@@ -1,0 +1,13 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+    <form method="post">
+     <table>
+         {%csrf_token%}
+         {{form}}
+
+     </table>
+     <button type="submit">Wprowadź</button>
+ </form>
+
+{% endblock content %}
