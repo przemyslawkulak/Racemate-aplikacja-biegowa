@@ -1,0 +1,42 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="card mb-3">
+
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+
+              Grupa Biegowa "{{group.name}}"
+
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Numer</th>
+                      <th>Name</th>
+                      <th>E-mail</th>
+                      <th>Ostatnie logowanie</th>
+                      <th>Data dołączenia</th>
+                      <th>Wydolność</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in user %}
+                    <tr>
+                      <td>{{i.id}}</td>
+                        <td><a href='/member/{{i.id}}'>{{i.username}}</a></td>
+                      <td>{{i.email}}</td>
+                      <td>{{i.last_login}}</td>
+                      <td>{{i.date_joined}}</td>
+                      <td>{{i.efficiency}}</td>
+                    {% endfor%}
+                    </tr>
+
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}

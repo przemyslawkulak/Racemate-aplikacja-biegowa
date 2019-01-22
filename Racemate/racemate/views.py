@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from racemate.forms import UserForm, LoginForm
+from racemate.models import MyUser, RunningGroup
 
 
 class Index(View):
@@ -46,3 +47,17 @@ class LogoutView(View):
 class LandingView(View):
     def get(self, request):
         return render(request, "racemate/landing-page.html")
+
+
+class RunningGroupView(View):
+    def get(self, request, id):
+        group = RunningGroup.objects.get(id=id)
+        user = MyUser.objects.filter(runninggroup=group).order_by('id')
+
+        return render(request, 'racemate/running-group.html', {'user': user, "group": group})
+
+
+class MemberView(View):
+    def get(self, request, id):
+        member = MyUser.objects.get(id=id)
+        return render(request, 'racemate/member.html', {'member': member})

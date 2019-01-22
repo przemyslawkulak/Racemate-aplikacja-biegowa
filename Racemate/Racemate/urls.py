@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
-from racemate.views import Index, LogoutView, LoginView, LandingView
+from racemate.views import Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('start/', LandingView.as_view(), name='landing-page'),
+    re_path(r'running_group/(?P<id>(\d)+)/$', RunningGroupView.as_view(), name='running-group'),
+    re_path(r'member/(?P<id>(\d)+)/$', MemberView.as_view(), name='member')
 ]
