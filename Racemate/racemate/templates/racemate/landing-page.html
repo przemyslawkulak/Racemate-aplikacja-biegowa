@@ -44,7 +44,7 @@
     <span class="step-links">
         {% if training.has_previous %}
 
-            <a href="?page={{ all_recipes.previous_page_number }}">< poprzednia </a>
+            <a href="?page={{ training.previous_page_number }}">< poprzednia </a>
         {% endif %}
 
         <span class="current">
@@ -54,7 +54,7 @@
         </span>
 
         {% if training.has_next %}
-            <a href="?page={{ all_recipes.next_page_number }}">| następna ></a>
+            <a href="?page={{ training.next_page_number }}">| następna ></a>
 
         {% endif %}
     </span>

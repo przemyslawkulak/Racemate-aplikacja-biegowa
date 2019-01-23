@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm, SelectDateWidget
 from django import forms
 
-from racemate.models import MyUser, PastTraining, Message
+from racemate.models import MyUser, PastTraining, Message, TrainingElement
 
 
 class LoginForm(forms.Form):
@@ -34,3 +34,9 @@ class SendMessageForm(ModelForm):
     class Meta:
         model = Message
         exclude = ['sender']
+
+
+class AddTreningForm(ModelForm):
+    class Meta:
+        model = TrainingElement
+        fields = ['name', 'time', 'type']

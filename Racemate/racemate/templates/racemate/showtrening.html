@@ -26,8 +26,8 @@
                 <tbody>
                     {% for i in tr %}
                     <tr>
-                      <td>{{i.id}}</td>
-                        <td>{{ i.trainingday }}</td>
+                      <td>{{i.trainingday}}</td>
+                        <td>{{ i.date }}</td>
                       <td>{{i.name}}</td>
                       <td>{{i.total_run}} min</td>
                       <td>{{i.total_time}} min</td>
@@ -46,54 +46,24 @@
             </div>
     <div class="pagination">
     <span class="step-links">
-        {% if training.has_previous %}
+        {% if tr.has_previous %}
 
-            <a href="?page={{ all_recipes.previous_page_number }}">< poprzednia </a>
+            <a href="?page={{ tr.previous_page_number }}">< poprzednia </a>
         {% endif %}
 
         <span class="current">
-            {% for page in training.paginator.page_range %}
+            {% for page in tr.paginator.page_range %}
                 <a href="?page={{ page}}">| {{ page }} </a>
             {%  endfor %}
         </span>
 
-        {% if training.has_next %}
-            <a href="?page={{ all_recipes.next_page_number }}">| następna ></a>
+        {% if tr.has_next %}
+            <a href="?page={{ tr.next_page_number }}">| następna ></a>
 
         {% endif %}
     </span>
 </div>
-     <div class="card-body">Twoje ostatnie wiadomości na forum:
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                        <th>Numer</th>
-                      <th>Data</th>
-                      <th>Od kogo</th>
-                      <th>Treść</th>
 
-
-                    </tr>
-                  </thead>
-
-                <tbody>
-                    {% for i in msg %}
-                    <tr>
-                      <td>{{i.id}}</td>
-                        <td>{{i.subject}}</td>
-                      <td>{{i.sender.username}}</td>
-                        <td>{{i.content}}</td>
-                      <td>{{i.date_sent}}</td>
-                    </tr>
-                        {% empty %}
-                    <p>Brak wprowadzonych treningów</p>
-                    {% endfor %}
-                </tbody>
-
-                </table>
-              </div>
-            </div>
 </div>
 
 {% endblock content %}

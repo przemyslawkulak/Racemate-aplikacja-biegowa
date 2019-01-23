@@ -36,7 +36,7 @@ class RunningGroup(models.Model):
 
 class TrainingElement(models.Model):
     name = models.CharField(max_length=255, default='easy')
-    speed = models.IntegerField()
+    time = models.IntegerField()
     distance = models.IntegerField()
     type = models.IntegerField(choices=TRAINING_TYPE)
 
@@ -44,9 +44,16 @@ class TrainingElement(models.Model):
 class Training(models.Model):
     name = models.CharField(max_length=255, null=True)
     trainingElements = models.ManyToManyField(TrainingElement)
-    time_total = models.IntegerField()
-    distance_total = models.IntegerField()
-    date = models.DateTimeField()
+    time_total = models.IntegerField(null=True)
+    distance_total = models.IntegerField(null=True)
+    date = models.DateTimeField(null=True)
+    trainingday = models.IntegerField(null=True)
+    walk = models.IntegerField(null=True)
+    easy = models.IntegerField(null=True)
+    marathon = models.IntegerField(null=True)
+    threshold = models.IntegerField(null=True)
+    interval = models.IntegerField(null=True)
+    repetition = models.IntegerField(null=True)
 
     def __str__(self):
         return f'{self.name} {self.time_total} {self.distance_total}'

@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView, ForumView, \
-                            AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView)
+                            AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
+                            TreningPlanView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,5 +31,8 @@ urlpatterns = [
     re_path(r'forum/(?P<id>(\d)+)/$', ForumView.as_view(), name='forum'),
     path('add_training/', AddTrainingView.as_view(), name='addtraining'),
     path('send_message/', SendMessageView.as_view(), name='sendmessage'),
-    re_path('messanger/(?P<id>(\d)+)/$', MessangerView.as_view(), name='messanger')
+    re_path('messanger/(?P<id>(\d)+)/$', MessangerView.as_view(), name='messanger'),
+    path('add_plan/', AddTreningView.as_view(), name='addplan'),  # nie zrobione
+    path('treningplan/', TreningPlanView.as_view(), name='plan'),  # nie zrobione
+
 ]
