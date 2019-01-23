@@ -9,6 +9,110 @@ from django.views import View
 from racemate.forms import UserForm, LoginForm, PastTrainingForm, SendMessageForm
 # PastTrainingForm
 from racemate.models import MyUser, RunningGroup, Message, PastTraining
+from racemate.table import TABLES
+
+
+def checktable3(time):
+    for i in range(0, 30):
+        if time > TABLES[0][1]:
+            vdot = 30
+            return vdot
+        elif time < TABLES[i][1] and time > TABLES[i + 1][1]:
+            vdot = TABLES[i][0]
+            return vdot
+        else:
+            vdot = 60
+            return vdot
+
+
+def generateVDOT(tr):
+    if tr.distance_total < 3000:
+        print('nie mierzone')
+        return f'VDOT generujemy od dystansu 3 km'
+
+
+    elif tr.distance_total > 3000 and tr.distance_total < 5000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(3000 / (speed / 3.6))
+        print('3km')
+        for i in range(0, 30):
+            if time > TABLES[0][1]:
+                vdot = 30
+                return vdot
+            elif time < TABLES[i][1] and time > TABLES[i + 1][1]:
+                vdot = TABLES[i][0]
+                return vdot
+            elif time < TABLES[30][1]:
+                vdot = 60
+                return vdot
+
+
+    elif tr.distance_total > 5000 and tr.distance_total < 10000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(5000 / (speed / 3.6))
+        print('5 km')
+        for i in range(0, 30):
+            if time > TABLES[0][2]:
+                vdot = 30
+                return vdot
+            elif time < TABLES[i][2] and time > TABLES[i + 1][2]:
+                vdot = TABLES[i][0]
+                return vdot
+            elif time < TABLES[30][2]:
+                vdot = 60
+                return vdot
+
+    elif tr.distance_total > 10000 and tr.distance_total < 21097:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(10000 / (speed / 3.6))
+        print('10 km')
+        for i in range(0, 30):
+            if time > TABLES[0][3]:
+                vdot = 30
+                return vdot
+            elif time < TABLES[i][3] and time > TABLES[i + 1][3]:
+                vdot = TABLES[i][0]
+                return vdot
+            elif time < TABLES[30][3]:
+                vdot = 60
+                return vdot
+
+
+    elif tr.distance_total > 21097 and tr.distance_total < 42195:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(21097 / (speed / 3.6))
+        print('Pół')
+        for i in range(0, 30):
+            if time > TABLES[0][4]:
+                vdot = 30
+                return vdot
+            elif time < TABLES[i][4] and time > TABLES[i + 1][4]:
+                vdot = TABLES[i][0]
+                return vdot
+            elif time < TABLES[30][4]:
+                vdot = 60
+                return vdot
+
+    elif tr.distance_total > 42195:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(42195 / (speed / 3.6))
+        print(tr.distance_total)
+        print(tr.time_total)
+        print(speed)
+        print(time)
+        print('Maraton')
+        print(TABLES[0][5])
+        for i in range(0, 30):
+            if time > TABLES[0][5]:
+                vdot = 30
+                return vdot
+            elif time < int(TABLES[i][5]) and time > int(TABLES[i + 1][5]):
+                print(TABLES[i][5])
+                vdot = TABLES[i][0]
+                return vdot
+            elif time < TABLES[30][5]:
+                vdot = 60
+                return vdot
 
 
 class Index(View):
@@ -99,8 +203,11 @@ class AddTrainingView(View):
         time = request.POST.get('time')
         date = request.POST.get('date')
         datetime = date + ' ' + time
-        PastTraining.objects.create(name=name, time_total=time_total, distance_total=distance_total, date=datetime,
-                                    user=request.user)
+        tr = PastTraining.objects.create(name=name, time_total=time_total, distance_total=distance_total, date=datetime,
+                                         user=request.user)
+        print(generateVDOT(tr))
+        request.user.efficiency = generateVDOT(tr)
+        request.user.save()
         return redirect('landing-page')
 
 
