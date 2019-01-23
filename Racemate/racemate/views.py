@@ -59,11 +59,18 @@ class LandingView(View):
             training.append(
                 {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
                  'distance_total': distance, 'user': i.user,
-                 'date': i.date})
+                 'date': i.date, "id": i.id})
         paginator = Paginator(training, 5)
         page = request.GET.get('page')
         a = paginator.get_page(page)
-        return render(request, "racemate/landing-page.html", {"training": a, })
+        m = []
+        msg = Message.objects.filter(to=request.user.id).order_by("-date_sent")
+        for i in msg:
+            m.append(
+                {"subject": i.subject, 'content': i.content,
+                 'to': i.to, 'user': request.user,
+                 'sender': i.sender, "id": i.id})
+        return render(request, "racemate/landing-page.html", {"training": a, "msg": m})
 
 
 class RunningGroupView(View):
@@ -83,8 +90,10 @@ class MemberView(View):
 class ForumView(View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
+        user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
+        print(user)
         messages = Message.objects.filter(to__isnull=True).order_by('-date_sent')
-        return render(request, 'racemate/forum.html', {'messages': messages, 'group': group})
+        return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
 
 
 class AddTrainingView(View):
@@ -134,4 +143,27 @@ class SendMessageView(View):
         to = request.POST.get('to')
         sender = request.user
         Message.objects.create(subject=subject, content=content, to=MyUser.objects.get(id=to), sender=sender)
-        return redirect('landing-page')
+        return redirect('forum/2')
+
+
+class LandingGeneratorView(View):
+    def get(self, request, id):
+        tr = PastTraining.objects.get(id=id)
+        if isinstance(generateVDOT(tr), int):
+            request.user.efficiency = generateVDOT(tr)
+            request.user.save()
+            return redirect('landing-page')
+        else:
+            return redirect('landing-page')
+
+
+class MessangerView(View):
+    def get(self, request, id):
+        msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
+        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
+        group = RunningGroup.objects.get(id=2)
+        user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
+
+        msg = msg1 | msg2
+
+        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user})

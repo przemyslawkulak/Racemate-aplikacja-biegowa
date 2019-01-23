@@ -24,11 +24,12 @@
                 <tbody>
                     {% for i in training %}
                     <tr>
-                      <td>1</td>
+                      <td>{{i.id}}</td>
                         <td>{{i.date}}</td>
                       <td>{{i.time_total}}</td>
                       <td>{{i.distance_total}} km</td>
                       <td>{{i.speed}} km/h</td>
+                        <td><a href="{% url 'landing-pages' id=i.id %}"><button name = 'VDOT' type="submit">Wygenerować VDOT?</button></a></td>
 
 
                     </tr>
@@ -67,23 +68,25 @@
                       <th>Data</th>
                       <th>Od kogo</th>
                       <th>Treść</th>
-                      <th></th>
+
 
                     </tr>
                   </thead>
+
                 <tbody>
-
+                    {% for i in msg %}
                     <tr>
-                      <td>1</td>
-                        <td>12 grudnia 2018</td>
-                      <td>od piesek-leszek</td>
-                      <td>Dobry trening</td>
-                      <td></td>
-
-
+                      <td>{{i.id}}</td>
+                        <td>{{i.subject}}</td>
+                      <td>{{i.sender.username}}</td>
+                        <td>{{i.content}}</td>
+                      <td>{{i.date_sent}}</td>
                     </tr>
-
+                        {% empty %}
+                    <p>Brak wprowadzonych treningów</p>
+                    {% endfor %}
                 </tbody>
+
                 </table>
               </div>
             </div>
