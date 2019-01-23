@@ -30,3 +30,55 @@ TABLES = [
     [58, 608, 1053, 2184, 4830, 10094, 58, 540, 277, 239, 226, 208, 193],
     [59, 598, 1037, 2152, 4758, 9947, 59, 540, 273, 236, 223, 205, 190],
     [60, 590, 1023, 2122, 4689, 9805, 60, 540, 269, 232, 220, 203, 188]]
+
+
+def checktable(time, check):  # sprawdzenie VDOT w tabeli
+    for i in range(0, 30):
+        if time > TABLES[0][check]:
+            vdot = 30
+            return vdot
+        elif time < TABLES[i][check] and time > TABLES[i + 1][check]:
+            vdot = TABLES[i][0]
+            return vdot
+        elif time < TABLES[30][check]:
+            vdot = 60
+            return vdot
+
+
+def generateVDOT(tr):  # ustalenie który dystans sprawdzać
+    if tr.distance_total <= 3000:
+        print('nie mierzone')
+        return f'VDOT generujemy od dystansu 3 km'
+
+
+    elif tr.distance_total > 3000 and tr.distance_total <= 5000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(3000 / (speed / 3.6))
+
+        return checktable(time, 1)
+
+
+    elif tr.distance_total > 5000 and tr.distance_total <= 10000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(5000 / (speed / 3.6))
+
+        return checktable(time, 2)
+
+    elif tr.distance_total > 10000 and tr.distance_total <= 20000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(10000 / (speed / 3.6))
+
+        return checktable(time, 3)
+
+
+    elif tr.distance_total > 20000 and tr.distance_total <= 40000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(21097 / (speed / 3.6))
+
+        return checktable(time, 4)
+
+    elif tr.distance_total > 40000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(42195 / (speed / 3.6))
+
+        return checktable(time, 5)

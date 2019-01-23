@@ -39,6 +39,25 @@
                 </table>
               </div>
             </div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if training.has_previous %}
+
+            <a href="?page={{ all_recipes.previous_page_number }}">< poprzednia </a>
+        {% endif %}
+
+        <span class="current">
+            {% for page in training.paginator.page_range %}
+                <a href="?page={{ page}}">| {{ page }} </a>
+            {%  endfor %}
+        </span>
+
+        {% if training.has_next %}
+            <a href="?page={{ all_recipes.next_page_number }}">| następna ></a>
+
+        {% endif %}
+    </span>
+</div>
      <div class="card-body">Twoje ostatnie wiadomości na forum:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
