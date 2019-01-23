@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from racemate.views import Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView
+from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView, ForumView, \
+                            AddTrainingView, SendMessageView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('start/', LandingView.as_view(), name='landing-page'),
     re_path(r'running_group/(?P<id>(\d)+)/$', RunningGroupView.as_view(), name='running-group'),
-    re_path(r'member/(?P<id>(\d)+)/$', MemberView.as_view(), name='member')
+    re_path(r'member/(?P<id>(\d)+)/$', MemberView.as_view(), name='member'),
+    re_path(r'forum/(?P<id>(\d)+)/$', ForumView.as_view(), name='forum'),
+    path('add_training/', AddTrainingView.as_view(), name='addtraining'),
+    path('send_message/', SendMessageView.as_view(), name='sendmessage')
 ]

@@ -1,0 +1,44 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="card mb-3">
+
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+
+            Forum grupy: {{group.name}}
+
+            </div>
+
+     <div class="card-body">Ostatnie wiadomości
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Data</th>
+                      <th>Nadawca</th>
+                      <th>Treść</th>
+                        <th></th>
+
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in messages%}
+                    <tr>
+
+                        <td>{{i.date_sent}}</td>
+                      <td>{{i.sender.username}}</td>
+                      <td>{{i.content}} </td>
+                      <td></td>
+
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}

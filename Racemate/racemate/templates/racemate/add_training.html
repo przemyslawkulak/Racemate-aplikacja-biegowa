@@ -1,0 +1,35 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+    <form method="post">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+     <h5>Witaj {{ user.username }}<br>Uzupełnij pola treningu:</h5>
+            <div>
+         {%csrf_token%}
+        <div><label>Nazwa:
+            <input type="text" name="name">
+        </label></div><br>
+         <div><label>Łączny czas:
+            <input type="number" name="hours">
+        </label>h
+         <label>
+             <input type="number" name="minutes">
+        </label>min
+         <label>
+             <input type="number" name="seconds">
+        </label>sek</div><br>
+         <div><label>Łączny dystans w kilometrach:
+            <input type="number" step=0.001 name="distance">
+        </label></div><br>
+         <div><label>Godzina:
+            <input type="time" name="time">
+        </label></div><br>
+         <div><label>Data:
+            <input type="date" name="date">
+        </label></div><br>
+     </div>
+     <button type="submit">Wprowadź</button>
+            </table>
+ </form>
+
+{% endblock content %}

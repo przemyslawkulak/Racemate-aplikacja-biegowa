@@ -1,6 +1,73 @@
 {% extends "racemate/index.html" %}
 {% block content %}
-<h2>Zalogowano jako {{ user }}</h2>
+<div class="card mb-3">
 
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+            <h5>Witaj {{ user.username }}</h5>
+            Nazwa użytkownika: {{user.username}} <br>Poziom VO2max = {{user.efficiency}}
+
+            </div>
+            <div class="card-body">Twój ostatni trening:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Numer</th>
+                      <th>Data</th>
+                      <th>Czas</th>
+                      <th>Dystans</th>
+                      <th>Średnia prędkość</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in training %}
+                    <tr>
+                      <td>1</td>
+                        <td>{{i.date}}</td>
+                      <td>{{i.time_total}}</td>
+                      <td>{{i.distance_total}} km</td>
+                      <td>{{i.speed}} km/h</td>
+
+
+                    </tr>
+                    {% empty %}
+                    <p>Brak wprowadzonych treningów</p>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+     <div class="card-body">Twoje ostatnie wiadomości na forum:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Numer</th>
+                      <th>Data</th>
+                      <th>Od kogo</th>
+                      <th>Treść</th>
+                      <th></th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+
+                    <tr>
+                      <td>1</td>
+                        <td>12 grudnia 2018</td>
+                      <td>od piesek-leszek</td>
+                      <td>Dobry trening</td>
+                      <td></td>
+
+
+                    </tr>
+
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
 
 {% endblock content %}
