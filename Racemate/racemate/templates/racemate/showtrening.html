@@ -1,16 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="card mb-3">
+
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+            <h5>Witaj {{ user.username }}</h5>
+            Nazwa użytkownika: {{user.username}} <br>Poziom VO2max = {{user.efficiency}}
+
+            </div>
+            <div class="card-body">Twój plan treningowy:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Dzień</th>
+                      <th>Data</th>
+                      <th>Trening</th>
+                      <th>Czas biegu w min</th>
+                      <th>Czas całkowity w min</th>
+                        <th>Całkowity dystans w km</th>
+                        <th>Prękości treningowe</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in tr %}
+                    <tr>
+                      <td>{{i.id}}</td>
+                        <td>{{ i.trainingday }}</td>
+                      <td>{{i.name}}</td>
+                      <td>{{i.total_run}} min</td>
+                      <td>{{i.total_time}} min</td>
+                        <td>{{i.total_distance}} km</td>
+                        <td>Marsz: {{i.speed1}} km/h BS: {{i.speed2}}km/h</td>
+
+
+
+                    </tr>
+                    {% empty %}
+                    <p>Brak wprowadzonych planów treningowych</p>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if training.has_previous %}
+
+            <a href="?page={{ all_recipes.previous_page_number }}">< poprzednia </a>
+        {% endif %}
+
+        <span class="current">
+            {% for page in training.paginator.page_range %}
+                <a href="?page={{ page}}">| {{ page }} </a>
+            {%  endfor %}
+        </span>
+
+        {% if training.has_next %}
+            <a href="?page={{ all_recipes.next_page_number }}">| następna ></a>
+
+        {% endif %}
+    </span>
+</div>
+     <div class="card-body">Twoje ostatnie wiadomości na forum:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Numer</th>
+                      <th>Data</th>
+                      <th>Od kogo</th>
+                      <th>Treść</th>
+
+
+                    </tr>
+                  </thead>
+
+                <tbody>
+                    {% for i in msg %}
+                    <tr>
+                      <td>{{i.id}}</td>
+                        <td>{{i.subject}}</td>
+                      <td>{{i.sender.username}}</td>
+                        <td>{{i.content}}</td>
+                      <td>{{i.date_sent}}</td>
+                    </tr>
+                        {% empty %}
+                    <p>Brak wprowadzonych treningów</p>
+                    {% endfor %}
+                </tbody>
+
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}
 TYP treningu {{type}}<br>
 Nazwa treningu {{name}}<br>
 Czas trwania treningu {{time}} min<br>
 VDOT {{efficiency}}<br>
 Szybkość {{speed}} km/h<br>
 Łączny dystans {{distance}} km <br>
-
-</body>
-</html>
