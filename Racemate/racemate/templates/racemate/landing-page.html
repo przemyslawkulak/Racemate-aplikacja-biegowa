@@ -22,7 +22,7 @@
                     </tr>
                   </thead>
                 <tbody>
-                    {% for i in training %}
+                    {% for i in training.order_by_date%}
                     <tr>
                       <td>{{i.id}}</td>
                         <td>{{i.date}}</td>
