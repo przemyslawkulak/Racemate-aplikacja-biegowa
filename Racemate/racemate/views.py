@@ -1,22 +1,23 @@
 import datetime
 import json
-from collections import OrderedDict
+
 
 import isodate as isodate
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
 
-from racemate.forms import UserForm, LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm
-# PastTrainingForm
+from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm
+
 from racemate.models import MyUser, RunningGroup, Message, PastTraining, Training
 from racemate.table import TABLES, generateVDOT
 
 
-class Index(View):
+class Index(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, "racemate/start.html")
 
@@ -41,9 +42,9 @@ class LoginView(View):
                 login(request, user)  # logujemy
                 return redirect('landing-page')
                 # jeśli uda się zalogować przerzuca nas na główną stronę
-            return render(request, 'racemate/form_html.html', {'form': form})
+            return render(request, 'racemate/login.html')
             # jeśli nie uda się zalogować wraca na formularz
-        return render(request, 'racemate/form_html.html', {'form': form})
+        return render(request, 'racemate/login.html')
 
 
 class LogoutView(View):
@@ -51,8 +52,12 @@ class LogoutView(View):
         logout(request)  # wylogowanie
         return redirect('login')
 
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'racemate/register.html')
 
-class LandingView(View):
+
+class LandingView(LoginRequiredMixin, View):
     def get(self, request):
         training = []
         tra = PastTraining.objects.filter(user=request.user.id).order_by("-date")
@@ -76,7 +81,7 @@ class LandingView(View):
         return render(request, "racemate/landing-page.html", {"training": a, "msg": m})
 
 
-class RunningGroupView(View):
+class RunningGroupView(LoginRequiredMixin, View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
         user = MyUser.objects.filter(runninggroup=group).order_by('id')
@@ -84,13 +89,13 @@ class RunningGroupView(View):
         return render(request, 'racemate/running-group.html', {'user': user, "group": group})
 
 
-class MemberView(View):
+class MemberView(LoginRequiredMixin, View):
     def get(self, request, id):
         member = MyUser.objects.get(id=id)
         return render(request, 'racemate/member.html', {'member': member})
 
 
-class ForumView(View):
+class ForumView(LoginRequiredMixin, View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
         user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
@@ -99,7 +104,7 @@ class ForumView(View):
         return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
 
 
-class AddTrainingView(View):
+class AddTrainingView(LoginRequiredMixin, View):
     def get(self, request):
         form = PastTrainingForm()
         # return render(request, 'racemate/form_html.html', {'form': form})
@@ -127,7 +132,7 @@ class AddTrainingView(View):
         return redirect('landing-page')
 
 
-class SendMessageView(View):
+class SendMessageView(LoginRequiredMixin, View):
     def get(self, request):
         form = SendMessageForm
         return render(request, 'racemate/form_html.html', {'form': form})
@@ -149,7 +154,7 @@ class SendMessageView(View):
         return redirect('messanger', id=to)
 
 
-class LandingGeneratorView(View):
+class LandingGeneratorView(LoginRequiredMixin, View):
     def get(self, request, id):
         tr = PastTraining.objects.get(id=id)
         if isinstance(generateVDOT(tr), int):
@@ -160,13 +165,13 @@ class LandingGeneratorView(View):
             return redirect('landing-page')
 
 
-class DeleteTrainingView(View):
+class DeleteTrainingView(LoginRequiredMixin, View):
     def get(self, request, id):
         PastTraining.objects.get(id=id).delete()
         return redirect('landing-page')
 
 
-class MessangerView(View):
+class MessangerView(LoginRequiredMixin, View):
     def get(self, request, id):
         msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
@@ -177,7 +182,7 @@ class MessangerView(View):
         return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user})
 
 
-class AddTreningView(View):
+class AddTreningView(LoginRequiredMixin, View):
     def get(self, request):
         form = AddTreningForm
         return render(request, "racemate/form_html.html", {"form": form})
@@ -204,7 +209,7 @@ def traningdata(efficiency, time, table):
     return result
 
 
-class TreningPlanWhiteView(View):
+class TreningPlanWhiteView(LoginRequiredMixin, View):
     def get(self, request):
         plan = []
         tr = Training.objects.filter(treningplan='white')
@@ -286,7 +291,7 @@ class TreningPlanWhiteView(View):
 #     speed = round(1 / TABLES[efficiency - 30][type + 6] * 3600, 2)
 #     distance = round(time * speed / 60, 2)
 #     return None
-class LoadTreningView(View):
+class LoadTreningView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, "racemate/load.html")
 
@@ -307,12 +312,12 @@ class LoadTreningView(View):
         return redirect('landing-page')
 
 
-class PlanChoiceView(View):
+class PlanChoiceView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, "racemate/planchoice.html")
 
 
-class TreningPlan18weeksView(View):
+class TreningPlan18weeksView(LoginRequiredMixin, View):
     def get(self, request):
         plan = []
         tr = Training.objects.filter(treningplan='18weeks').order_by("trainingday")
