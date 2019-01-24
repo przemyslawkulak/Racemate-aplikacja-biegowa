@@ -5,7 +5,7 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
             <h5>Witaj {{ user.username }}</h5>
-            Nazwa użytkownika: {{user.username}} <br>Poziom VO2max = {{user.efficiency}}
+            Nazwa użytkownika: {{user.username}} <br>Poziom VDOT = {{user.efficiency}}
 
             </div>
             <div class="card-body">Twój ostatni trening:
@@ -22,7 +22,7 @@
                     </tr>
                   </thead>
                 <tbody>
-                    {% for i in training.order_by_date%}
+                    {% for i in training%}
                     <tr>
                       <td>{{i.id}}</td>
                         <td>{{i.date}}</td>
