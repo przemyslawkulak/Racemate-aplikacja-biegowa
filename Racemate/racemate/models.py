@@ -21,6 +21,7 @@ class MyUser(AbstractUser):
     r42 = models.IntegerField(null=True)
     efficiency = models.IntegerField(null=True)
 
+
     def __str__(self):
         return f'{self.username} {self.email} '
 
@@ -54,6 +55,7 @@ class Training(models.Model):
     threshold = models.IntegerField(null=True)
     interval = models.IntegerField(null=True)
     repetition = models.IntegerField(null=True)
+    treningplan = models.CharField(max_length=255, null=True)
 
     def __str__(self):
         return f'{self.name} {self.time_total} {self.distance_total}'

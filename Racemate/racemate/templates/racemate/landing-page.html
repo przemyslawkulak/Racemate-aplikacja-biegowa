@@ -8,12 +8,12 @@
             Nazwa użytkownika: {{user.username}} <br>Poziom VDOT = {{user.efficiency}}
 
             </div>
-            <div class="card-body">Twój ostatni trening:
+            <div class="card-body">Twój treningi:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Numer</th>
+
                       <th>Data</th>
                       <th>Czas</th>
                       <th>Dystans</th>
@@ -24,13 +24,13 @@
                 <tbody>
                     {% for i in training%}
                     <tr>
-                      <td>{{i.id}}</td>
+
                         <td>{{i.date}}</td>
                       <td>{{i.time_total}}</td>
                       <td>{{i.distance_total}} km</td>
                       <td>{{i.speed}} km/h</td>
-                        <td><a href="{% url 'landing-pages' id=i.id %}"><button name = 'VDOT' type="submit">Wygenerować VDOT?</button></a></td>
-
+                        <td><a href="{% url 'generate_vdot' id=i.id %}"><button name = 'VDOT' type="submit">Wygenerować VDOT?</button></a></td>
+                        <td><a href="{% url 'deletetraining' id=i.id %}"><button name = 'VDOT' type="submit">Kasuj trening</button></a></td>
 
                     </tr>
                     {% empty %}
@@ -59,37 +59,7 @@
         {% endif %}
     </span>
 </div>
-     <div class="card-body">Twoje ostatnie wiadomości na forum:
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                        <th>Numer</th>
-                      <th>Data</th>
-                      <th>Od kogo</th>
-                      <th>Treść</th>
 
-
-                    </tr>
-                  </thead>
-
-                <tbody>
-                    {% for i in msg %}
-                    <tr>
-                      <td>{{i.id}}</td>
-                        <td>{{i.subject}}</td>
-                      <td>{{i.sender.username}}</td>
-                        <td>{{i.content}}</td>
-                      <td>{{i.date_sent}}</td>
-                    </tr>
-                        {% empty %}
-                    <p>Brak wprowadzonych treningów</p>
-                    {% endfor %}
-                </tbody>
-
-                </table>
-              </div>
-            </div>
 </div>
 
 {% endblock content %}

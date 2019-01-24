@@ -6,7 +6,7 @@
               <i class="fas fa-table"></i>
 
             </div>
-
+    <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość</button></a>
      <div class="card-body">Ostatnie wiadomości
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -39,7 +39,6 @@
                     {% endfor %}
                 </tbody>
                 </table>
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Dodaj wiadomość</button></a>
               </div>
             </div>
     <div class="card-body">Rozmowa z użytkownikiem:
@@ -63,7 +62,7 @@
                     {% endfor %}
                 </tbody>
                 </table>
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Dodaj wiadomość</button></a>
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość</button></a>
               </div>
             </div>
 </div>

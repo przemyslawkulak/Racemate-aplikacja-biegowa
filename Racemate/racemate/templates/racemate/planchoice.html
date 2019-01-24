@@ -1,0 +1,16 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+    <form method="post">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <h4>{{ user.username }} który trening chcesz wybrać?</h5>
+            <ul>
+                <li><a href = "{% url 'whiteplan' %}">Trening dla początkujących</a></li>
+                <li><a href = "{% url '18weeksplan' %}">Trening do maratonu - 18 tygodni</a></li>
+            </ul>
+
+
+            </table>
+ </form>
+
+{% endblock content %}

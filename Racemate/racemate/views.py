@@ -1,6 +1,8 @@
 import datetime
+import json
 from collections import OrderedDict
 
+import isodate as isodate
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -22,7 +24,7 @@ class Index(View):
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'racemate/form_html.html', {'form': form})
+        return render(request, 'racemate/login.html')
 
     def post(self, request):
         '''
@@ -61,7 +63,7 @@ class LandingView(View):
                 {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
                  'distance_total': distance, 'user': i.user,
                  'date': i.date, "id": i.id})
-        paginator = Paginator(training, 5)
+        paginator = Paginator(training, 10)
         page = request.GET.get('page')
         a = paginator.get_page(page)
         m = []
@@ -144,7 +146,7 @@ class SendMessageView(View):
         to = request.POST.get('to')
         sender = request.user
         Message.objects.create(subject=subject, content=content, to=MyUser.objects.get(id=to), sender=sender)
-        return redirect('forum/2')
+        return redirect('messanger', id=to)
 
 
 class LandingGeneratorView(View):
@@ -156,6 +158,12 @@ class LandingGeneratorView(View):
             return redirect('landing-page')
         else:
             return redirect('landing-page')
+
+
+class DeleteTrainingView(View):
+    def get(self, request, id):
+        PastTraining.objects.get(id=id).delete()
+        return redirect('landing-page')
 
 
 class MessangerView(View):
@@ -196,10 +204,10 @@ def traningdata(efficiency, time, table):
     return result
 
 
-class TreningPlanView(View):
+class TreningPlanWhiteView(View):
     def get(self, request):
         plan = []
-        tr = Training.objects.all()
+        tr = Training.objects.filter(treningplan='white')
         now = datetime.datetime.now()
         dic = []
         dicts = []
@@ -273,7 +281,107 @@ class TreningPlanView(View):
         return render(request, "racemate/showtrening.html", {"tr": plan, "dict": dicts})
 
 
-def createtraning(type, time, efficiency):
-    speed = round(1 / TABLES[efficiency - 30][type + 6] * 3600, 2)
-    distance = round(time * speed / 60, 2)
-    return None
+#
+# def createtraning(type, time, efficiency):
+#     speed = round(1 / TABLES[efficiency - 30][type + 6] * 3600, 2)
+#     distance = round(time * speed / 60, 2)
+#     return None
+class LoadTreningView(View):
+    def get(self, request):
+        return render(request, "racemate/load.html")
+
+    def post(self, request):
+        with open('training.txt') as json_data:
+            d = json.load(json_data)
+
+            dur = isodate.parse_duration(d['duration'])
+            time = dur.total_seconds()
+            print(time)
+            PastTraining.objects.create(
+                time_total=time,
+                distance_total=d['distance'],
+                date=d['start-time'],
+                user=request.user)
+
+        # return render(request, "racemate/load.html", {"d": d})
+        return redirect('landing-page')
+
+
+class PlanChoiceView(View):
+    def get(self, request):
+        return render(request, "racemate/planchoice.html")
+
+
+class TreningPlan18weeksView(View):
+    def get(self, request):
+        plan = []
+        tr = Training.objects.filter(treningplan='18weeks').order_by("trainingday")
+        now = datetime.datetime.now()
+        dic = []
+        dicts = []
+        for i in tr:
+            total_distance = 0
+            total_time = 0
+            date = now + datetime.timedelta(days=i.trainingday - 1)
+            efficiency = request.user.efficiency
+            speed = ''
+            if i.walk is not None:
+                total_distance += traningdata(efficiency, i.walk, 7)[1]
+
+                speed += "Marsz=" + str(round(traningdata(efficiency, i.walk, 7)[0], 2)) + 'km/h  '
+                dic.append(1)
+
+            if i.easy is not None:
+                total_distance += traningdata(efficiency, i.easy, 8)[1]
+                total_time += i.easy
+                speed += "BS=" + str(round(traningdata(efficiency, i.easy, 8)[0], 2)) + 'km/h  '
+                dic.append(2)
+
+            if i.marathon is not None:
+                total_distance += traningdata(efficiency, i.marathon, 9)[1]
+                total_time += i.marathon
+                speed += "M=" + str(round(traningdata(efficiency, i.marathon, 9)[0], 2)) + 'km/h  '
+                dic.append(3)
+
+            if i.threshold is not None:
+                total_distance += traningdata(efficiency, i.threshold, 10)[1]
+                total_time += i.threshold
+                speed += "P=" + str(round(traningdata(efficiency, i.threshold, 10)[0], 2)) + 'km/h  '
+                dic.append(4)
+
+            if i.interval is not None:
+                total_distance += traningdata(efficiency, i.interval, 11)[1]
+                total_time += i.interval
+                speed += "I=" + str(round(traningdata(efficiency, i.interval, 11)[0], 2)) + 'km/h  '
+                dic.append(5)
+
+            if i.repetition is not None:
+                total_distance += traningdata(efficiency, i.repetition, 12)[1]
+                total_time += i.repetition
+                speed += "R=" + str(round(traningdata(efficiency, i.repetition, 12)[0], 2)) + 'km/h  '
+                dic.append(6)
+
+            plan.append({"name": i.name, "trainingday": i.trainingday, "date": date,
+                         "total_run": total_time, "total_time": i.time_total,
+                         "total_distance": round(total_distance, 2),
+                         "speed": speed})
+
+        if 1 in dic:
+            dicts.append({"run": "Marsz - szybki marsz"})
+        if 2 in dic:
+            dicts.append({"run": "BS - bieg spokojny, w tempie konwersacyjnym"})
+        if 3 in dic:
+            dicts.append({"run": "M - bieg w tempie maratońskim"})
+        if 4 in dic:
+            dicts.append({"run": "P - szybki bieg progowy, do utrzymania przez 20-30 min"})
+        if 5 in dic:
+            dicts.append({"run": "I - bieg interwałowy, do utrzymania przez 2-3 min"})
+        if 6 in dic:
+            dicts.append({"run": "R - rytmy, badzo szybki bieg interwałowy, do utrzymania przez 0,5-1,5 minuty"})
+
+        print(plan)
+        paginator = Paginator(plan, 12)
+        page = request.GET.get('page')
+        a = paginator.get_page(page)
+        print(dicts)
+        return render(request, "racemate/showtrening.html", {"tr": a, "dict": dicts})

@@ -1,7 +1,31 @@
 {% extends "racemate/index.html" %}
 {% block content %}
 <div class="card mb-3">
+    <div class="card-body">Rozmowa z użytkownikiem:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
 
+                      <th>ID</th>
+                      <th>Użytkownik</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in user %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
+
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Dodaj wiadomość</button></a>
+              </div>
+            </div>
             <div class="card-header">
               <i class="fas fa-table"></i>
 
@@ -40,31 +64,7 @@
                   <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Dodaj wiadomość</button></a>
               </div>
             </div>
-    <div class="card-body">Rozmowa z użytkownikiem:
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
 
-                      <th>ID</th>
-                      <th>Użytkownik</th>
-
-                    </tr>
-                  </thead>
-                <tbody>
-                    {% for i in user %}
-                    <tr>
-                        <td>{{i.id}}</td>
-                        <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
-
-
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                </table>
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Dodaj wiadomość</button></a>
-              </div>
-            </div>
 </div>
 
 {% endblock content %}

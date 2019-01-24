@@ -21,9 +21,9 @@
                         <th>Dzień treningu</th>
                       <th>Data treningu</th>
                       <th>Trening</th>
-                      <th>Czas biegu w min</th>
-                      <th>Czas całkowity w min</th>
-                        <th>Całkowity dystans w km</th>
+
+                      <th>Czas całkowity</th>
+                        <th>Całkowity dystans</th>
                         <th>Prękości treningowe</th>
 
                     </tr>
@@ -34,7 +34,7 @@
                       <td>{{i.trainingday}}</td>
                         <td>{{ i.date |date:"D d M Y" }}</td>
                       <td>{{i.name}}</td>
-                      <td>{{i.total_run}} min</td>
+
                       <td>{{i.total_time}} min</td>
                         <td>{{i.total_distance}} km</td>
                         <td>{{i.speed}}</td>

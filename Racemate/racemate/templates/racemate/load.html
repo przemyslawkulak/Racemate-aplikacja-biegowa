@@ -1,0 +1,15 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+    <form method="post">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <h5>Witaj {{ user.username }}<br></h5>
+
+                {%csrf_token%}
+
+         <button type="submit">Ściągnij trening</button>
+            {{d}}
+        </table>
+ </form>
+
+{% endblock content %}
