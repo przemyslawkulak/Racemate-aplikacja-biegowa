@@ -120,6 +120,11 @@
             <span>Forum grupy</span></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'loadtrening'%}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Wczytaj trening z pliku</span></a>
+        </li>
+        <li class="nav-item">
                   {% if auth %}
           <a class="nav-link" href="{% url 'logout'%}">
             <i class="fas fa-fw fa-table"></i>

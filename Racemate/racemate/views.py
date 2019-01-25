@@ -57,14 +57,38 @@ class RegisterView(View):
     def get(self, request):
         return render(request, 'racemate/register.html')
 
+    def post(self, request):
+        username = request.POST.get("username")
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirmPassword = request.POST.get('confirmPassword')
+        users = MyUser.objects.all()
+        usernames = []
+        for i in users:
+            usernames.append(i.username)
+        if username and email and password and confirmPassword and password == confirmPassword:
+            if username in usernames:
+                text = 'Podany user już istnieje'
+                return render(request, 'racemate/register.html', {"text": text})
+            else:
+                MyUser.objects.create_user(username=username,
+                                           email=email,
+                                           efficiency=30,
+                                           password=password,
+                                           )
+                return redirect('login')
+        text = 'Żle powtórzone hasło'
+        return render(request, 'racemate/register.html', {"text": text})
+
 
 def customhandler404(request):
-    response = render(request, 'racemate/404.html',)
+    response = render(request, 'racemate/404.html', )
     response.status_code = 404
     return response
 
+
 def customhandler500(request):
-    response = render(request, 'racemate/500.html',)
+    response = render(request, 'racemate/500.html', )
     response.status_code = 500
     return response
 
@@ -197,8 +221,9 @@ class MessangerView(LoginRequiredMixin, View):
         group = RunningGroup.objects.get(id=2)
         user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
         msg = msg1 | msg2
+        interlocutor = MyUser.objects.get(id=id)
 
-        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user})
+        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user, 'interlocutor':interlocutor})
 
 
 class AddTreningView(LoginRequiredMixin, View):

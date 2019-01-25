@@ -38,7 +38,7 @@ urlpatterns = [
     path('add_plan/', AddTreningView.as_view(), name='addplan'),  # nie zrobione
     path('treningplan_white/', TreningPlanWhiteView.as_view(), name='whiteplan'),
     path('treningplan_18weeks/', TreningPlan18weeksView.as_view(), name='18weeksplan'),# nie zrobione
-    path('loadtrening/', LoadTreningView.as_view(), name='load'),
+    path('loadtrening/', LoadTreningView.as_view(), name='loadtrening'),
     path ('planchoice/', PlanChoiceView.as_view(), name='planchoice'),
     re_path(r'^deletetraining/(?P<id>(\d)+)/$', DeleteTrainingView.as_view(), name='deletetraining'),
 

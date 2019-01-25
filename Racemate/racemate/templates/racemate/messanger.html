@@ -6,8 +6,8 @@
               <i class="fas fa-table"></i>
 
             </div>
-    <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość</button></a>
-     <div class="card-body">Ostatnie wiadomości
+    <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość do {{interlocutor.username}}</button></a>
+     <div class="card-body">Ostatnie wiadomości z użytkownikiem {{interlocutor.username}}
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -47,7 +47,7 @@
                   <thead>
                     <tr>
 
-                      <th>ID</th>
+
                       <th>Użytkownik</th>
 
                     </tr>
@@ -55,7 +55,7 @@
                 <tbody>
                     {% for i in user %}
                     <tr>
-                        <td>{{i.id}}</td>
+
                         <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
 
                     </tr>
