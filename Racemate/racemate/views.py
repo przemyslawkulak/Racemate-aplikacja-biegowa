@@ -128,7 +128,21 @@ class RunningGroupView(LoginRequiredMixin, View):
 class MemberView(LoginRequiredMixin, View):
     def get(self, request, id):
         member = MyUser.objects.get(id=id)
-        return render(request, 'racemate/member.html', {'member': member})
+        msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
+        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
+        msg = msg1 | msg2
+        interlocutor = MyUser.objects.get(id=id)
+        training = []
+        tra = PastTraining.objects.filter(user=id).order_by("-date")[:5]
+        for i in tra:
+            speed = round((float(i.distance_total) / float(i.time_total) * 3.6), 2)
+            distance = i.distance_total / 1000
+            training.append(
+                {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
+                 'distance_total': distance, 'user': i.user,
+                 'date': i.date, "id": i.id})
+        return render(request, 'racemate/member.html',
+                      {'member': member, 'msg': msg, 'interlocutor': interlocutor, "training": training})
 
 
 class ForumView(LoginRequiredMixin, View):
@@ -223,7 +237,7 @@ class MessangerView(LoginRequiredMixin, View):
         msg = msg1 | msg2
         interlocutor = MyUser.objects.get(id=id)
 
-        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user, 'interlocutor':interlocutor})
+        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user, 'interlocutor': interlocutor})
 
 
 class AddTreningView(LoginRequiredMixin, View):

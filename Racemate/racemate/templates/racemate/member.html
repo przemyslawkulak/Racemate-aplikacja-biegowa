@@ -8,12 +8,12 @@
             Nazwa użytkownika: {{member.username}} <br>Poziom VO2max = {{member.efficiency}}
 
             </div>
-            <div class="card-body">Ostatni trening
+            <div class="card-body">Ostatnie 5 treningów użytkownia {{member.username}}
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Numer</th>
+
                       <th>Data</th>
                       <th>Czas</th>
                       <th>Dystans</th>
@@ -22,46 +22,53 @@
                     </tr>
                   </thead>
                 <tbody>
-
+                    {% for i in training%}
                     <tr>
-                      <td>1</td>
-                        <td>12 grudnia 2018</td>
-                      <td>1h 25 min 13 sek</td>
-                      <td>15km 320 m</td>
-                      <td>12.3km/h</td>
 
+                        <td>{{i.date}}</td>
+                      <td>{{i.time_total}}</td>
+                      <td>{{i.distance_total}} km</td>
+                      <td>{{i.speed}} km/h</td>
 
                     </tr>
-
+                    {% empty %}
+                    <p>Brak wprowadzonych treningów</p>
+                    {% endfor %}
                 </tbody>
                 </table>
               </div>
             </div>
-     <div class="card-body">Ostatnie wiadomości
+     <div class="card-body">Ostatnie rozmowy z użytkownikiem {{interlocutor.username}}
               <div class="table-responsive">
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość do {{interlocutor.username}}</button></a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Numer</th>
+
                       <th>Data</th>
-                      <th>Od kogo</th>
+                      <th>Nadawca</th>
+                        <th>Odbiorca</th>
                       <th>Treść</th>
-                      <th></th>
+                        <th></th>
+
 
                     </tr>
                   </thead>
                 <tbody>
-
+                    {% for i in msg %}
                     <tr>
-                      <td>1</td>
-                        <td>12 grudnia 2018</td>
-                      <td>od piesek-leszek</td>
-                      <td>Dobry trening</td>
-                      <td></td>
+
+                        <td>{{i.date_sent}}</td>
+                      <td>{{i.sender.username}}</td>
+                        <td>{{i.to.username}}</td>
+                      <td>{{i.content}} </td>
+
 
 
                     </tr>
-
+                    {% empty %}
+                    <p>Brak wiadomości</p>
+                    {% endfor %}
                 </tbody>
                 </table>
               </div>

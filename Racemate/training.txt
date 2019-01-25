@@ -1,19 +1,19 @@
 {
-    "calories": 9,
+    "calories": 8,
     "detailed-sport-info": "RUNNING",
     "device": "Polar M430",
-    "distance": 47.0,
-    "duration": "PT6M3.125S",
+    "distance": 48.0,
+    "duration": "PT2M59.625S",
     "has-route": false,
     "heart-rate": {
-        "average": 59,
-        "maximum": 80
+        "average": 85,
+        "maximum": 97
     },
-    "id": 83556871,
+    "id": 83590261,
     "polar-user": "https://www.polaraccesslink.com/v3/users/37288820",
     "sport": "RUNNING",
-    "start-time": "2019-01-24T20:16:02.000",
+    "start-time": "2019-01-25T10:48:31.000",
     "training-load": 0.0,
-    "transaction-id": 172729786,
-    "upload-time": "2019-01-24T19:31:16.000"
+    "transaction-id": 172748319,
+    "upload-time": "2019-01-25T09:53:47.000"
 }
