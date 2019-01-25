@@ -1,14 +1,14 @@
 import datetime
 import json
 
-
 import isodate as isodate
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 
 # Create your views here.
+from django.template import RequestContext
 from django.views import View
 
 from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm
@@ -52,9 +52,21 @@ class LogoutView(View):
         logout(request)  # wylogowanie
         return redirect('login')
 
+
 class RegisterView(View):
     def get(self, request):
         return render(request, 'racemate/register.html')
+
+
+def customhandler404(request):
+    response = render(request, 'racemate/404.html',)
+    response.status_code = 404
+    return response
+
+def customhandler500(request):
+    response = render(request, 'racemate/500.html',)
+    response.status_code = 500
+    return response
 
 
 class LandingView(LoginRequiredMixin, View):
@@ -115,21 +127,28 @@ class AddTrainingView(LoginRequiredMixin, View):
         hours = request.POST.get('hours')
         minutes = request.POST.get('minutes')
         seconds = request.POST.get('seconds')
-        time_total = int(hours) * 3600 + int(minutes) * 60 + int(seconds)
         distance_total = request.POST.get('distance')
-        distance_total = int(float(distance_total) * 1000)
         time = request.POST.get('time')
         date = request.POST.get('date')
-        datetime = date + ' ' + time
-        tr = PastTraining.objects.create(name=name,
-                                         time_total=time_total,
-                                         distance_total=distance_total,
-                                         date=datetime,
-                                         user=request.user)
-        if ('VDOT' in request.POST) and isinstance(generateVDOT(tr), int):
-            request.user.efficiency = generateVDOT(tr)
-            request.user.save()
-        return redirect('landing-page')
+        time_total = int(hours) * 3600 + int(minutes) * 60 + int(seconds)
+        if (name is not None and time_total != 0 and distance_total and
+                time and date and request.user is not None):
+
+            distance_total = int(float(distance_total) * 1000)
+
+            datetime = date + ' ' + time
+
+            tr = PastTraining.objects.create(name=name,
+                                             time_total=time_total,
+                                             distance_total=distance_total,
+                                             date=datetime,
+                                             user=request.user)
+            if ('VDOT' in request.POST) and isinstance(generateVDOT(tr), int):
+                request.user.efficiency = generateVDOT(tr)
+                request.user.save()
+            return redirect('landing-page')
+        text = 'Wprowadź wszystkie dane do formularza'
+        return render(request, 'racemate/add_training.html', {'text': text})
 
 
 class SendMessageView(LoginRequiredMixin, View):

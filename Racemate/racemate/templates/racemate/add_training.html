@@ -4,7 +4,9 @@
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
      <h5>Witaj {{ user.username }}<br>Uzupełnij pola treningu:</h5>
+            <h5 style="color:red">{{text}}</h5>
             <div>
+
          {%csrf_token%}
         <label>Nazwa:<br>
             <input type="text" name="name">

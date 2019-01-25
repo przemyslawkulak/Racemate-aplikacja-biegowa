@@ -19,12 +19,14 @@ from django.urls import path, re_path
 from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView, ForumView, \
                             AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
                             TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
-                            DeleteTrainingView)
-
+                            DeleteTrainingView, RegisterView, customhandler404, customhandler500)
+handler404 = customhandler404
+handler500 = customhandler500
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(), name="login"),
+    path('accounts/login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', RegisterView.as_view(), name='register'),
     path('start/', LandingView.as_view(), name='landing-page'),
     re_path(r'start/(?P<id>(\d)+)/$', LandingGeneratorView.as_view(), name='generate_vdot'),
     re_path(r'running_group/(?P<id>(\d)+)/$', RunningGroupView.as_view(), name='running-group'),
