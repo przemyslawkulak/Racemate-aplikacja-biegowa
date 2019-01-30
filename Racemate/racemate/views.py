@@ -9,9 +9,11 @@ from django.shortcuts import render, redirect, render_to_response
 
 # Create your views here.
 from django.template import RequestContext
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import DeleteView, CreateView
 
-from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm
+from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm, CreateGroupForm
 
 from racemate.models import MyUser, RunningGroup, Message, PastTraining, Training
 from racemate.table import TABLES, generateVDOT
@@ -222,15 +224,44 @@ class LandingGeneratorView(LoginRequiredMixin, View):
             return redirect('landing-page')
 
 
+# class CreateGroupView(LoginRequiredMixin, CreateView):
+#     fields = ['name']
+#     model = RunningGroup
+#     success_url = reverse_lazy('landing-page')
+
+class CreateGroupView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = CreateGroupForm
+        return render(request, 'racemate/runninggroup_form.html', {'form': form})
+
+    def post(self, request):
+        form = CreateGroupForm(request.POST)
+        user = request.user
+        print(user)
+        if form.is_valid():
+            g = RunningGroup.objects.create(name=form['name'].value())
+            g.admins.add(user)
+            g.members.add(user)
+        return redirect('landing-page')
+
+
 class DeleteTrainingView(LoginRequiredMixin, View):
     def get(self, request, id):
         PastTraining.objects.get(id=id).delete()
+
         return redirect('landing-page')
+
+
+class PastTrainingDelete(DeleteView):
+    model = PastTraining
+
+    success_url = reverse_lazy('landing-page')
 
 
 class MessangerView(LoginRequiredMixin, View):
     def get(self, request, id):
         msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
+        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
         group = RunningGroup.objects.get(id=2)
         user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
@@ -336,11 +367,10 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
         if 6 in dic:
             dicts.append({"run": "R - rytmy, badzo szybki bieg interwałowy, do utrzymania przez 0,5-1,5 minuty"})
 
-        print(plan)
         paginator = Paginator(plan, 12)
         page = request.GET.get('page')
         a = paginator.get_page(page)
-        print(dicts)
+
         return render(request, "racemate/showtrening.html", {"tr": plan, "dict": dicts})
 
 

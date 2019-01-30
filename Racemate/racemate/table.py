@@ -48,12 +48,12 @@ def checktable(time, check):  # sprawdzenie VDOT w tabeli
 
 
 def generateVDOT(tr):  # ustalenie który dystans sprawdzać
-    if tr.distance_total <= 3000:
+    if tr.distance_total < 3000:
         print('nie mierzone')
         return f'VDOT generujemy od dystansu 3 km'
 
 
-    elif tr.distance_total > 3000 and tr.distance_total <= 5000:
+    elif tr.distance_total >= 3000 and tr.distance_total <= 5000:
         speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
         time = int(3000 / (speed / 3.6))
 

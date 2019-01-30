@@ -29,9 +29,13 @@
                       <td>{{i.time_total}}</td>
                       <td>{{i.distance_total}} km</td>
                       <td>{{i.speed}} km/h</td>
-                        <td><a href="{% url 'generate_vdot' id=i.id %}"><button name = 'VDOT' type="submit">Wygenerować VDOT?</button></a></td>
-                        <td><a href="{% url 'deletetraining' id=i.id %}"><button name = 'VDOT' type="submit">Kasuj trening</button></a></td>
 
+                        <td><a href="{% url 'delete' pk=i.id %}"><button name = 'VDOT' type="submit">Kasuj trening</button></a></td>
+                        {% if i.distance_total >= 3 %}
+                        <td><a href="{% url 'generate_vdot' id=i.id %}"><button name = 'VDOT' type="submit">Wygenerować VDOT?</button></a></td>
+                        {% else %}
+                        <td><button name = 'VDOT' type="submit">Dystans musi być dłuższy niż 3 km</button></td>
+                        {% endif %}
                     </tr>
                     {% empty %}
                     <p>Brak wprowadzonych treningów</p>

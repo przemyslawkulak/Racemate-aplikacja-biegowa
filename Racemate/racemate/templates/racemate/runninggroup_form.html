@@ -1,0 +1,15 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+    <form method="post">
+
+     <table>
+          <p>Wprowadź nazwę grupy biegowej: </p>
+         {%csrf_token%}
+         {{form}}
+
+     </table>
+     <button type="submit">Wprowadź</button>
+ </form>
+
+{% endblock content %}
