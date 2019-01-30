@@ -20,7 +20,7 @@ from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGr
                             AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
                             TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
                             DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
-                            CreateGroupView)
+                            CreateGroupView, ShowGroupsView)
 
 handler404 = customhandler404
 handler500 = customhandler500

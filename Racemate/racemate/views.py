@@ -122,7 +122,7 @@ class LandingView(LoginRequiredMixin, View):
 class RunningGroupView(LoginRequiredMixin, View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
-        user = MyUser.objects.filter(runninggroup=group).order_by('id')
+        user = MyUser.objects.filter(members=group).order_by('id')
 
         return render(request, 'racemate/running-group.html', {'user': user, "group": group})
 
@@ -242,7 +242,14 @@ class CreateGroupView(LoginRequiredMixin, View):
             g = RunningGroup.objects.create(name=form['name'].value())
             g.admins.add(user)
             g.members.add(user)
-        return redirect('landing-page')
+        return redirect('show-groups')
+
+
+class ShowGroupsView(View):
+    def get(self, request):
+        group = RunningGroup.objects.all().filter(members=request.user)
+        
+        return render(request, 'racemate/showgroups.html', {"group": group})
 
 
 class DeleteTrainingView(LoginRequiredMixin, View):
