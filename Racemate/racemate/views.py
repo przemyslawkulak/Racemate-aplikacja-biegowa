@@ -150,7 +150,7 @@ class MemberView(LoginRequiredMixin, View):
 class ForumView(LoginRequiredMixin, View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
-        user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
+        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
         print(user)
         messages = Message.objects.filter(to__isnull=True).order_by('-date_sent')
         return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
@@ -248,7 +248,7 @@ class CreateGroupView(LoginRequiredMixin, View):
 class ShowGroupsView(View):
     def get(self, request):
         group = RunningGroup.objects.all().filter(members=request.user)
-        
+
         return render(request, 'racemate/showgroups.html', {"group": group})
 
 
@@ -271,7 +271,7 @@ class MessangerView(LoginRequiredMixin, View):
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
         group = RunningGroup.objects.get(id=2)
-        user = MyUser.objects.filter(runninggroup=group).exclude(id=request.user.id)
+        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
         msg = msg1 | msg2
         interlocutor = MyUser.objects.get(id=id)
 
