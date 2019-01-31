@@ -22,7 +22,7 @@ class MyUser(AbstractUser):
     efficiency = models.IntegerField(null=True)
 
     def __str__(self):
-        return f'{self.username} {self.email} '
+        return f'{self.id} {self.username} {self.email} '
 
 
 class RunningGroup(models.Model):
@@ -32,7 +32,7 @@ class RunningGroup(models.Model):
     admins = models.ManyToManyField(MyUser, related_name='admins')
 
     def __str__(self):
-        return f'{self.name} {self.members}'
+        return f'{self.name} {self.admins.name} {self.members}'
 
 
 class TrainingElement(models.Model):

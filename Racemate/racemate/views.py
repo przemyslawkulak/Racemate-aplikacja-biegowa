@@ -127,6 +127,44 @@ class RunningGroupView(LoginRequiredMixin, View):
         return render(request, 'racemate/running-group.html', {'user': user, "group": group})
 
 
+class JoinGroupView(LoginRequiredMixin, View):
+    def get(self, request):
+        groups = []
+        admin = []
+        group = RunningGroup.objects.all().exclude(members=request.user)
+        print(groups)
+        for i in group:
+            admins = MyUser.objects.filter(admins=i)
+            for j in admins:
+                admin = j.username
+
+            m = len(MyUser.objects.filter(members=i))
+            groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
+        return render(request, 'racemate/joingroup.html', {"groups": groups})
+
+    # def post(self, request):
+    #
+    #     return pass
+
+
+class JoinConfirmView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        group = RunningGroup.objects.get(id=id)
+        admins = MyUser.objects.filter(admins=group)
+        for i in admins:
+            Message.objects.create(content=f"Prośba o przyjęcie do grupy '{group.name}' ", sender=request.user, to=i,
+                                   groupjoin=group)
+        return redirect('running-group', id=id)
+
+
+class AdminConfirmView(LoginRequiredMixin, View):
+    def get(self, request, id, sender):
+        g = RunningGroup.objects.get(id=id)
+        m = MyUser.objects.get(id=sender)
+        g.members.add(m)
+        return redirect('running-group', id=id)
+
+
 class MemberView(LoginRequiredMixin, View):
     def get(self, request, id):
         member = MyUser.objects.get(id=id)
@@ -223,11 +261,11 @@ class LandingGeneratorView(LoginRequiredMixin, View):
         else:
             return redirect('landing-page')
 
+    # class CreateGroupView(LoginRequiredMixin, CreateView):
+    #     fields = ['name']
+    #     model = RunningGroup
+    #     success_url = reverse_lazy('landing-page')
 
-# class CreateGroupView(LoginRequiredMixin, CreateView):
-#     fields = ['name']
-#     model = RunningGroup
-#     success_url = reverse_lazy('landing-page')
 
 class CreateGroupView(LoginRequiredMixin, View):
     def get(self, request):
@@ -380,12 +418,13 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
 
         return render(request, "racemate/showtrening.html", {"tr": plan, "dict": dicts})
 
+    #
+    # def createtraning(type, time, efficiency):
+    #     speed = round(1 / TABLES[efficiency - 30][type + 6] * 3600, 2)
+    #     distance = round(time * speed / 60, 2)
+    #     return None
 
-#
-# def createtraning(type, time, efficiency):
-#     speed = round(1 / TABLES[efficiency - 30][type + 6] * 3600, 2)
-#     distance = round(time * speed / 60, 2)
-#     return None
+
 class LoadTreningView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, "racemate/load.html")

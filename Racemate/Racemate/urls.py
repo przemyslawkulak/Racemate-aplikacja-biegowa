@@ -20,7 +20,7 @@ from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGr
                             AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
                             TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
                             DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
-                            CreateGroupView, ShowGroupsView)
+                            CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, AdminConfirmView)
 
 handler404 = customhandler404
 handler500 = customhandler500
@@ -47,5 +47,8 @@ urlpatterns = [
     re_path(r'^(?P<pk>\d+)/delete/$', PastTrainingDelete.as_view(), name='delete'),
     path('creategroup/', CreateGroupView.as_view(), name='create-group'),
     path('showgroups/', ShowGroupsView.as_view(), name='show-groups'),
+    path('joingroup/', JoinGroupView.as_view(), name='join-group'),
+    re_path(r'joingroupconfirm/(?P<id>(\d)+)/$', JoinConfirmView.as_view(), name='join-group-confirm'),
+    re_path(r'adminconfirm/(?P<id>(\d)+)/(?P<sender>(\d)+)$', AdminConfirmView.as_view(), name='adminconfirm'),
 
 ]

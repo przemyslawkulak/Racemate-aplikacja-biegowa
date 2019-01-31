@@ -17,7 +17,7 @@
                       <th>Nadawca</th>
                         <th>Odbiorca</th>
                       <th>Treść</th>
-                        <th></th>
+
 
 
                     </tr>
@@ -30,6 +30,11 @@
                       <td>{{i.sender.username}}</td>
                         <td>{{i.to.username}}</td>
                       <td>{{i.content}} </td>
+                        {% if i.groupjoin is not null %}
+                        {% if i.to == request.user %}
+                        <td><a href="{% url 'adminconfirm' id=i.groupjoin.id sender=i.sender.id %}">Przyjmij do grupy</a></td>
+                        {% endif %}
+                        {% endif %}
 
 
 
