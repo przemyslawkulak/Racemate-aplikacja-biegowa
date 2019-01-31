@@ -21,7 +21,6 @@ class MyUser(AbstractUser):
     r42 = models.IntegerField(null=True)
     efficiency = models.IntegerField(null=True)
 
-
     def __str__(self):
         return f'{self.username} {self.email} '
 
@@ -79,3 +78,4 @@ class Message(models.Model):
     to = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True, related_name="Adresat")
     sender = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True, related_name="Nadawca")
     date_sent = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Data wysłania")
+    groupjoin = models.OneToOneField(RunningGroup, on_delete=models.CASCADE, null=True)
