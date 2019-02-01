@@ -13,7 +13,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DeleteView, CreateView
 
-from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm, CreateGroupForm
+from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm, CreateGroupForm, \
+    SendMessageGroupForm
 
 from racemate.models import MyUser, RunningGroup, Message, PastTraining, Training
 from racemate.table import TABLES, generateVDOT
@@ -186,7 +187,7 @@ class ForumView(LoginRequiredMixin, View):
         group = RunningGroup.objects.get(id=id)
         user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
         print(user)
-        messages = Message.objects.filter(to__isnull=True).order_by('-date_sent')
+        messages = Message.objects.filter(togroup=group).order_by('-date_sent')
         return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
 
 
@@ -245,24 +246,38 @@ class SendMessageView(LoginRequiredMixin, View):
     def get(self, request):
         form = SendMessageForm()
         form.fields['to'].queryset = MyUser.objects.all().exclude(id=request.user.id)
-        form.fields['togroup'].queryset = RunningGroup.objects.all().filter(members=request.user)
         return render(request, 'racemate/form_html.html', {'form': form})
-
-    def post(self, request):
-        form = SendMessageForm(request.POST)
-        a = form['sender'].value()
-        print(a)
-        if form.is_valid():
-            Message.objects.create(content=form['content'].value(), sender=request.user, to=form['to'].value())
-        return render(request, "racemate/form_html.html", {"form": form})
 
     def post(self, request):
         subject = request.POST.get("subject")
         content = request.POST.get('content')
         to = request.POST.get('to')
+
         sender = request.user
-        Message.objects.create(subject=subject, content=content, to=MyUser.objects.get(id=to), sender=sender)
-        return redirect('messanger', id=to)
+        if to:
+            Message.objects.create(subject=subject, content=content,
+                                   to=MyUser.objects.get(id=to), sender=sender)
+            return redirect('messanger', id=to)
+
+        return redirect('landing-page')
+
+
+class SendMessageGroupView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = SendMessageGroupForm()
+        form.fields['togroup'].queryset = RunningGroup.objects.all().filter(members=request.user)
+        return render(request, 'racemate/form_html.html', {'form': form})
+
+    def post(self, request):
+        subject = request.POST.get("subject")
+        content = request.POST.get('content')
+        togroup = request.POST.get('togroup')
+        sender = request.user
+        if togroup:
+            Message.objects.create(subject=subject, content=content,
+                                   togroup=RunningGroup.objects.get(id=togroup), sender=sender)
+            return redirect('forum', id=togroup)
+        return redirect('landing-page')
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):

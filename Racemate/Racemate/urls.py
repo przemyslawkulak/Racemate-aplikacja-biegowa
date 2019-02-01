@@ -21,7 +21,7 @@ from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGr
                             TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
                             DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
                             CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, AdminConfirmView,
-                            ForumChoiceView)
+                            ForumChoiceView, SendMessageGroupView)
 
 handler404 = customhandler404
 handler500 = customhandler500
@@ -39,6 +39,7 @@ urlpatterns = [
     path('forumchoice', ForumChoiceView.as_view(), name='forum-choice'),
     path('add_training/', AddTrainingView.as_view(), name='addtraining'),
     path('send_message/', SendMessageView.as_view(), name='sendmessage'),
+    path('send_message_group', SendMessageGroupView. as_view(), name='sendmessagegroup'),
     re_path(r'^messanger/(?P<id>(\d)+)/$', MessangerView.as_view(), name='messanger'),
     path('add_plan/', AddTreningView.as_view(), name='addplan'),  # nie zrobione
     path('treningplan_white/', TreningPlanWhiteView.as_view(), name='whiteplan'),
