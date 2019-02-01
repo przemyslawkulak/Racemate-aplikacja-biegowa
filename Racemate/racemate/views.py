@@ -243,7 +243,9 @@ class AddTrainingView(LoginRequiredMixin, View):
 
 class SendMessageView(LoginRequiredMixin, View):
     def get(self, request):
-        form = SendMessageForm
+        form = SendMessageForm()
+        form.fields['to'].queryset = MyUser.objects.all().exclude(id=request.user.id)
+        form.fields['togroup'].queryset = RunningGroup.objects.all().filter(members=request.user)
         return render(request, 'racemate/form_html.html', {'form': form})
 
     def post(self, request):

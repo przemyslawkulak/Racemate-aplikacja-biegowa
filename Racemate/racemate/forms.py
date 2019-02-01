@@ -31,9 +31,10 @@ class PastTrainingForm(forms.ModelForm):
 
 
 class SendMessageForm(ModelForm):
+
     class Meta:
         model = Message
-        exclude = ['sender']
+        exclude = ['sender', 'groupjoin']
 
 
 class CreateGroupForm(ModelForm):
