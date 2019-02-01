@@ -1,0 +1,44 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="card mb-3">
+
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+
+             Dołącz do grupy biegowej:
+
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Nazwa grupy</th>
+                      <th>Admin</th>
+                      <th>Data utworzenia</th>
+                        <th>Ilość członków</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+
+
+                    {% for i in groups %}
+                    <tr>
+
+                        <td><a href="{% url 'forum' id=i.id %}">{{i.name}}</a></td>
+                      <td>{{i.admins}}</td>
+                      <td>{{i.date}}</td>
+                        <td>{{i.members}}</td>
+                    {% endfor%}
+                    </tr>
+
+                </tbody>
+
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}

@@ -142,10 +142,6 @@ class JoinGroupView(LoginRequiredMixin, View):
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         return render(request, 'racemate/joingroup.html', {"groups": groups})
 
-    # def post(self, request):
-    #
-    #     return pass
-
 
 class JoinConfirmView(LoginRequiredMixin, View):
     def get(self, request, id):
@@ -194,10 +190,26 @@ class ForumView(LoginRequiredMixin, View):
         return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
 
 
+class ForumChoiceView(LoginRequiredMixin, View):
+    def get(self, request):
+        groups = []
+        admin = []
+        group = RunningGroup.objects.all().filter(members=request.user)
+        for i in group:
+            admins = MyUser.objects.filter(admins=i)
+            for j in admins:
+                admin = j.username
+
+            m = len(MyUser.objects.filter(members=i))
+            groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
+        return render(request, 'racemate/forumchoice.html', {"groups": groups})
+    # def get(self, request):
+    #     group = RunningGroup.objects.all().filter(members=request.user)
+    #     return render(request, 'racemate/forumchoice.html', {'group': group})
+
+
 class AddTrainingView(LoginRequiredMixin, View):
     def get(self, request):
-        form = PastTrainingForm()
-        # return render(request, 'racemate/form_html.html', {'form': form})
         return render(request, 'racemate/add_training.html', )
 
     def post(self, request):
@@ -286,7 +298,6 @@ class CreateGroupView(LoginRequiredMixin, View):
 class ShowGroupsView(View):
     def get(self, request):
         group = RunningGroup.objects.all().filter(members=request.user)
-
         return render(request, 'racemate/showgroups.html', {"group": group})
 
 
