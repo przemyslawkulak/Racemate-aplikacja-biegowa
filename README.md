@@ -1,5 +1,6 @@
 # Racemate
-Aplikacja biegowa służąca do:
+## Aplikacja biegowa służąca do:
+
 •	Komunikacji pomiędzy członkami grupy biegowej
 •	Tworzenia bazy wykonanych treningów
 •	Monitorowania i aktualizacji formy zawodnika zgodnie z założeniami  badań trenera biegowego  Jacka Danielsa
