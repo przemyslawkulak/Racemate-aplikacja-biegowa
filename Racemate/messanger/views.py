@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
 
-from main.models import RunningGroup, MyUser
+from group.models import RunningGroup
+from main.models import  MyUser
 from messanger.forms import SendMessageForm, SendMessageGroupForm
 from messanger.models import Message
 
@@ -31,9 +32,6 @@ class ForumChoiceView(LoginRequiredMixin, View):
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         return render(request, 'main/forumchoice.html', {"groups": groups})
-    # def get(self, request):
-    #     group = RunningGroup.objects.all().filter(members=request.user)
-    #     return render(request, 'main/forumchoice.html', {'group': group})
 
 
 class SendMessageView(LoginRequiredMixin, View):
