@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 
@@ -8,6 +10,7 @@ from group.forms import CreateGroupForm
 from group.models import RunningGroup
 from main.models import MyUser
 from messanger.models import Message
+from training.models import PastTraining
 
 
 class RunningGroupView(LoginRequiredMixin, View):
@@ -72,3 +75,23 @@ class ShowGroupsView(View):
     def get(self, request):
         group = RunningGroup.objects.all().filter(members=request.user)
         return render(request, 'main/showgroups.html', {"group": group})
+
+
+class MemberView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        member = MyUser.objects.get(id=id)
+        msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
+        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
+        msg = msg1 | msg2
+        interlocutor = MyUser.objects.get(id=id)
+        training = []
+        tra = PastTraining.objects.filter(user=id).order_by("-date")[:5]
+        for i in tra:
+            speed = round((float(i.distance_total) / float(i.time_total) * 3.6), 2)
+            distance = i.distance_total / 1000
+            training.append(
+                {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
+                 'distance_total': distance, 'user': i.user,
+                 'date': i.date, "id": i.id})
+        return render(request, 'main/member.html',
+                      {'member': member, 'msg': msg, 'interlocutor': interlocutor, "training": training})
