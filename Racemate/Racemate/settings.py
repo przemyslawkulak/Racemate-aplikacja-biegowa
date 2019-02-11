@@ -36,9 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'racemate',
-    'main',
-    'messanger',
-
 ]
 
 MIDDLEWARE = [
