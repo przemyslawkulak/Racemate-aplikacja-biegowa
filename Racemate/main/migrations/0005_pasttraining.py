@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('racemate', '0004_auto_20190122_1353'),
+        ('main', '0004_auto_20190122_1353'),
     ]
 
     operations = [

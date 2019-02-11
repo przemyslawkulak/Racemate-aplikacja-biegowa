@@ -35,7 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'racemate',
+    'main',
+    'group',
+    'messanger',
+    'training',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'racemate.cp.logged_user'
+                'main.cp.logged_user'
             ],
         },
     },
@@ -109,7 +112,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-AUTH_USER_MODEL = 'racemate.MyUser'
+AUTH_USER_MODEL = 'main.MyUser'
 
 try:
     from Racemate.local_settings import DATABASES

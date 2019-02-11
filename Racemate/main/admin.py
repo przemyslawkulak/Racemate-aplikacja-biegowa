@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from racemate.models import MyUser, TrainingElement, Training, Message, PastTraining
+from main.models import MyUser, TrainingElement, Training, Message, PastTraining
 
 admin.site.register(MyUser)
 admin.site.register(TrainingElement)

@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('racemate', '0010_auto_20190130_1445'),
+        ('main', '0010_auto_20190130_1445'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='message',
             name='groupjoin',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='racemate.RunningGroup'),
+            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='main.RunningGroup'),
         ),
     ]

@@ -82,6 +82,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='training',
             name='trainingElements',
-            field=models.ManyToManyField(to='racemate.TrainingElement'),
+            field=models.ManyToManyField(to='main.TrainingElement'),
         ),
     ]

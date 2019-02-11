@@ -13,22 +13,22 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DeleteView, CreateView
 
-from racemate.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm, CreateGroupForm, \
+from main.forms import LoginForm, PastTrainingForm, SendMessageForm, AddTreningForm, CreateGroupForm, \
     SendMessageGroupForm
 
-from racemate.models import MyUser, RunningGroup, Message, PastTraining, Training
-from racemate.table import TABLES, generateVDOT
+from main.models import MyUser, RunningGroup, Message, PastTraining, Training
+from main.table import TABLES, generateVDOT
 
 
 class Index(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "racemate/start.html")
+        return render(request, "main/start.html")
 
 
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'racemate/login.html')
+        return render(request, 'main/login.html')
 
     def post(self, request):
         '''
@@ -45,9 +45,9 @@ class LoginView(View):
                 login(request, user)  # logujemy
                 return redirect('landing-page')
                 # jeśli uda się zalogować przerzuca nas na główną stronę
-            return render(request, 'racemate/login.html')
+            return render(request, 'main/login.html')
             # jeśli nie uda się zalogować wraca na formularz
-        return render(request, 'racemate/login.html')
+        return render(request, 'main/login.html')
 
 
 class LogoutView(View):
@@ -58,7 +58,7 @@ class LogoutView(View):
 
 class RegisterView(View):
     def get(self, request):
-        return render(request, 'racemate/register.html')
+        return render(request, 'main/register.html')
 
     def post(self, request):
         username = request.POST.get("username")
@@ -72,7 +72,7 @@ class RegisterView(View):
         if username and email and password and confirmPassword and password == confirmPassword:
             if username in usernames:
                 text = 'Podany user już istnieje'
-                return render(request, 'racemate/register.html', {"text": text})
+                return render(request, 'main/register.html', {"text": text})
             else:
                 MyUser.objects.create_user(username=username,
                                            email=email,
@@ -81,17 +81,17 @@ class RegisterView(View):
                                            )
                 return redirect('login')
         text = 'Żle powtórzone hasło'
-        return render(request, 'racemate/register.html', {"text": text})
+        return render(request, 'main/register.html', {"text": text})
 
 
 def customhandler404(request):
-    response = render(request, 'racemate/404.html', )
+    response = render(request, 'main/404.html', )
     response.status_code = 404
     return response
 
 
 def customhandler500(request):
-    response = render(request, 'racemate/500.html', )
+    response = render(request, 'main/500.html', )
     response.status_code = 500
     return response
 
@@ -117,49 +117,8 @@ class LandingView(LoginRequiredMixin, View):
                 {"subject": i.subject, 'content': i.content,
                  'to': i.to, 'user': request.user,
                  'sender': i.sender, "id": i.id})
-        return render(request, "racemate/landing-page.html", {"training": a, "msg": m})
+        return render(request, "main/landing-page.html", {"training": a, "msg": m})
 
-
-class RunningGroupView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        group = RunningGroup.objects.get(id=id)
-        user = MyUser.objects.filter(members=group).order_by('id')
-
-        return render(request, 'racemate/running-group.html', {'user': user, "group": group})
-
-
-class JoinGroupView(LoginRequiredMixin, View):
-    def get(self, request):
-        groups = []
-        admin = []
-        group = RunningGroup.objects.all().exclude(members=request.user)
-        print(groups)
-        for i in group:
-            admins = MyUser.objects.filter(admins=i)
-            for j in admins:
-                admin = j.username
-
-            m = len(MyUser.objects.filter(members=i))
-            groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
-        return render(request, 'racemate/joingroup.html', {"groups": groups})
-
-
-class JoinConfirmView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        group = RunningGroup.objects.get(id=id)
-        admins = MyUser.objects.filter(admins=group)
-        for i in admins:
-            Message.objects.create(content=f"Prośba o przyjęcie do grupy '{group.name}' ", sender=request.user, to=i,
-                                   groupjoin=group)
-        return redirect('running-group', id=id)
-
-
-class AdminConfirmView(LoginRequiredMixin, View):
-    def get(self, request, id, sender):
-        g = RunningGroup.objects.get(id=id)
-        m = MyUser.objects.get(id=sender)
-        g.members.add(m)
-        return redirect('running-group', id=id)
 
 
 class MemberView(LoginRequiredMixin, View):
@@ -178,40 +137,13 @@ class MemberView(LoginRequiredMixin, View):
                 {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
                  'distance_total': distance, 'user': i.user,
                  'date': i.date, "id": i.id})
-        return render(request, 'racemate/member.html',
+        return render(request, 'main/member.html',
                       {'member': member, 'msg': msg, 'interlocutor': interlocutor, "training": training})
-
-
-class ForumView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        group = RunningGroup.objects.get(id=id)
-        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
-        print(user)
-        messages = Message.objects.filter(togroup=group).order_by('-date_sent')
-        return render(request, 'racemate/forum.html', {'messages': messages, 'group': group, "user": user})
-
-
-class ForumChoiceView(LoginRequiredMixin, View):
-    def get(self, request):
-        groups = []
-        admin = []
-        group = RunningGroup.objects.all().filter(members=request.user)
-        for i in group:
-            admins = MyUser.objects.filter(admins=i)
-            for j in admins:
-                admin = j.username
-
-            m = len(MyUser.objects.filter(members=i))
-            groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
-        return render(request, 'racemate/forumchoice.html', {"groups": groups})
-    # def get(self, request):
-    #     group = RunningGroup.objects.all().filter(members=request.user)
-    #     return render(request, 'racemate/forumchoice.html', {'group': group})
 
 
 class AddTrainingView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'racemate/add_training.html', )
+        return render(request, 'main/add_training.html', )
 
     def post(self, request):
         name = request.POST.get("name")
@@ -239,45 +171,9 @@ class AddTrainingView(LoginRequiredMixin, View):
                 request.user.save()
             return redirect('landing-page')
         text = 'Wprowadź wszystkie dane do formularza'
-        return render(request, 'racemate/add_training.html', {'text': text})
+        return render(request, 'main/add_training.html', {'text': text})
 
 
-class SendMessageView(LoginRequiredMixin, View):
-    def get(self, request):
-        form = SendMessageForm()
-        form.fields['to'].queryset = MyUser.objects.all().exclude(id=request.user.id)
-        return render(request, 'racemate/form_html.html', {'form': form})
-
-    def post(self, request):
-        subject = request.POST.get("subject")
-        content = request.POST.get('content')
-        to = request.POST.get('to')
-
-        sender = request.user
-        if to:
-            Message.objects.create(subject=subject, content=content,
-                                   to=MyUser.objects.get(id=to), sender=sender)
-            return redirect('messanger', id=to)
-
-        return redirect('landing-page')
-
-
-class SendMessageGroupView(LoginRequiredMixin, View):
-    def get(self, request):
-        form = SendMessageGroupForm()
-        form.fields['togroup'].queryset = RunningGroup.objects.all().filter(members=request.user)
-        return render(request, 'racemate/form_html.html', {'form': form})
-
-    def post(self, request):
-        subject = request.POST.get("subject")
-        content = request.POST.get('content')
-        togroup = request.POST.get('togroup')
-        sender = request.user
-        if togroup:
-            Message.objects.create(subject=subject, content=content,
-                                   togroup=RunningGroup.objects.get(id=togroup), sender=sender)
-            return redirect('forum', id=togroup)
-        return redirect('landing-page')
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):
@@ -296,26 +192,7 @@ class LandingGeneratorView(LoginRequiredMixin, View):
     #     success_url = reverse_lazy('landing-page')
 
 
-class CreateGroupView(LoginRequiredMixin, View):
-    def get(self, request):
-        form = CreateGroupForm
-        return render(request, 'racemate/runninggroup_form.html', {'form': form})
 
-    def post(self, request):
-        form = CreateGroupForm(request.POST)
-        user = request.user
-        print(user)
-        if form.is_valid():
-            g = RunningGroup.objects.create(name=form['name'].value())
-            g.admins.add(user)
-            g.members.add(user)
-        return redirect('show-groups')
-
-
-class ShowGroupsView(View):
-    def get(self, request):
-        group = RunningGroup.objects.all().filter(members=request.user)
-        return render(request, 'racemate/showgroups.html', {"group": group})
 
 
 class DeleteTrainingView(LoginRequiredMixin, View):
@@ -331,23 +208,13 @@ class PastTrainingDelete(DeleteView):
     success_url = reverse_lazy('landing-page')
 
 
-class MessangerView(LoginRequiredMixin, View):
-    def get(self, request, id):
-        msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
-        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
-        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
-        group = RunningGroup.objects.get(id=2)
-        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
-        msg = msg1 | msg2
-        interlocutor = MyUser.objects.get(id=id)
 
-        return render(request, 'racemate/messanger.html', {"msg": msg, 'user': user, 'interlocutor': interlocutor})
 
 
 class AddTreningView(LoginRequiredMixin, View):
     def get(self, request):
         form = AddTreningForm
-        return render(request, "racemate/form_html.html", {"form": form})
+        return render(request, "main/form_html.html", {"form": form})
 
     def post(self, request):
         form = AddTreningForm(request.POST)
@@ -357,7 +224,7 @@ class AddTreningView(LoginRequiredMixin, View):
         efficiency = request.user.efficiency
         speed = round(1 / TABLES[efficiency - 30][rtype + 6] * 3600, 2)
         distance = round(timetrening * speed / 60, 2)
-        return render(request, "racemate/showtrening.html",
+        return render(request, "main/showtrening.html",
                       {"type": rtype, "name": name, "time": timetrening,
                        "efficiency": efficiency, "speed": speed, "distance": distance})
 
@@ -444,7 +311,7 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
         page = request.GET.get('page')
         a = paginator.get_page(page)
 
-        return render(request, "racemate/showtrening.html", {"tr": plan, "dict": dicts})
+        return render(request, "main/showtrening.html", {"tr": plan, "dict": dicts})
 
     #
     # def createtraning(type, time, efficiency):
@@ -455,7 +322,7 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
 
 class LoadTreningView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "racemate/load.html")
+        return render(request, "main/load.html")
 
     def post(self, request):
         with open('training.txt') as json_data:
@@ -470,13 +337,13 @@ class LoadTreningView(LoginRequiredMixin, View):
                 date=d['start-time'],
                 user=request.user)
 
-        # return render(request, "racemate/load.html", {"d": d})
+        # return render(request, "main/load.html", {"d": d})
         return redirect('landing-page')
 
 
 class PlanChoiceView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "racemate/planchoice.html")
+        return render(request, "main/planchoice.html")
 
 
 class TreningPlan18weeksView(LoginRequiredMixin, View):
@@ -551,4 +418,4 @@ class TreningPlan18weeksView(LoginRequiredMixin, View):
         page = request.GET.get('page')
         a = paginator.get_page(page)
         print(dicts)
-        return render(request, "racemate/showtrening.html", {"tr": a, "dict": dicts})
+        return render(request, "main/showtrening.html", {"tr": a, "dict": dicts})

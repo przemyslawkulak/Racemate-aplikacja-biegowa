@@ -1,4 +1,4 @@
-from racemate.models import MyUser
+from main.models import MyUser
 
 TABLES = [
     [30, 1076, 1840, 3826, 8464, 17357, 30, 720, 465, 423, 384, 355, 335],

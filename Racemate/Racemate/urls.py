@@ -16,17 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from racemate.views import (Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView, ForumView, \
-                            AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
-                            TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
-                            DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
-                            CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, AdminConfirmView,
-                            ForumChoiceView, SendMessageGroupView)
+from main.views import (Index, LogoutView, LoginView, LandingView, RunningGroupView, MemberView, ForumView, \
+                        AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
+                        TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
+                        DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
+                        CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, AdminConfirmView,
+                        ForumChoiceView, SendMessageGroupView)
 
 handler404 = customhandler404
 handler500 = customhandler500
 
 urlpatterns = [
+    # group
+
+    # messanger
+    re_path(r'forum/(?P<id>(\d)+)/$', ForumView.as_view(), name='forum'),
+    path('forumchoice', ForumChoiceView.as_view(), name='forum-choice'),
+    # main
+
+    # training
+
+
     path('admin/', admin.site.urls),
     path('accounts/login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name='logout'),
@@ -35,8 +45,7 @@ urlpatterns = [
     re_path(r'start/(?P<id>(\d)+)/$', LandingGeneratorView.as_view(), name='generate_vdot'),
     re_path(r'running_group/(?P<id>(\d)+)/$', RunningGroupView.as_view(), name='running-group'),
     re_path(r'member/(?P<id>(\d)+)/$', MemberView.as_view(), name='member'),
-    re_path(r'forum/(?P<id>(\d)+)/$', ForumView.as_view(), name='forum'),
-    path('forumchoice', ForumChoiceView.as_view(), name='forum-choice'),
+
     path('add_training/', AddTrainingView.as_view(), name='addtraining'),
     path('send_message/', SendMessageView.as_view(), name='sendmessage'),
     path('send_message_group', SendMessageGroupView. as_view(), name='sendmessagegroup'),

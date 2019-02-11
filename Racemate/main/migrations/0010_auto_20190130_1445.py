@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('racemate', '0009_training_treningplan'),
+        ('main', '0009_training_treningplan'),
     ]
 
     operations = [

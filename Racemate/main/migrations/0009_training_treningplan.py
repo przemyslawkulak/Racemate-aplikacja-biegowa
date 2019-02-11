@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('racemate', '0008_auto_20190123_1720'),
+        ('main', '0008_auto_20190123_1720'),
     ]
 
     operations = [
