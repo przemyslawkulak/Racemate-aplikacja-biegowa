@@ -18,12 +18,11 @@ from django.urls import path, re_path
 
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
     AdminConfirmView
-from racemate.views import (Index, LogoutView, LoginView, LandingView,  ForumView, \
-                            AddTrainingView, SendMessageView, LandingGeneratorView, MessangerView, AddTreningView,
-                            TreningPlanWhiteView, LoadTreningView, PlanChoiceView, TreningPlan18weeksView,
-                            DeleteTrainingView, RegisterView, customhandler404, customhandler500, PastTrainingDelete,
-
-                            ForumChoiceView, SendMessageGroupView)
+from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView
+from racemate.views import (LogoutView, LoginView, LandingView, LandingGeneratorView,
+                            RegisterView, customhandler404, customhandler500)
+from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView, TreningPlan18weeksView, \
+    LoadTreningView, PlanChoiceView, DeleteTrainingView, PastTrainingDelete
 
 handler404 = customhandler404
 handler500 = customhandler500
