@@ -29,7 +29,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href='{% url 'landing-page' %}'>Racemate - zalogowano jako {{user.username}}</a>
+      <a class="navbar-brand mr-1" href='{% url 'landing-page' %}'>Racemate - logged as {{user.username}}</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href='{% url 'landing-page' %}'>
         <i class="fas fa-bars"></i>
@@ -95,54 +95,54 @@
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'landing-page' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Strona główna</span>
+            <span>Main page</span>
           </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="{% url 'addtraining' %}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Dodaj trening</span></a>
+            <span>Add training</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'show-groups' %}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Twoja grupa biegowa</span></a>
+            <span>Your running groups</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'create-group'%}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Utwórz grupę biegową</span></a>
+            <span>Create running group</span></a>
         </li>
           <li class="nav-item">
           <a class="nav-link" href="{% url 'join-group'%}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Dołącz do grupy biegowej</span></a>
+            <span>Join the running group</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'planchoice' %}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Plany treningowe</span></a>
+            <span>Trening plans</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'forum-choice' %}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Forum grupy</span></a>
+            <span>Group forum</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'loadtrening'%}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Wczytaj trening z pliku</span></a>
+            <span>Load trening from file</span></a>
         </li>
         <li class="nav-item">
                   {% if auth %}
           <a class="nav-link" href="{% url 'logout'%}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Wylogowanie</span></a>
+            <span>Logout</span></a>
         {% else %}
           <a class="nav-link" href="{% url 'login'%}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Zaloguj</span></a>
+            <span>Login</span></a>
 
            {% endif %}
         </li>

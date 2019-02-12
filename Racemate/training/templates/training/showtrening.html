@@ -4,27 +4,27 @@
 
             <div class="card-header">
               <i class="fas fa-table"></i>
-            <h5>Witaj {{ user.username }}</h5>
-            Nazwa użytkownika: {{user.username}} <br>Poziom VDOT = {{user.efficiency}}<br><br>
-                Słowniczek:<br>
+            <h5>Hi {{ user.username }}</h5>
+            Username: {{user.username}} <br>Poziom VDOT = {{user.efficiency}}<br><br>
+                Glossary:<br>
                 {% for i in dict %}
                 {{i.run}}<br>
                 {% endfor %}
 
 
             </div>
-            <div class="card-body">Twój plan treningowy:
+            <div class="card-body">Your trening plan:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Dzień treningu</th>
-                      <th>Data treningu</th>
-                      <th>Trening</th>
+                        <th>Trening day</th>
+                      <th>Date of training</th>
+                      <th>Training</th>
 
-                      <th>Czas całkowity</th>
-                        <th>Całkowity dystans</th>
-                        <th>Prękości treningowe</th>
+                      <th>Total Time</th>
+                        <th>Total Distance</th>
+                        <th>Trening speeds</th>
 
                     </tr>
                   </thead>
@@ -43,7 +43,7 @@
 
                     </tr>
                     {% empty %}
-                    <p>Brak wprowadzonych planów treningowych</p>
+                    <p>No trening plans in database</p>
                     {% endfor %}
                 </tbody>
                 </table>
@@ -53,7 +53,7 @@
     <span class="step-links">
         {% if tr.has_previous %}
 
-            <a href="?page={{ tr.previous_page_number }}">< poprzednia </a>
+            <a href="?page={{ tr.previous_page_number }}">< previous </a>
         {% endif %}
 
         <span class="current">
@@ -63,7 +63,7 @@
         </span>
 
         {% if tr.has_next %}
-            <a href="?page={{ tr.next_page_number }}">| następna ></a>
+            <a href="?page={{ tr.next_page_number }}">| next ></a>
 
         {% endif %}
     </span>

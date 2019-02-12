@@ -12,29 +12,29 @@
 <h1>Runmate</h1>
     <div id='cssmenu'>
         <ul>
-            <li class='active'><a href='#'><span>Dodaj trening</span></a></li>
-            <li><a href='#' ><span>Dodaj plan treningowy</span></a></li>
-            <li class='active'><a href='#'><span>Twoja grupa</span></a></li>
-            <li><a href='#' ><span>Historia treningów</span></a></li>
+            <li class='active'><a href='#'><span>Add training</span></a></li>
+            <li><a href='#' ><span>Add training plan</span></a></li>
+            <li class='active'><a href='#'><span>Your group</span></a></li>
+            <li><a href='#' ><span>History of trenings</span></a></li>
             <li class='last'><a href='#'><span>Cośtam jeszcze</span></a></li>
             <li><a href='#' ><span>Forum</span></a></li>
-            <li class='last'>Zalogowano jako {{ user }}
+            <li class='last'>Logged as {{ user }}
         <!--Stopka do wylogowania-->
         {% if auth %}
-        <span>Zalogowano jako {{ user }}</span><a href="{% url 'logout'%}">wyloguj</a>
+        <span>Logged as {{ user }}</span><a href="{% url 'logout'%}">Logout</a>
         {% else %}
-        <a href="{% url 'login'%}">zaloguj się</a>
+        <a href="{% url 'login'%}">Login</a>
         {% endif %}</li>
         </ul>
 
 
 
-                    Zalogowano jako {{ user }}
+                    Logged as {{ user }}
         <!--Stopka do wylogowania-->
         {% if auth %}
-        <a href="{% url 'logout'%}">wyloguj</a>
+        <a href="{% url 'logout'%}">Logout</a>
         {% else %}
-        <a href="{% url 'login'%}">zaloguj się</a>
+        <a href="{% url 'login'%}">Login</a>
         {% endif %}
     <div id="content">
         {% block content %}
@@ -43,7 +43,7 @@
 
     <div id="footer">
       {% block footer %}
-        © Copyright 2018 by <a href="http://...">Charles</a>.
+        © Copyright 2019 by <a href="http://...">Przemek Kulak</a>.
       {% endblock %}
     </div>
 </body>

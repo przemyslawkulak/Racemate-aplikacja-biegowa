@@ -3,11 +3,11 @@
 
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <h5>Witaj {{ user.username }}<br></h5>
+            <h5>Hi {{ user.username }}<br></h5>
 
                 {%csrf_token%}
 
-         <button type="submit">Wczytaj trening z pliku</button>
+         <button type="submit">Load trening from file</button>
             {{d}}
         </table>
  </form>

@@ -3,15 +3,15 @@
 
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <h5>Witaj {{ user.username }}<br></h5><h6>Uzupełnij pola treningu:</h6>
+            <h5>Hi {{ user.username }}<br></h5><h6>Complete all training details:</h6>
             <h5 style="color:red">{{text}}</h5>
             <div>
 
          {%csrf_token%}
-        <label>Nazwa:<br>
+        <label>Name:<br>
             <input type="text" name="name">
         </label><br>
-         <label>Łączny czas:<br>
+         <label>Total time:<br>
             <input type="number" value = 0 name="hours">
         </label> h<br>
          <label>
@@ -19,22 +19,22 @@
         </label> min<br>
          <label>
              <input type="number" value = 0 name="seconds">
-        </label> sek<br>
-         <label>Łączny dystans w kilometrach:<br>
+        </label> sec<br>
+         <label>Total distance in km:<br>
             <input type="number" step=0.001 name="distance">
         </label><br>
-         <label>Godzina:<br>
+         <label>Time:<br>
             <input type="time" name="time">
         </label><br>
-         <div><label>Data:<br>
+         <div><label>Date:<br>
             <input type="date" name="date">
         </label></div><br>
-                <div><label>Wygenerować VDOT?:
+                <div><label>Generate VDOT?:
             <input type="checkbox" name="VDOT">
         </label></div><br>
 
      </div>
-     <button type="submit">Wprowadź</button>
+     <button type="submit">Submit</button>
             </table>
  </form>
 
