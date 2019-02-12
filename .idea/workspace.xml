@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cc636b7-0ac1-46c8-90e5-681b64ab70a8" name="Default Changelist" comment="remove .idea">
+    <list default="true" id="6cc636b7-0ac1-46c8-90e5-681b64ab70a8" name="Default Changelist" comment="group app views">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forum.html" beforeDir="false" afterPath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forumchoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forumchoice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html" beforeDir="false" afterPath="$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html" afterDir="false" />
     </list>
     <ignored path=".idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,46 +19,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Racemate/Racemate/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Racemate/racemate/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Racemate/racemate/views.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Racemate/Racemate/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
-              <folding>
-                <element signature="e#632#664#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -70,17 +40,37 @@
     </option>
     <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="88" />
-    <option name="width" value="640" />
-    <option name="height" value="555" />
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Racemate/racemate/views.py" />
+        <option value="$PROJECT_DIR$/Racemate/Racemate/urls.py" />
+        <option value="$PROJECT_DIR$/Racemate/Racemate/settings.py" />
+        <option value="$PROJECT_DIR$/Racemate/messanger/views.py" />
+        <option value="$PROJECT_DIR$/Racemate/training/views.py" />
+        <option value="$PROJECT_DIR$/Racemate/group/templates/group/member.html" />
+        <option value="$PROJECT_DIR$/Racemate/group/templates/group/joingroup.html" />
+        <option value="$PROJECT_DIR$/Racemate/group/templates/group/runninggroup_form.html" />
+        <option value="$PROJECT_DIR$/Racemate/group/templates/group/showgroups.html" />
+        <option value="$PROJECT_DIR$/Racemate/group/views.py" />
+        <option value="$PROJECT_DIR$/Racemate/group/templates/group/running-group.html" />
+        <option value="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forum.html" />
+        <option value="$PROJECT_DIR$/Racemate/messanger/templates/messanger/forumchoice.html" />
+        <option value="$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="716" />
+    <option name="y" value="25" />
+    <option name="width" value="650" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -95,6 +85,48 @@
               <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
               <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
               <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="group" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="group" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="group" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="group" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="messanger" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="messanger" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Racemate-aplikacja-biegowa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Racemate-aplikacja-biegowa" type="462c0819:PsiDirectoryNode" />
+              <item name="Racemate" type="462c0819:PsiDirectoryNode" />
+              <item name="messanger" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="messanger" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -122,6 +154,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Racemate/training/templates/training" />
+      <recent name="$PROJECT_DIR$/Racemate/messanger/templates/messanger" />
+      <recent name="$PROJECT_DIR$/Racemate/messanger/templates" />
+      <recent name="$PROJECT_DIR$/Racemate/group/templates/group" />
+      <recent name="$PROJECT_DIR$/Racemate/group/templates" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -174,42 +215,42 @@
       <workItem from="1549912988403" duration="2635000" />
       <workItem from="1549915703086" duration="1351000" />
       <workItem from="1549917157091" duration="1569000" />
-      <workItem from="1549967273861" duration="674000" />
+      <workItem from="1549967273861" duration="6660000" />
     </task>
-    <task id="LOCAL-00001" summary="create models and index.html template">
-      <created>1548153234432</created>
+    <task id="LOCAL-00001" summary="remove .idea">
+      <created>1549973735613</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1548153234432</updated>
+      <updated>1549973735613</updated>
     </task>
-    <task id="LOCAL-00002" summary="create view: running_group and member">
-      <created>1548162918050</created>
+    <task id="LOCAL-00002" summary="group app views">
+      <created>1549974478900</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1548162918050</updated>
+      <updated>1549974478900</updated>
     </task>
-    <task id="LOCAL-00003" summary="create view: add_training, forum and add_message; create daniels table">
-      <created>1548230945608</created>
+    <task id="LOCAL-00003" summary="messanger/training app views">
+      <created>1549975871782</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1548230945608</updated>
+      <updated>1549975871782</updated>
     </task>
-    <task id="LOCAL-00004" summary="VDOT Generate">
-      <created>1548239049235</created>
+    <task id="LOCAL-00004" summary="apps templates">
+      <created>1549976682685</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1548239049235</updated>
+      <updated>1549976682685</updated>
     </task>
-    <task id="LOCAL-00005" summary="Generate VDOT taken from views to TABLE.py&#10;Paginator on Landing_page">
-      <created>1548241173755</created>
+    <task id="LOCAL-00005" summary="group templates english">
+      <created>1549978623196</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1548241173755</updated>
+      <updated>1549978623251</updated>
     </task>
     <task id="LOCAL-00006" summary="Create a messanger">
       <created>1548252428911</created>
@@ -456,15 +497,16 @@
       <option name="project" value="LOCAL" />
       <updated>1549920808475</updated>
     </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="699000" />
+    <option name="totallyTimeSpent" value="6685000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <frame x="716" y="25" width="650" height="743" extended-state="4" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30407023" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2963576" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Repositories" order="3" visible="true" weight="0.32960895" />
@@ -541,10 +583,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Requirements&#10;Training file from Polar" />
-    <MESSAGE value="Custom 404 and 500 page&#10;AddTrening Post validation" />
-    <MESSAGE value="Register a user" />
-    <MESSAGE value="Massanger Update&#10;LoadTrenning Update" />
     <MESSAGE value="MemberView Update" />
     <MESSAGE value="Custom 404 and 500 update" />
     <MESSAGE value="Confirm Training Delete View&#10;3km condition in VDOT Generate in landing-page view" />
@@ -566,17 +604,13 @@
     <MESSAGE value="Revert &quot;Update README.md&quot;&#10;&#10;This reverts commit 5d146fe8" />
     <MESSAGE value="Update settings" />
     <MESSAGE value="remove .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove .idea" />
+    <MESSAGE value="group app views" />
+    <MESSAGE value="messanger/training app views" />
+    <MESSAGE value="apps templates" />
+    <MESSAGE value="group templates english" />
+    <option name="LAST_COMMIT_MESSAGE" value="group templates english" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Racemate/main/templates/main/register.html" />
-    <entry file="das://e7bde275-f49a-4870-b74b-c6ce21db0667/database/racemate/schema/public/table/racemate_runninggroup_members">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://e7bde275-f49a-4870-b74b-c6ce21db0667/database/racemate/schema/public/table/racemate_myuser_groups">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -584,9 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/member.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/showgroups.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/joingroup.html" />
     <entry file="das://e7bde275-f49a-4870-b74b-c6ce21db0667/database/racemate/schema/public/table/racemate_message">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -594,17 +625,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/forumchoice.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/forum.html" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/cp.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/training/models.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/group/forms.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/forms.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/table.py" />
-    <entry file="file://$PROJECT_DIR$/Racemate/messanger/views.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/group/admin.py" />
-    <entry file="file://$PROJECT_DIR$/Racemate/group/views.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/05eb7926-c0e4-45c5-9be3-f086a0df1ad0/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -650,7 +676,6 @@
     <entry file="file://$PROJECT_DIR$/Racemate/main/migrations/0001_initial.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/models.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/templates/main/landing-page.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/training/views.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/messanger/models.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/messanger/forms.py" />
     <entry file="file://$PROJECT_DIR$/Racemate/training/forms.py" />
@@ -677,13 +702,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Racemate/main/templates/main/base.html" />
-    <entry file="file://$PROJECT_DIR$/Racemate/Racemate/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Racemate/racemate/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -693,21 +711,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Racemate/racemate/views.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore.txt">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/racemate/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-435">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/messanger/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="85" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/Racemate/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="36" column="33" lean-forward="true" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/training/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3210">
+          <caret line="214" lean-forward="true" selection-start-line="214" selection-end-line="214" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/runninggroup_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/member.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="38" column="20" lean-forward="true" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/running-group.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Racemate/Racemate/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+        <state relative-caret-position="255">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
           <folding>
             <element signature="e#632#664#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/forum.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="63" column="116" selection-start-line="63" selection-start-column="116" selection-end-line="63" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/showgroups.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/joingroup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="13" column="24" lean-forward="true" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/forumchoice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Racemate/messanger/templates/messanger/messanger.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

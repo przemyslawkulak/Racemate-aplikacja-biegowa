@@ -2,7 +2,7 @@
 {% block content %}
 <div class="card mb-3">
     <div class="card-body">
-        <h4>Rozmawiaj z użytkownikiem:</h4>
+        <h4>Talk with user:</h4>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -23,25 +23,25 @@
                     {% endfor %}
                 </tbody>
                 </table>
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość do użytkownika</button></a>
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to user</button></a>
               </div>
             </div>
             <div class="card-header">
               <i class="fas fa-table"></i>
 
-            Forum grupy: {{group.name}}
+            Group forum: {{group.name}}
 
             </div>
 
-     <div class="card-body">Ostatnie wiadomości
+     <div class="card-body">Last messages
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
 
-                      <th>Data</th>
-                      <th>Nadawca</th>
-                      <th>Treść</th>
+                      <th>Date</th>
+                      <th>Sender</th>
+                      <th>Content</th>
                         <th></th>
 
 
@@ -61,7 +61,7 @@
                     {% endfor %}
                 </tbody>
                 </table>
-                  <a href="{% url 'sendmessagegroup' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość do grupy</button></a>
+                  <a href="{% url 'sendmessagegroup' %}"><button name = 'VDOT' type="submit">Send a message to group</button></a>
               </div>
             </div>
 
