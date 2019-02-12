@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="055fe47e-4f6a-46b3-b73b-3d5767b2a80a" name="Default Changelist" comment="remove .idea">
+    <list default="true" id="6cc636b7-0ac1-46c8-90e5-681b64ab70a8" name="Default Changelist" comment="remove .idea">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path=".idea/" />
@@ -13,60 +13,6 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Racemate_aplikacja_biegowa$accesslink_example.coverage" NAME="accesslink_example Coverage Results" MODIFIED="1548351038795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Racemate" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="racemate: database" type="162271b6:PgImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="racemate: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="racemate: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="racemate@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="racemate: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-    </expand>
-    <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -95,7 +41,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Racemate/Racemate/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
@@ -107,50 +53,12 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="HTML File" />
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>form</find>
-      <find>filter</find>
-      <find>pagi</find>
-      <find>add</find>
-      <find>defa</find>
-      <find>debu</find>
-      <find>admin</find>
-      <find>home</find>
-      <find>404</find>
-      <find>member</find>
-      <find>das</find>
-      <find>print(</find>
-      <find>print</find>
-      <find>generat</find>
-      <find>dele</find>
-      <find>crea</find>
-      <find>MyUser</find>
-      <find>index</find>
-      <find>runningg</find>
-      <find>redire</find>
-      <find>fo</find>
-      <find>running</find>
-      <find>choic</find>
-      <find>grou</find>
-      <find>runn</find>
-      <find>messa</find>
-      <find>messan</find>
-      <find>RunningGroup</find>
-      <find>send</find>
-      <find>forum</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -162,63 +70,6 @@
     </option>
     <option name="RESET_MODE" value="HARD" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Racemate/accesslink/accesslink.py" />
-        <option value="$PROJECT_DIR$/Racemate/training.txt" />
-        <option value="$PROJECT_DIR$/Racemate/accesslink_example.py" />
-        <option value="$PROJECT_DIR$/training.txt" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/showtrening.html" />
-        <option value="$PROJECT_DIR$/Racemate/requirements.txt" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/add_training.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/register.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/login.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/load.html" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/member.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/planchoice.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/500.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/404.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/table.py" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/pasttraining_confirm_delete.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/runninggroup_form.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/showgroups.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/joingroup.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/forumchoice.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/index.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/messanger.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/models.py" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/forum.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/templates/racemate/landing-page.html" />
-        <option value="$PROJECT_DIR$/Racemate/racemate/views.py" />
-        <option value="$PROJECT_DIR$/Racemate/training/models.py" />
-        <option value="$PROJECT_DIR$/Racemate/main/models.py" />
-        <option value="$PROJECT_DIR$/Racemate/group/models.py" />
-        <option value="$PROJECT_DIR$/Racemate/messanger/migrations/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/group/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/group/views.py" />
-        <option value="$PROJECT_DIR$/Racemate/main/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/main/views.py" />
-        <option value="$PROJECT_DIR$/Racemate/Racemate/urls.py" />
-        <option value="$PROJECT_DIR$/Racemate/messanger/views.py" />
-        <option value="$PROJECT_DIR$/Racemate/main/templates/main/landing-page.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/templates/training/add_training.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/templates/training/load.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/templates/training/pasttraining_confirm_delete.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/templates/training/planchoice.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/templates/training/showtrening.html" />
-        <option value="$PROJECT_DIR$/Racemate/training/views.py" />
-        <option value="$PROJECT_DIR$/Racemate/Racemate/local_settings.py" />
-        <option value="$PROJECT_DIR$/Racemate/messanger/models.py" />
-        <option value="$PROJECT_DIR$/Racemate/messanger/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/training/forms.py" />
-        <option value="$PROJECT_DIR$/Racemate/main/admin.py" />
-        <option value="$PROJECT_DIR$/Racemate/Racemate/settings.py" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="88" />
@@ -229,7 +80,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -268,29 +119,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="postgresql" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Racemate/messanger/templates/messanger" />
-      <recent name="$PROJECT_DIR$/Racemate/group/templates/group" />
-      <recent name="$PROJECT_DIR$/Racemate/training/templates/training" />
-      <recent name="$PROJECT_DIR$/Racemate/messanger" />
-      <recent name="$PROJECT_DIR$/Racemate/racemate/templates/racemate" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Racemate/Racemate" />
-      <recent name="$PROJECT_DIR$/Racemate/racemate/static" />
-      <recent name="$PROJECT_DIR$/Racemate/racemate" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -304,43 +135,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="accesslink_example" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Racemate-aplikacja-biegowa" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Racemate" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Racemate/accesslink_example.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.accesslink_example" />
-        <item itemvalue="Python.accesslink_example" />
-        <item itemvalue="Python.accesslink_example" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="055fe47e-4f6a-46b3-b73b-3d5767b2a80a" name="Default Changelist" comment="" />
+      <changelist id="6cc636b7-0ac1-46c8-90e5-681b64ab70a8" name="Default Changelist" comment="remove .idea" />
       <created>1548090177193</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -373,7 +173,8 @@
       <workItem from="1549908571118" duration="2271000" />
       <workItem from="1549912988403" duration="2635000" />
       <workItem from="1549915703086" duration="1351000" />
-      <workItem from="1549917157091" duration="1234000" />
+      <workItem from="1549917157091" duration="1569000" />
+      <workItem from="1549967273861" duration="674000" />
     </task>
     <task id="LOCAL-00001" summary="create models and index.html template">
       <created>1548153234432</created>
@@ -641,25 +442,29 @@
       <option name="project" value="LOCAL" />
       <updated>1549915900651</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="remove .idea">
+      <created>1549920572417</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1549920572417</updated>
+    </task>
+    <task id="LOCAL-00040" summary="remove .idea">
+      <created>1549920808474</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1549920808475</updated>
+    </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="192786000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29928172" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30407023" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Repositories" order="3" visible="true" weight="0.32960895" />
@@ -720,30 +525,6 @@
     <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -760,7 +541,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Register Page" />
     <MESSAGE value="Requirements&#10;Training file from Polar" />
     <MESSAGE value="Custom 404 and 500 page&#10;AddTrening Post validation" />
     <MESSAGE value="Register a user" />
@@ -785,10 +565,10 @@
     <MESSAGE value="update settings" />
     <MESSAGE value="Revert &quot;Update README.md&quot;&#10;&#10;This reverts commit 5d146fe8" />
     <MESSAGE value="Update settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update settings" />
+    <MESSAGE value="remove .idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove .idea" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Racemate/group/templates/group/running-group.html" />
     <entry file="file://$PROJECT_DIR$/Racemate/main/templates/main/register.html" />
     <entry file="das://e7bde275-f49a-4870-b74b-c6ce21db0667/database/racemate/schema/public/table/racemate_runninggroup_members">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
@@ -925,6 +705,9 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
