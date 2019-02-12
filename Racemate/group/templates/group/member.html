@@ -5,19 +5,19 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
 
-            Nazwa użytkownika: {{member.username}} <br>Poziom VO2max = {{member.efficiency}}
+            Username: {{member.username}} <br>VDOT = {{member.efficiency}}
 
             </div>
-            <div class="card-body">Ostatnie 5 treningów użytkownia {{member.username}}
+            <div class="card-body">Last 5 trainings of {{member.username}}
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
 
-                      <th>Data</th>
-                      <th>Czas</th>
-                      <th>Dystans</th>
-                      <th>Średnia prędkość</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Distance</th>
+                      <th>Speed</th>
 
                     </tr>
                   </thead>
@@ -32,23 +32,23 @@
 
                     </tr>
                     {% empty %}
-                    <p>Brak wprowadzonych treningów</p>
+                    <p>No trainings in database</p>
                     {% endfor %}
                 </tbody>
                 </table>
               </div>
             </div>
-     <div class="card-body">Ostatnie rozmowy z użytkownikiem {{interlocutor.username}}
+     <div class="card-body">Last messages with {{interlocutor.username}}
               <div class="table-responsive">
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Wyślij wiadomość do {{interlocutor.username}}</button></a>
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to {{interlocutor.username}}</button></a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
 
-                      <th>Data</th>
-                      <th>Nadawca</th>
-                        <th>Odbiorca</th>
-                      <th>Treść</th>
+                      <th>Date</th>
+                      <th>Sender</th>
+                        <th>To</th>
+                      <th>Content</th>
                         <th></th>
 
 
@@ -67,7 +67,7 @@
 
                     </tr>
                     {% empty %}
-                    <p>Brak wiadomości</p>
+                    <p>No messages</p>
                     {% endfor %}
                 </tbody>
                 </table>

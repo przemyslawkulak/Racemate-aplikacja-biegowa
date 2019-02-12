@@ -5,7 +5,7 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
 
-             Twoje grupy biegowe:
+             Your running groups:
 
             </div>
             <div class="card-body">
@@ -13,22 +13,21 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Numer</th>
-                      <th>Nazwa grupy</th>
+
+                      <th>Name of the group</th>
                       <th>Admin</th>
-                      <th>Data utworzenia</th>
+                      <th>Creation date</th>
 
                     </tr>
                   </thead>
                 <tbody>
                     {% for i in group %}
                     <tr>
-                      <td>{{i.id}}</td>
+
                         <td><a href='/running_group/{{i.id}}'>{{i.name}}</a></td>
                       <td>{{i.admin.username}}</td>
                       <td>{{i.date}}</td>
-                      <td>{{i.date_joined}}</td>
-                      <td>{{i.efficiency}}</td>
+
                     {% endfor%}
                     </tr>
 

@@ -5,7 +5,7 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
 
-              Grupa Biegowa "{{group.name}}"
+              Running Group "{{group.name}}"
 
             </div>
             <div class="card-body">
@@ -13,18 +13,18 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                        <th>Numer</th>
+
                       <th>Name</th>
                       <th>E-mail</th>
-                      <th>Ostatnie logowanie</th>
-                      <th>Data dołączenia</th>
-                      <th>Wydolność</th>
+                      <th>Last login</th>
+                      <th>Date of joining</th>
+                      <th>Efficiency(VDOT)</th>
                     </tr>
                   </thead>
                 <tbody>
                     {% for i in user %}
                     <tr>
-                      <td>{{i.id}}</td>
+
                         <td><a href='/member/{{i.id}}'>{{i.username}}</a></td>
                       <td>{{i.email}}</td>
                       <td>{{i.last_login}}</td>

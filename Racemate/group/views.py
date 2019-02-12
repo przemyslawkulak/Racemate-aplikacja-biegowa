@@ -23,7 +23,6 @@ class JoinGroupView(LoginRequiredMixin, View):
         groups = []
         admin = []
         group = RunningGroup.objects.all().exclude(members=request.user)
-        print(groups)
         for i in group:
             admins = MyUser.objects.filter(admins=i)
             for j in admins:
