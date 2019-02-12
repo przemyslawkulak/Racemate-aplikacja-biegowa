@@ -15,7 +15,7 @@ class RunningGroupView(LoginRequiredMixin, View):
         group = RunningGroup.objects.get(id=id)
         user = MyUser.objects.filter(members=group).order_by('id')
 
-        return render(request, 'racemate/running-group.html', {'user': user, "group": group})
+        return render(request, 'group/running-group.html', {'user': user, "group": group})
 
 
 class JoinGroupView(LoginRequiredMixin, View):
@@ -31,7 +31,7 @@ class JoinGroupView(LoginRequiredMixin, View):
 
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
-        return render(request, 'racemate/joingroup.html', {"groups": groups})
+        return render(request, 'group/joingroup.html', {"groups": groups})
 
 
 class JoinConfirmView(LoginRequiredMixin, View):
@@ -68,14 +68,14 @@ class MemberView(LoginRequiredMixin, View):
                 {"speed": speed, 'time_total': str(datetime.timedelta(seconds=i.time_total)),
                  'distance_total': distance, 'user': i.user,
                  'date': i.date, "id": i.id})
-        return render(request, 'racemate/member.html',
+        return render(request, 'group/member.html',
                       {'member': member, 'msg': msg, 'interlocutor': interlocutor, "training": training})
 
 
 class CreateGroupView(LoginRequiredMixin, View):
     def get(self, request):
         form = CreateGroupForm
-        return render(request, 'racemate/runninggroup_form.html', {'form': form})
+        return render(request, 'group/runninggroup_form.html', {'form': form})
 
     def post(self, request):
         form = CreateGroupForm(request.POST)
@@ -91,5 +91,5 @@ class CreateGroupView(LoginRequiredMixin, View):
 class ShowGroupsView(View):
     def get(self, request):
         group = RunningGroup.objects.all().filter(members=request.user)
-        return render(request, 'racemate/showgroups.html', {"group": group})
+        return render(request, 'group/showgroups.html', {"group": group})
 

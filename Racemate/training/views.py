@@ -18,7 +18,7 @@ from racemate.table import generateVDOT, TABLES
 
 class AddTrainingView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, 'racemate/add_training.html', )
+        return render(request, 'training/add_training.html', )
 
     def post(self, request):
         name = request.POST.get("name")
@@ -46,7 +46,7 @@ class AddTrainingView(LoginRequiredMixin, View):
                 request.user.save()
             return redirect('landing-page')
         text = 'Wprowadź wszystkie dane do formularza'
-        return render(request, 'racemate/add_training.html', {'text': text})
+        return render(request, 'training/add_training.html', {'text': text})
 
 
 class DeleteTrainingView(LoginRequiredMixin, View):
@@ -62,7 +62,6 @@ class PastTrainingDelete(DeleteView):
     success_url = reverse_lazy('landing-page')
 
 
-
 class AddTreningView(LoginRequiredMixin, View):
     def get(self, request):
         form = AddTreningForm
@@ -76,7 +75,7 @@ class AddTreningView(LoginRequiredMixin, View):
         efficiency = request.user.efficiency
         speed = round(1 / TABLES[efficiency - 30][rtype + 6] * 3600, 2)
         distance = round(timetrening * speed / 60, 2)
-        return render(request, "racemate/showtrening.html",
+        return render(request, "training/showtrening.html",
                       {"type": rtype, "name": name, "time": timetrening,
                        "efficiency": efficiency, "speed": speed, "distance": distance})
 
@@ -163,7 +162,7 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
         page = request.GET.get('page')
         a = paginator.get_page(page)
 
-        return render(request, "racemate/showtrening.html", {"tr": plan, "dict": dicts})
+        return render(request, "training/showtrening.html", {"tr": plan, "dict": dicts})
 
     #
     # def createtraning(type, time, efficiency):
@@ -174,7 +173,7 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
 
 class LoadTreningView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "racemate/load.html")
+        return render(request, "training/load.html")
 
     def post(self, request):
         with open('training.txt') as json_data:
@@ -195,7 +194,7 @@ class LoadTreningView(LoginRequiredMixin, View):
 
 class PlanChoiceView(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "racemate/planchoice.html")
+        return render(request, "training/planchoice.html")
 
 
 class TreningPlan18weeksView(LoginRequiredMixin, View):
@@ -270,4 +269,4 @@ class TreningPlan18weeksView(LoginRequiredMixin, View):
         page = request.GET.get('page')
         a = paginator.get_page(page)
         print(dicts)
-        return render(request, "racemate/showtrening.html", {"tr": a, "dict": dicts})
+        return render(request, "training/showtrening.html", {"tr": a, "dict": dicts})
