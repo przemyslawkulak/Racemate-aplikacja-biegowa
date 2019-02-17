@@ -40,7 +40,6 @@ class JoinConfirmView(LoginRequiredMixin, View):
 
         for i in admins:
             m = Message.objects.filter(groupjoin=group.id).filter(sender=request.user)
-            print(m)
             if m:
                 groups = []
                 admin = []
@@ -108,3 +107,16 @@ class ShowGroupsView(View):
         group = RunningGroup.objects.all().filter(members=request.user)
         return render(request, 'group/showgroups.html', {"group": group})
 
+
+class AdminView(View):
+    def get(self, request, id):
+        g = RunningGroup.objects.get(id=id)
+        m = Message.objects.filter(groupjoin=g)
+        requested_users = []
+        for i in m:
+            users = i.sender
+            requested_users.append(
+                {"id": users.id, "username": users.username, "email": users.email, "last_login": users.last_login})
+        print(requested_users)
+        print(id)
+        return render(request, 'group/admingroup.html', {"requested_users": requested_users, "group_id": id})

@@ -1,0 +1,39 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="card mb-3">
+
+            <div class="card-header">
+              <i class="fas fa-users"></i><span  class="test fa-lg"> Running Group Admin"{{group.name}}"</span>
+            </div>
+            <div class="card-body"><span  class="test fa-lg">Request users:</span>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Name</th>
+                      <th>E-mail</th>
+                      <th>Last login</th>
+
+                      <th>Efficiency(VDOT)</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in requested_users %}
+                    <tr>
+
+                        <td><a href='/member/{{i.id}}'>{{i.username}}</a></td>
+                      <td>{{i.email}}</td>
+                      <td>{{i.last_login}}</td>
+                      <td>{{i.efficiency}}</td>
+                        <td><a href="{% url 'adminconfirm' id=group_id sender=i.id %}">Join to group</a></td>
+                    {% endfor%}
+                    </tr>
+
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}

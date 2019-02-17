@@ -9,6 +9,30 @@
             </div>
             <!--Username: {{user.username}} <br>-->
 
+    <div class="card-body">You are the admin of groups:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Name of the group</th>
+
+                      <th>Creation date</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in groups %}
+                    <tr>
+
+                        <td><a href='{% url "adminview" id=i.id %}'>{{i.name}}</a></td>
+                      <td>{{i.date}}</td>
+                    {% endfor%}
+                    </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
             <div class="card-body">Your trenings:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

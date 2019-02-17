@@ -13,7 +13,7 @@ from django.views import View
 
 from racemate.forms import LoginForm
 
-from racemate.models import MyUser,  Message, PastTraining
+from racemate.models import MyUser, Message, PastTraining, RunningGroup
 from racemate.table import  generateVDOT
 
 
@@ -114,7 +114,9 @@ class LandingView(LoginRequiredMixin, View):
                 {"subject": i.subject, 'content': i.content,
                  'to': i.to, 'user': request.user,
                  'sender': i.sender, "id": i.id})
-        return render(request, "racemate/landing-page.html", {"training": a, "msg": m})
+        groups = RunningGroup.objects.filter(admins=request.user.id)
+        print(groups)
+        return render(request, "racemate/landing-page.html", {"training": a, "msg": m, "groups": groups})
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):
