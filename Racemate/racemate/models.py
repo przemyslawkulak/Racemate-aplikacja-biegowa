@@ -80,6 +80,6 @@ class Message(models.Model):
     sender = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True,
                                related_name="Nadawca", verbose_name="Nadawca")
     date_sent = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Data wysłania")
-    groupjoin = models.OneToOneField(RunningGroup, on_delete=models.CASCADE,  null=True, related_name="Join")
+    groupjoin = models.ForeignKey(RunningGroup, on_delete=models.CASCADE,  null=True, related_name="Join")
     togroup = models.ForeignKey(RunningGroup, on_delete=models.CASCADE, blank=True, null=True,
                                 related_name="Message", verbose_name="Wiadomość do grupy")
