@@ -3,7 +3,12 @@
 
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <h4><b>{{ user.username }}</b> Which trening you want to start?</h5>
+
+            <div class="card-header">
+                <i class="fas fa-table"> </i><span  class="test fa-lg"> Hi {{ user.username }}</span>
+
+            </div>
+            <p class="test fa-1x">  Which trening do you want to start?</p>
             <ul>
                 <li><a href = "{% url 'whiteplan' %}">For beginers(Jack Daniels' White Plan)</a></li>
                 <li><a href = "{% url '18weeksplan' %}">Marathon training - 18 weeks</a></li>

@@ -3,7 +3,8 @@
 
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <h5>Hi {{ user.username }}<br></h5>
+            <div class="card-header">
+                            <i class="fas fa-chart-area"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span><br><br>
 
                 {%csrf_token%}
 

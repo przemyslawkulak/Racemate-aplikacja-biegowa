@@ -3,7 +3,10 @@
 
     <form method="post">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <h5>Hi {{ user.username }}<br></h5><h6>Complete all training details:</h6>
+                        <div class="card-header">
+                            <i class="fas fa-chart-area"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
+
+            </div><br><h6>Complete all training details:</h6>
             <h5 style="color:red">{{text}}</h5>
             <div>
 
@@ -29,7 +32,7 @@
          <div><label>Date:<br>
             <input type="date" name="date">
         </label></div><br>
-                <div><label>Generate VDOT?:
+                <div><label>Competition (generate VDOT)?:
             <input type="checkbox" name="VDOT">
         </label></div><br>
 
