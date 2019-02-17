@@ -63,6 +63,7 @@ class AdminConfirmView(LoginRequiredMixin, View):
         g = RunningGroup.objects.get(id=id)
         m = MyUser.objects.get(id=sender)
         g.members.add(m)
+        Message.objects.filter(groupjoin=g).filter(sender=sender).delete()
         return redirect('running-group', id=id)
 
 
