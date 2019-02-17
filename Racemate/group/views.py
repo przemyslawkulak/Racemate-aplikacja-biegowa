@@ -37,8 +37,24 @@ class JoinConfirmView(LoginRequiredMixin, View):
     def get(self, request, id):
         group = RunningGroup.objects.get(id=id)
         admins = MyUser.objects.filter(admins=group)
+
         for i in admins:
-            Message.objects.create(content=f"Prośba o przyjęcie do grupy '{group.name}' ", sender=request.user, to=i,
+            m = Message.objects.filter(groupjoin=group.id).filter(sender=request.user)
+            print(m)
+            if m:
+                groups = []
+                admin = []
+                g = RunningGroup.objects.all().exclude(members=request.user)
+                for i in g:
+                    admins = MyUser.objects.filter(admins=i)
+                    for j in admins:
+                        admin = j.username
+
+                    m = len(MyUser.objects.filter(members=i))
+                    groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
+                text = f'You already request to {group.name}'
+                return render(request, 'group/joingroup.html', {"groups": groups, "text": text})
+            Message.objects.create(content=f"Request to join '{group.name}' ", sender=request.user, to=i,
                                    groupjoin=group)
         return redirect('running-group', id=id)
 
