@@ -29,6 +29,9 @@
 .fa-1x {
   font-size: 1em; }
 
+.fa-1-5x {
+  font-size: 1.5em; }
+
 .fa-2x {
   font-size: 2em; }
 
@@ -3810,3 +3813,8 @@ readers do not read off random characters that represent icons */
 .fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
+
+.test  {
+    display:inline-block;
+    font-size: 18pt;
+}

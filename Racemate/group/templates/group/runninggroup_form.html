@@ -4,11 +4,13 @@
     <form method="post">
 
      <table>
-          <p>Enter the name of running group: </p>
+                     <div class="card-header">
+              <i class="fas fa-users"></i><span  class="test fa-lg"> Enter the name of running group:</span>
+            </div>
          {%csrf_token%}
          {{form}}
 
-     </table>
+     </table><br>
      <button type="submit">Submit</button>
  </form>
 

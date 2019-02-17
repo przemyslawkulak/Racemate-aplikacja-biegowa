@@ -2,13 +2,13 @@
 {% block content %}
 <div class="card mb-3">
 
-            <div class="card-header">
-              <i class="fas fa-table"></i>
-            <h5>Witaj {{ user.username }}</h5>
-            <!--Username: {{user.username}} <br>-->
-                VDOT (efficiency) = {{user.efficiency}}
 
+            <div class="card-header">
+                            <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
+                <p class="fa-1x" >VDOT (efficiency) = {{user.efficiency}}</p>
             </div>
+            <!--Username: {{user.username}} <br>-->
+
             <div class="card-body">Your trenings:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

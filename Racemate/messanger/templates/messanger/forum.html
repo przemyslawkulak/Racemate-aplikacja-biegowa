@@ -1,8 +1,11 @@
 {% extends "racemate/index.html" %}
 {% block content %}
 <div class="card mb-3">
+    <div class="card-header">
+              <i class="fas fa-comments"></i><span  class="test fa-lg"> Forum of "{{group.name}}"</span>
+            </div>
     <div class="card-body">
-        <h4>Talk with user:</h4>
+        <p class="fa-lg">Talk with user:</p>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -23,14 +26,11 @@
                     {% endfor %}
                 </tbody>
                 </table>
-                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to user</button></a>
+                  <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message</button></a>
               </div>
             </div>
             <div class="card-header">
-              <i class="fas fa-table"></i>
-
-            Group forum: {{group.name}}
-
+              <i class="fas fa-comments"></i><span  class="test fa-1x"> Group forum: "{{group.name}}"</span>
             </div>
 
      <div class="card-body">Last messages
