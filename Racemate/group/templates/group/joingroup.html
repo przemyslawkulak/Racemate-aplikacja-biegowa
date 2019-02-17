@@ -17,7 +17,8 @@
                       <th>Name of the group</th>
                       <th>Admin</th>
                       <th>Creation date</th>
-                        <th>Number of members</th>
+                        <th>No. of members</th>
+                        <th>Join</th>
 
                     </tr>
                   </thead>
@@ -27,10 +28,11 @@
                     {% for i in groups %}
                     <tr>
 
-                        <td><a href="{% url 'join-group-confirm' id=i.id %}"><button name = 'join' type="submit">{{i.name}}</button></a></td>
+                        <td><a href="{% url 'running-group' id=i.id %}">{{i.name}}</a></td>
                       <td>{{i.admins}}</td>
                       <td>{{i.date}}</td>
                         <td>{{i.members}}</td>
+                        <td><a href="{% url 'join-group-confirm' id=i.id %}"><button name = 'join' type="submit">Join</button></a></td>
                     {% endfor%}
                     </tr>
 
