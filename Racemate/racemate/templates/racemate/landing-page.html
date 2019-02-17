@@ -5,13 +5,14 @@
             <div class="card-header">
               <i class="fas fa-table"></i>
             <h5>Witaj {{ user.username }}</h5>
-            Username: {{user.username}} <br>VDOT = {{user.efficiency}}
+            <!--Username: {{user.username}} <br>-->
+                VDOT (efficiency) = {{user.efficiency}}
 
             </div>
             <div class="card-body">Your trenings:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <a href="{% url 'addtraining' %}"><button name = 'training' type="submit">Insert a trening</button></a>
+                    <a href="{% url 'addtraining' %}"><button name = 'training' type="submit">Add a trening</button></a>
                   <thead>
                     <tr>
 

@@ -3202,6 +3202,9 @@ readers do not read off random characters that represent icons */
 .fa-table:before {
   content: "\f0ce"; }
 
+.fa-logout:before {
+  content: "\f08b"; }
+
 .fa-table-tennis:before {
   content: "\f45d"; }
 
