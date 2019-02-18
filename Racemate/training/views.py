@@ -45,7 +45,7 @@ class AddTrainingView(LoginRequiredMixin, View):
                 request.user.efficiency = generateVDOT(tr)
                 request.user.save()
             return redirect('landing-page')
-        text = 'Wprowadź wszystkie dane do formularza'
+        text = 'Insert all data to the form'
         return render(request, 'training/add_training.html', {'text': text})
 
 
@@ -106,13 +106,13 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
                 if i.walk is not None:
                     total_distance += traningdata(efficiency, i.walk, 7)[1]
                     total_time += i.walk
-                    speed += "Marsz=" + str(round(traningdata(efficiency, i.walk, 7)[0], 2)) + 'km/h '
+                    speed += "March=" + str(round(traningdata(efficiency, i.walk, 7)[0], 2)) + 'km/h '
                     dic.append(1)
 
                 if i.easy is not None:
                     total_distance += traningdata(efficiency, i.easy, 8)[1]
                     total_time += i.easy
-                    speed += "BS=" + str(round(traningdata(efficiency, i.easy, 8)[0], 2)) + 'km/h '
+                    speed += "E=" + str(round(traningdata(efficiency, i.easy, 8)[0], 2)) + 'km/h '
                     dic.append(2)
 
                 if i.marathon is not None:
@@ -124,7 +124,7 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
                 if i.threshold is not None:
                     total_distance += traningdata(efficiency, i.threshold, 10)[1]
                     total_time += i.threshold
-                    speed += "P=" + str(round(traningdata(efficiency, i.easy, 10)[0], 2)) + 'km/h '
+                    speed += "T=" + str(round(traningdata(efficiency, i.easy, 10)[0], 2)) + 'km/h '
                     dic.append(4)
 
                 if i.interval is not None:
@@ -146,17 +146,23 @@ class TreningPlanWhiteView(LoginRequiredMixin, View):
                              "speed2": round(traningdata(efficiency, i.easy, 8)[0], 2)})
 
         if 1 in dic:
-            dicts.append({"run": "Marsz - szybki marsz"})
+            dicts.append({"run": "March - fast march"})
         if 2 in dic:
-            dicts.append({"run": "BS - bieg spokojny, w tempie konwersacyjnym"})
+            dicts.append({
+                "run": "E - easy pace running refers to warm-ups, cool-downs , "
+                       "recovery runs, recovery running within a workout and generally long runs."})
         if 3 in dic:
-            dicts.append({"run": "M - bieg w tempie maratońskim"})
+            dicts.append({"run": "M - marathon-pace running, similar in target to the E zone, but faster "})
         if 4 in dic:
-            dicts.append({"run": "P - szybki bieg progowy, do utrzymania przez 20-30 min"})
+            dicts.append({
+                "run": "T - treshold-pace running, steady, prolonged or tempo runs or "
+                       "intermittent runs, to keep in  20-30 min"})
         if 5 in dic:
-            dicts.append({"run": "I - bieg interwałowy, do utrzymania przez 2-3 min"})
+            dicts.append({"run": "I - fast interval training to keep in 2-3 min"})
         if 6 in dic:
-            dicts.append({"run": "R - rytmy, badzo szybki bieg interwałowy, do utrzymania przez 0,5-1,5 minuty"})
+            dicts.append({
+                "run": "R - repetition training, very similar to interval training, "
+                       "repetition training is generally faster and shorter in duration."})
 
         paginator = Paginator(plan, 12)
         page = request.GET.get('page')
@@ -178,10 +184,8 @@ class LoadTreningView(LoginRequiredMixin, View):
     def post(self, request):
         with open('training.txt') as json_data:
             d = json.load(json_data)
-
             dur = isodate.parse_duration(d['duration'])
             time = dur.total_seconds()
-            print(time)
             PastTraining.objects.create(
                 time_total=time,
                 distance_total=d['distance'],
@@ -213,13 +217,13 @@ class TreningPlan18weeksView(LoginRequiredMixin, View):
             if i.walk is not None:
                 total_distance += traningdata(efficiency, i.walk, 7)[1]
 
-                speed += "Marsz=" + str(round(traningdata(efficiency, i.walk, 7)[0], 2)) + 'km/h  '
+                speed += "March=" + str(round(traningdata(efficiency, i.walk, 7)[0], 2)) + 'km/h  '
                 dic.append(1)
 
             if i.easy is not None:
                 total_distance += traningdata(efficiency, i.easy, 8)[1]
                 total_time += i.easy
-                speed += "BS=" + str(round(traningdata(efficiency, i.easy, 8)[0], 2)) + 'km/h  '
+                speed += "E=" + str(round(traningdata(efficiency, i.easy, 8)[0], 2)) + 'km/h  '
                 dic.append(2)
 
             if i.marathon is not None:
@@ -231,7 +235,7 @@ class TreningPlan18weeksView(LoginRequiredMixin, View):
             if i.threshold is not None:
                 total_distance += traningdata(efficiency, i.threshold, 10)[1]
                 total_time += i.threshold
-                speed += "P=" + str(round(traningdata(efficiency, i.threshold, 10)[0], 2)) + 'km/h  '
+                speed += "T=" + str(round(traningdata(efficiency, i.threshold, 10)[0], 2)) + 'km/h  '
                 dic.append(4)
 
             if i.interval is not None:
@@ -252,17 +256,23 @@ class TreningPlan18weeksView(LoginRequiredMixin, View):
                          "speed": speed})
 
         if 1 in dic:
-            dicts.append({"run": "Marsz - szybki marsz"})
+            dicts.append({"run": "March - fast march"})
         if 2 in dic:
-            dicts.append({"run": "BS - bieg spokojny, w tempie konwersacyjnym"})
+            dicts.append({
+                "run": "E - easy pace running refers to warm-ups, cool-downs , recovery runs, "
+                       "recovery running within a workout and generally long runs."})
         if 3 in dic:
-            dicts.append({"run": "M - bieg w tempie maratońskim"})
+            dicts.append({"run": "M - marathon-pace running, similar in target to the E zone, but faster "})
         if 4 in dic:
-            dicts.append({"run": "P - szybki bieg progowy, do utrzymania przez 20-30 min"})
+            dicts.append({
+                "run": "T - treshold-pace running, steady, prolonged or tempo runs "
+                       "or intermittent runs, to keep in  20-30 min"})
         if 5 in dic:
-            dicts.append({"run": "I - bieg interwałowy, do utrzymania przez 2-3 min"})
+            dicts.append({"run": "I - fast interval training to keep in 2-3 min"})
         if 6 in dic:
-            dicts.append({"run": "R - rytmy, badzo szybki bieg interwałowy, do utrzymania przez 0,5-1,5 minuty"})
+            dicts.append({
+                "run": "R - repetition training, very similar to interval training, "
+                       "repetition training is generally faster and shorter in duration."})
 
         print(plan)
         paginator = Paginator(plan, 12)
