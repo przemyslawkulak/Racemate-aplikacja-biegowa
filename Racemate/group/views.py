@@ -103,13 +103,13 @@ class CreateGroupView(LoginRequiredMixin, View):
         return redirect('show-groups')
 
 
-class ShowGroupsView(View):
+class ShowGroupsView(LoginRequiredMixin, View):
     def get(self, request):
         group = RunningGroup.objects.all().filter(members=request.user)
         return render(request, 'group/showgroups.html', {"group": group})
 
 
-class AdminView(View):
+class AdminView(LoginRequiredMixin, View):
     def get(self, request, id):
         g = RunningGroup.objects.get(id=id)
         m = Message.objects.filter(groupjoin=g)

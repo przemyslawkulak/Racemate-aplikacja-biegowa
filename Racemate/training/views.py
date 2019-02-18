@@ -56,7 +56,7 @@ class DeleteTrainingView(LoginRequiredMixin, View):
         return redirect('landing-page')
 
 
-class PastTrainingDelete(DeleteView):
+class PastTrainingDelete(LoginRequiredMixin, DeleteView):
     model = PastTraining
 
     success_url = reverse_lazy('landing-page')
