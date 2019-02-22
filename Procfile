@@ -1,0 +1,1 @@
+web: gunicorn Racemate.wsgi:application --log-file -
