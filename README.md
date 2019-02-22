@@ -11,3 +11,4 @@ Python, JavaScript, Django
 IDE: PyCharm  
 Bazy danych: PostgreSQL  
 System kontroli wersji: Git  
+https://racemate-app.herokuapp.com/
