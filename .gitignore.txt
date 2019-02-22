@@ -1,0 +1,2 @@
+.idea/
+Racemate/local_settings.py
