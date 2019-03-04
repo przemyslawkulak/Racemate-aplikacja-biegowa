@@ -17,17 +17,18 @@
                       <th>Name of the group</th>
                       <th>Admin</th>
                       <th>Creation date</th>
+                         <th>No. of members</th>
 
                     </tr>
                   </thead>
                 <tbody>
-                    {% for i in group %}
+                    {% for i in groups %}
                     <tr>
 
                         <td><a href='/running_group/{{i.id}}'>{{i.name}}</a></td>
-                      <td>{{i.admin.username}}</td>
+                      <td>{{i.admins}}</td>
                       <td>{{i.date}}</td>
-
+                        <td>{{i.members}}</td>
                     {% endfor%}
                     </tr>
 
