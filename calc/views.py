@@ -51,7 +51,6 @@ def generate_result(efficiency, distance):
         minutes = str(minutes) + "min "
     else:
         minutes = ''
-    print(seconds)
     if seconds > 0:
         seconds = str(seconds) + "sec "
     else:

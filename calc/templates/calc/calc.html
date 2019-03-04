@@ -1,13 +1,18 @@
 {% extends "racemate/index.html" %}
 {% block content %}
-
+    <div class="col-3">
     <form method="post" >
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                         <div class="card-header">
                             <i class="fas fa-calculator"> </i><span  class="test fa-lg">
-                            {% if user.username %} Hi {{ user.username }}{% else %}VDOT calculator{% endif %}</span>
+                            Running calculator</span>
 
-            </div><br><h6>Complete all training details:</h6>
+            </div><br>
+            <div>Complete all training details to calculate:<br>
+            <li>your VDOT</li>
+            <li>training tempos</li>
+            <li>predicted finish times at common race distances</li>
+            </div>
             <h5 style="color:red">{{text}}</h5>
             <div>
 
@@ -26,10 +31,14 @@
             <input type="number" step=0.01 name="distance"  value = 0 >
         </label><br>
      </div>
-     <button type="submit">Submit</button>
+     <button type="submit">Calculate</button>
             </table>
  </form>
+    </div>
+
 {% if form_value.distance_total %}
+    <div class="col-9">
+        <div class="row">
         <div class="card-header">
             <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  </span>
             <p>Your run :<br>
@@ -40,7 +49,9 @@
             </p>
                 <p class="fa-1x" >Your VDOT (efficiency) is {{efficiency}}</p>
             </div>
-        <div class="card-body">Calculate competition results
+        </div>
+    <div class="row">
+    <div class="card-body col-4">Calculated competition results
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -75,7 +86,7 @@
               </div>
             </div>
 
-    <div class="card-body">Trening tempos
+    <div class="card-body col-4">Trening tempos
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -109,9 +120,10 @@
                 </table>
               </div>
             </div>
-
-
+    </div>
+</div>
     {% endif %}
+
 
 
 {% endblock content %}
