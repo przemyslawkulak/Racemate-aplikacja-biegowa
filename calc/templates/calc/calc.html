@@ -1,8 +1,8 @@
 {% extends "racemate/index.html" %}
 {% block content %}
 
-    <form method="post">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <form method="post" >
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
                         <div class="card-header">
                             <i class="fas fa-calculator"> </i><span  class="test fa-lg">
                             {% if user.username %} Hi {{ user.username }}{% else %}VDOT calculator{% endif %}</span>
@@ -32,13 +32,82 @@
 {% if form_value.distance_total %}
         <div class="card-header">
             <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  </span>
-            <p>Your run :
-                {% if form_value.hours != '0' %} {{ form_value.hours }}h {% endif %}
+            <p>Your run :<br>
+                Time: {% if form_value.hours != '0' %} {{ form_value.hours }}h {% endif %}
                 {% if form_value.minutes != '0'%} {{ form_value.minutes }}min {% endif %}
-                {% if form_value.seconds != '0'%} {{ form_value.seconds }}sec {% endif %}
-                {% if form_value.distance_total %} {{ form_value.distance_total }}km {% endif %}
+                {% if form_value.seconds != '0'%} {{ form_value.seconds }}sec {% endif %}<br>
+                Distance: {% if form_value.distance_total %} {{ form_value.distance_total }}km {% endif %}
             </p>
                 <p class="fa-1x" >Your VDOT (efficiency) is {{efficiency}}</p>
+            </div>
+        <div class="card-body">Calculate competition results
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Distance</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr>
+                        <td>Marathon</td>
+                      <td>{{ results.marathon }}</td>
+                    </tr>
+                     <tr>
+                        <td>Half-marathon</td>
+                      <td>{{ results.half }}</td>
+                    </tr>
+                 <tr>
+                        <td>10km</td>
+                      <td>{{ results.10k }}</td>
+                    </tr>
+                 <tr>
+                        <td>5km</td>
+                      <td>{{ results.5k }}</td>
+                    </tr>
+                 <tr>
+                        <td>3km</td>
+                      <td>{{ results.3k }}</td>
+                    </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+
+    <div class="card-body">Trening tempos
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Training Type</th>
+                      <th>Speed</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr>
+                        <td>Easy</td>
+                      <td>{{ tempos.easy }}</td>
+                    </tr>
+                     <tr>
+                        <td>Marathon</td>
+                      <td>{{ tempos.marathon }}</td>
+                    </tr>
+                 <tr>
+                        <td>Threshold</td>
+                      <td>{{ tempos.threshold }}</td>
+                    </tr>
+                 <tr>
+                        <td>Interval</td>
+                      <td>{{ tempos.interval }}</td>
+                    </tr>
+                 <tr>
+                        <td>Repetition</td>
+                      <td>{{ tempos.repetition }}</td>
+                    </tr>
+                </tbody>
+                </table>
+              </div>
             </div>
 
 

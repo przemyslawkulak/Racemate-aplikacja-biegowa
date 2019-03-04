@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 
 from racemate.models import PastTraining
-from racemate.table import generateVDOT
+from racemate.table import generateVDOT, TABLES
 
 
 class CalculatorView(View):
@@ -22,7 +22,6 @@ class CalculatorView(View):
         form_value["seconds"] = seconds
         form_value["distance_total"] = distance_total
         time_total = int(hours) * 3600 + int(minutes) * 60 + int(seconds)
-        print(form_value['hours'])
         if time_total != 0 and distance_total:
             distance_total = int(float(distance_total) * 1000)
             tr = PastTraining.objects.none()
@@ -31,6 +30,56 @@ class CalculatorView(View):
             if isinstance(generateVDOT(tr), int):
                 efficiency = generateVDOT(tr)
 
-                return render(request, 'calc/calc.html', {'efficiency': efficiency, 'form_value': form_value})
+            return render(request, 'calc/calc.html', {'efficiency': efficiency, 'form_value': form_value,
+                                                      'results': adding_result(efficiency),
+                                                      'tempos': adding_tempos(efficiency)})
+
         text = 'Insert all data to the form'
         return render(request, 'calc/calc.html', {'text': text})
+
+
+def generate_result(efficiency, distance):
+    total_time = TABLES[efficiency - 30][distance]
+    hours = total_time // 3600
+    minutes = (total_time - hours * 3600) // 60
+    seconds = total_time - hours * 3600 - minutes * 60
+    if hours > 0:
+        hours = str(hours) + "h "
+    else:
+        hours = ''
+    if minutes > 0:
+        minutes = str(minutes) + "min "
+    else:
+        minutes = ''
+    print(seconds)
+    if seconds > 0:
+        seconds = str(seconds) + "sec "
+    else:
+        seconds = ''
+
+    return hours + minutes + seconds
+
+
+def adding_result(efficiency):
+    results = {}
+    results['marathon'] = generate_result(efficiency, 5)
+    results['half'] = generate_result(efficiency, 4)
+    results['10k'] = generate_result(efficiency, 3)
+    results['5k'] = generate_result(efficiency, 2)
+    results['3k'] = generate_result(efficiency, 1)
+    return results
+
+
+def generate_tempo(efficiency, type):
+    return str(round(1 / TABLES[efficiency - 30][type] * 3600, 2)) + 'km/h'
+
+
+def adding_tempos(efficiency):
+    tempo = {}
+    tempo['easy'] = generate_tempo(efficiency, 8)
+    tempo['marathon'] = generate_tempo(efficiency, 9)
+    tempo['threshold'] = generate_tempo(efficiency, 10)
+    tempo['interval'] = generate_tempo(efficiency, 11)
+    tempo['repetition'] = generate_tempo(efficiency, 12)
+
+    return tempo
