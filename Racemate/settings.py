@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'group',
     'messanger',
     'training',
+    'calc',
 ]
 
 MIDDLEWARE = [
