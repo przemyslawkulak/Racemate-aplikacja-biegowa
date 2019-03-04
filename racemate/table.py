@@ -39,10 +39,10 @@ def checktable(time, check):  # sprawdzenie VDOT w tabeli
         if time > TABLES[0][check]:
             vdot = 30
             return vdot
-        elif time < TABLES[i][check] and time > TABLES[i + 1][check]:
+        elif time <= TABLES[i][check] and time > TABLES[i + 1][check]:
             vdot = TABLES[i][0]
             return vdot
-        elif time < TABLES[30][check]:
+        elif time <= TABLES[30][check]:
             vdot = 60
             return vdot
 

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
+from calc.views import CalculatorView
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
     AdminConfirmView, AdminView
 from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView
@@ -64,4 +65,6 @@ urlpatterns = [
     re_path(r'^deletetraining/(?P<id>(\d)+)/$', DeleteTrainingView.as_view(), name='deletetraining'),
     re_path(r'^(?P<pk>\d+)/delete/$', PastTrainingDelete.as_view(), name='delete'),
 
+    #calc
+    path('calculator/', CalculatorView.as_view(), name='calculator')
 ]
