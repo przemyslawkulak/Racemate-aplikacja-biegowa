@@ -1,0 +1,16 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+
+<form method="post">{% csrf_token %}
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
+                        </div>
+
+    <p>Are you sure you want to delete training:<br> Name: "{{ object.name }}", Training date: {{ object.date }}?</p>
+    <input type="submit" value="Confirm">
+    <button><a href="{% url 'landing-page' %}" class="btn-link">Cancel</a></button>
+    </table>
+</form>
+
+{% endblock content %}
