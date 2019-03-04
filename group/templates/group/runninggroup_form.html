@@ -1,10 +1,10 @@
 {% extends "racemate/index.html" %}
 {% block content %}
-
+    <div class="col-5">
     <form method="post">
 
      <table>
-                     <div class="card-header">
+         <div class="card-header">
               <i class="fas fa-users"></i><span  class="test fa-lg"> Enter the name of running group:</span>
             </div>
          {%csrf_token%}
@@ -13,5 +13,5 @@
      </table><br>
      <button type="submit">Submit</button>
  </form>
-
+</div>
 {% endblock content %}

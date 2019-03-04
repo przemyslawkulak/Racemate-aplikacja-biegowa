@@ -373,3 +373,21 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+.back {
+  background-image: url(/static/img/run.jpg);
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+  opacity: 0.4;
+  z-index: 2;
+
+}
+
+.back::after {
+  background-image: url(/static/img/run.jpg);
+  background-attachment: revert;
+  opacity: 0.5;
+  background-size: cover;
+  z-index: 2;
+}
