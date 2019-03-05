@@ -54,7 +54,8 @@ class AddTreningForm(ModelForm):
         model = TrainingElement
         fields = ['name', 'time', 'type']
 
-class EditUserForm(ModelForm):
-    class Meta:
-        model = MyUser
-        fields = ['username', 'first_name', 'last_name', 'email']
+
+class ContactForm(forms.Form):
+    subject = forms.CharField()
+    content = forms.CharField(widget=forms.Textarea)
+

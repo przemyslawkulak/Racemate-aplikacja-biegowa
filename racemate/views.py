@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
@@ -11,7 +12,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import UpdateView
 
-from racemate.forms import LoginForm
+from racemate.forms import LoginForm, ContactForm
 
 from racemate.models import MyUser, Message, PastTraining, RunningGroup
 from racemate.table import generateVDOT
@@ -140,3 +141,23 @@ class EditUserView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('edituser')
+
+
+class ContactView(View):
+    def get(self, request):
+        form = ContactForm
+        return render(request, 'racemate/contact.html', {"form": form})
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            content = form.cleaned_data['content']
+            send_mail(
+                subject,
+                content,
+                'racemate.app@gmail.com',
+                ['przemyslaw.kulak86@gmail.com'],
+                fail_silently=False,
+            )
+            return redirect('landing-page')
