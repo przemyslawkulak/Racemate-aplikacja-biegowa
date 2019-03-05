@@ -3,6 +3,7 @@
 
   <head>
   {%load static%}
+      {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,9 +24,10 @@
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
 
+
   </head>
 
-  <body id="page-top">
+  <body id="page-top" style="background-image: url(/static/img/run.jpg); background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-color: #464646;">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -73,7 +75,7 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
-          <li><a class="nav-link" href="{% url 'landing-page' %}" >
+          <li><a class="nav-link" href="{% url 'edituser' %}" >
             {{user.username}}
           </a>
           </li>

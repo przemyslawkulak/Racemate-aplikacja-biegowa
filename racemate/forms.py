@@ -53,3 +53,8 @@ class AddTreningForm(ModelForm):
     class Meta:
         model = TrainingElement
         fields = ['name', 'time', 'type']
+
+class EditUserForm(ModelForm):
+    class Meta:
+        model = MyUser
+        fields = ['username', 'first_name', 'last_name', 'email']

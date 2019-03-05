@@ -1,0 +1,16 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+    <div class="col-5">
+        <form action="" method="post">
+            <div class="card-header">
+                <i class="fas fa-user"> </i>
+                <span  class="test fa-lg">  Edit your data</span>
+            </div>
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+{% endblock content%}

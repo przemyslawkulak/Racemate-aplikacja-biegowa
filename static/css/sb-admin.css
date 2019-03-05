@@ -378,11 +378,9 @@ body.sidebar-toggled footer.sticky-footer {
   }
 }
 
-
-
-body {
+body #page-top {
   background-image: url(/static/img/run.jpg);
-   background-position: center center;
+  background-position: center center;
 
   /* Background image doesn't tile */
   background-repeat: no-repeat;
@@ -399,3 +397,4 @@ body {
      while the background image is loading */
   background-color: #464646;
 }
+

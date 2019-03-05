@@ -6,15 +6,15 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 # Create your views here.
-
+from django.urls import reverse
 
 from django.views import View
-
+from django.views.generic import UpdateView
 
 from racemate.forms import LoginForm
 
 from racemate.models import MyUser, Message, PastTraining, RunningGroup
-from racemate.table import  generateVDOT
+from racemate.table import generateVDOT
 
 
 class Index(LoginRequiredMixin, View):
@@ -128,7 +128,15 @@ class LandingGeneratorView(LoginRequiredMixin, View):
         else:
             return redirect('landing-page')
 
-    # class CreateGroupView(LoginRequiredMixin, CreateView):
-    #     fields = ['name']
-    #     model = RunningGroup
-    #     success_url = reverse_lazy('landing-page')
+
+class EditUserView(LoginRequiredMixin, UpdateView):
+    model = MyUser
+
+    fields = ['username', 'first_name', 'last_name', 'email']
+    template_name_suffix = '_update_form'
+
+    def get_object(self):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse('edituser')
