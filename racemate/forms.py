@@ -58,5 +58,5 @@ class AddTreningForm(ModelForm):
 class ContactForm(forms.Form):
     subject = forms.CharField()
     content = forms.CharField(widget=forms.Textarea)
-    email = forms.EmailField()
+    email = forms.EmailField(null=True)
 
