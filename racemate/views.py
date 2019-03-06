@@ -163,3 +163,4 @@ class ContactView(View):
                 fail_silently=False,
             )
             return redirect('landing-page')
+        return redirect('landing-page')
