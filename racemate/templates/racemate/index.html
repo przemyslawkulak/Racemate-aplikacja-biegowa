@@ -114,7 +114,7 @@
           {% if auth %}
           {% else %}
       <li class="nav-item active">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="{% url 'about'%}">
             <i class="fas fa-fw fa-info-circle"></i>
             <span>About</span></a>
         </li>
@@ -198,7 +198,7 @@
 
           {% if auth %}
       <li class="nav-item ">
-          <a class="nav-link " href="#">
+          <a class="nav-link " href="{% url 'about'%}">
             <i class="fas fa-fw fa-info-circle"></i>
             <span>About</span></a>
         </li>

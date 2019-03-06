@@ -162,5 +162,10 @@ class ContactView(View):
                 ['przemyslaw.kulak86@gmail.com'],
                 fail_silently=False,
             )
-            return redirect('landing-page')
+            return redirect('landing-page')  # Todo  sending without getting emailin form
         return redirect('landing-page')
+
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'racemate/about.html', )

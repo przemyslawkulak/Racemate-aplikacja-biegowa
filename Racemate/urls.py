@@ -21,7 +21,7 @@ from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroup
     AdminConfirmView, AdminView
 from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView
 from racemate.views import (LogoutView, LoginView, LandingView, LandingGeneratorView,
-                            RegisterView, customhandler404, customhandler500, EditUserView, ContactView)
+                            RegisterView, customhandler404, customhandler500, EditUserView, ContactView, AboutView)
 from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView, TreningPlan18weeksView, \
     LoadTreningView, PlanChoiceView, DeleteTrainingView, PastTrainingDelete
 
@@ -39,6 +39,7 @@ urlpatterns = [
     re_path(r'start/(?P<id>(\d)+)/$', LandingGeneratorView.as_view(), name='generate_vdot'),
     path('edituser/', EditUserView.as_view(), name='edituser'),
     path('contact/', ContactView.as_view(), name='contact'),
+    path('about/', AboutView.as_view(), name='about'),
 
     # group
     re_path(r'running_group/(?P<id>(\d)+)/$', RunningGroupView.as_view(), name='running-group'),
