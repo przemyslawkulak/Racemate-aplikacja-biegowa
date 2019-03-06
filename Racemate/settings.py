@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from Racemate.test import TEST
+# from Racemate.test import TEST
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -131,5 +131,6 @@ except ModuleNotFoundError:
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'racemate.app@gmail.com'
-EMAIL_HOST_PASSWORD = TEST
+# EMAIL_HOST_PASSWORD = TEST
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
 EMAIL_PORT = 587
