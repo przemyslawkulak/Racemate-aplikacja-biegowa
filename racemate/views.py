@@ -153,6 +153,8 @@ class ContactView(View):
         if form.is_valid():
             subject = form.cleaned_data['subject']
             content = form.cleaned_data['content']
+            email = form.cleaned_data['email']
+            content = content + email
             send_mail(
                 subject,
                 content,

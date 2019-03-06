@@ -7,7 +7,13 @@
         <form action="" method="post">
             <div class="card-header">
                 <i class="fas fa-user"> </i>
-                <span  class="test fa-lg">  Send me a message:</span>
+                <span  class="test fa-lg">  Racemate© created by Przemysław Kulak</span><br><br>
+                <span  class="test fa">
+                    If you want to:
+                        <li>give me some feedback</li>
+                        <li>point bugs</li>
+                        <li>hire me ;)</li>
+                        just send me a message:</span>
             </div>
             {% csrf_token %}
             <table>
@@ -15,5 +21,16 @@
             </table>
             <input type="submit" value="Send">
         </form>
+
+    <div class="card-header">
+
+        <span  class="test fa-lg">  Social media:</span><br>
+        <span  class="test fa-lg">
+            <a href="https://www.linkedin.com/in/przemyslaw-kulak/"><i class="fa fa-2x fa-linkedin-in"> </i></a>
+            <a href="https://github.com/przemyslawkulak"><i class="fa fa-2x fa-github"> </i></a>
+            <a href="https://www.facebook.com/profile.php?id=100000454931975&ref=bookmarks"><i class="fa fa-2x fa-facebook"> </i></a>
+            </span>
+
+            </div>
     </div>
 {% endblock content%}
