@@ -36,15 +36,20 @@ class LoginView(View):
         '''
         form = LoginForm(request.POST)
         if form.is_valid():
-            user = authenticate(username=form['login'].value(),
-                                # wyciągamy login i hasło z formularza i logujemy
-                                password=form['password'].value())
-            if user:
-                login(request, user)  # logujemy
-                return redirect('landing-page')
-                # jeśli uda się zalogować przerzuca nas na główną stronę
-            return render(request, 'racemate/login.html')
-            # jeśli nie uda się zalogować wraca na formularz
+            users = [i.username for i in MyUser.objects.all()]
+            if form['login'].value() in users:
+                user = authenticate(username=form['login'].value(),
+                                    # wyciągamy login i hasło z formularza i logujemy
+                                    password=form['password'].value())
+                if user:
+                    login(request, user)  # logujemy
+                    return redirect('landing-page')
+                    # jeśli uda się zalogować przerzuca nas na główną stronę
+                text = 'Wrong password'
+                return render(request, 'racemate/login.html', {'text': text})
+                # jeśli nie uda się zalogować wraca na formularz
+            text = 'Unknown user'
+            return render(request, 'racemate/login.html', {'text': text})
         text = 'Fill all fields'
         return render(request, 'racemate/login.html', {'text': text})
 
