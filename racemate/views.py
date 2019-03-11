@@ -45,7 +45,8 @@ class LoginView(View):
                 # jeśli uda się zalogować przerzuca nas na główną stronę
             return render(request, 'racemate/login.html')
             # jeśli nie uda się zalogować wraca na formularz
-        return render(request, 'racemate/login.html')
+        text = 'Fill all fields'
+        return render(request, 'racemate/login.html', {'text': text})
 
 
 class LogoutView(View):
