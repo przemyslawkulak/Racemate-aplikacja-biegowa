@@ -121,3 +121,7 @@ env/*
 venv/*
 .idea/*
 .idea/
+.idea/dataSources.local.xml
+.idea/dataSources/
+.idea/snapshots/
+.idea/workspace.xml

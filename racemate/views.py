@@ -64,25 +64,27 @@ class RegisterView(View):
         password = request.POST.get('password')
         confirmPassword = request.POST.get('confirmPassword')
         users = MyUser.objects.all()
-        usernames = []
-        for i in users:
-            usernames.append(i.username)
-        if username and email and password and confirmPassword and password == confirmPassword:
-            if username in usernames:
-                text = 'Podany user już istnieje'
-                return render(request, 'racemate/register.html', {"text": text})
-            else:
-                MyUser.objects.create_user(username=username,
-                                           email=email,
-                                           efficiency=30,
-                                           password=password,
-                                           )
-                return redirect('login')
-        text = 'Żle powtórzone hasło'
+        usernames = [i.username for i in users]
+        if username and email and password and confirmPassword:
+            if password == confirmPassword:
+                if username in usernames:
+                    text = 'Username exists'
+                    return render(request, 'racemate/register.html', {"text": text})
+                else:
+                    MyUser.objects.create_user(username=username,
+                                               email=email,
+                                               efficiency=30,
+                                               password=password,
+                                               )
+                    return redirect('login')
+            text = 'The password and confirmation password do not match'
+            return render(request, 'racemate/register.html', {"text": text})
+
+        text = 'Fill all fields'
         return render(request, 'racemate/register.html', {"text": text})
 
 
-def customhandler404(request):
+def customhandler404(request, exception=None):
     response = render(request, 'racemate/404.html', )
     response.status_code = 404
     return response
@@ -162,7 +164,7 @@ class ContactView(View):
                 ['przemyslaw.kulak86@gmail.com'],
                 fail_silently=False,
             )
-            return redirect('landing-page')  # Todo  sending without getting emailin form
+            return redirect('landing-page')  # Todo  sending without getting email in form
         return redirect('landing-page')
 
 
