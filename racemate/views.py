@@ -25,29 +25,20 @@ class Index(LoginRequiredMixin, View):
 
 class LoginView(View):
     def get(self, request):
-        form = LoginForm()
         return render(request, 'racemate/login.html')
 
     def post(self, request):
-        '''
-
-        :param request:
-        :return:
-        '''
         form = LoginForm(request.POST)
         if form.is_valid():
             users = [i.username for i in MyUser.objects.all()]
             if form['login'].value() in users:
                 user = authenticate(username=form['login'].value(),
-                                    # wyciągamy login i hasło z formularza i logujemy
                                     password=form['password'].value())
                 if user:
-                    login(request, user)  # logujemy
+                    login(request, user)
                     return redirect('landing-page')
-                    # jeśli uda się zalogować przerzuca nas na główną stronę
                 text = 'Wrong password'
                 return render(request, 'racemate/login.html', {'text': text})
-                # jeśli nie uda się zalogować wraca na formularz
             text = 'Unknown user'
             return render(request, 'racemate/login.html', {'text': text})
         text = 'Fill all fields'
@@ -56,7 +47,7 @@ class LoginView(View):
 
 class LogoutView(View):
     def get(self, request):
-        logout(request)  # wylogowanie
+        logout(request)
         return redirect('login')
 
 
@@ -170,7 +161,7 @@ class ContactView(View):
                 ['przemyslaw.kulak86@gmail.com'],
                 fail_silently=False,
             )
-            return redirect('landing-page')  # Todo  sending without getting email in form
+            return redirect('landing-page')  # Todo  sending without getting emailin form
         return redirect('landing-page')
 
 

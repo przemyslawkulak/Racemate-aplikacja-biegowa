@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# from Racemate.test import TEST
+from Racemate.test import TEST, SECRET_KEY
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y@xm2mr_e=5i**5szrbpv^#w336#(d2*5yrx-#h3z=_rrce#^h'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'racemate-app.herokuapp.com']
 
@@ -131,6 +131,6 @@ except ModuleNotFoundError:
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'racemate.app@gmail.com'
-# EMAIL_HOST_PASSWORD = TEST
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
+EMAIL_HOST_PASSWORD = TEST
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
 EMAIL_PORT = 587
