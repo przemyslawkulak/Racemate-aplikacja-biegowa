@@ -15,7 +15,7 @@ from django.views.generic import UpdateView
 from racemate.forms import LoginForm, ContactForm
 
 from racemate.models import MyUser, Message, PastTraining, RunningGroup
-from racemate.table import generateVDOT
+from racemate.table import generateVDOT, adding_result
 
 
 class Index(LoginRequiredMixin, View):
@@ -95,6 +95,8 @@ def customhandler500(request):
 
 class LandingView(LoginRequiredMixin, View):
     def get(self, request):
+
+        # showing all trainings
         training = []
         tra = PastTraining.objects.filter(user=request.user.id).order_by("-date")
         for i in tra:
@@ -107,6 +109,8 @@ class LandingView(LoginRequiredMixin, View):
         paginator = Paginator(training, 10)
         page = request.GET.get('page')
         a = paginator.get_page(page)
+
+        # last messages
         m = []
         msg = Message.objects.filter(to=request.user.id).order_by("-date_sent")
         for i in msg:
@@ -114,40 +118,17 @@ class LandingView(LoginRequiredMixin, View):
                 {"subject": i.subject, 'content': i.content,
                  'to': i.to, 'user': request.user,
                  'sender': i.sender, "id": i.id})
-        print(request.user.r42)
-        results = adding_result(request.user)
 
+        # showing personal records
+        results = adding_result(request.user)
+        print(results['half'])
+
+        # showing groups where user is an admin
         groups = RunningGroup.objects.filter(admins=request.user.id)
+
         return render(request, "racemate/landing-page.html", {"training": a, "msg": m, "groups": groups, 'results': results})
 
-def generate_records(total_time):
-    hours = total_time // 3600
-    minutes = (total_time - hours * 3600) // 60
-    seconds = total_time - hours * 3600 - minutes * 60
-    if hours > 0:
-        hours = str(hours) + "h "
-    else:
-        hours = ''
-    if minutes > 0:
-        minutes = str(minutes) + "min "
-    else:
-        minutes = ''
-    if seconds > 0:
-        seconds = str(seconds) + "sec "
-    else:
-        seconds = ''
 
-    return hours + minutes + seconds
-
-def adding_result(user):
-    results = {}
-    results['marathon'] = generate_records(user.r42)
-    print(user.r42)
-    results['half'] = generate_records(user.r21)
-    results['10k'] = generate_records(user.r10)
-    results['5k'] = generate_records(user.r5)
-    results['3k'] = generate_records(user.r3)
-    return results
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):

@@ -197,3 +197,32 @@ def check_best_time(tr):
             else:
                 return None, 'r42'
         return time, 'r42'
+
+
+def generate_records(total_time):
+    hours = total_time // 3600
+    minutes = (total_time - hours * 3600) // 60
+    seconds = total_time - hours * 3600 - minutes * 60
+    if hours > 0:
+        hours = str(hours) + "h "
+    else:
+        hours = ''
+    if minutes > 0:
+        minutes = str(minutes) + "min "
+    else:
+        minutes = ''
+    if seconds > 0:
+        seconds = str(seconds) + "sec "
+    else:
+        seconds = ''
+
+    return hours + minutes + seconds
+
+def adding_result(user):
+    results = {}
+    results['marathon'] = generate_records(user.r42)
+    results['half'] = generate_records(user.r21)
+    results['10k'] = generate_records(user.r10)
+    results['5k'] = generate_records(user.r5)
+    results['3k'] = generate_records(user.r3)
+    return results

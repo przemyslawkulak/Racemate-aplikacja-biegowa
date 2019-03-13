@@ -6,6 +6,7 @@
             <div class="card-header">
                             <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
                 <p class="fa-1x" >VDOT (efficiency) = {{user.efficiency}}</p>
+                <p class="fa-1x" >days from your last training</p>
             </div>
             <!--Username: {{user.username}} <br>-->
 
@@ -93,7 +94,7 @@
 </div>
 
     <div class="cards col-6">
-    <div class="card-body col-6">{{ user.username }} personal records
+    <div class="card-body col-6">Your personal records
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -105,23 +106,23 @@
                 <tbody>
                     <tr>
                         <td>Marathon</td>
-                      <td>{{ results.marathon }}</td>
+                      <td>{% if  results.marathon != '' %}{{ results.marathon }}{% else %}No data{% endif %}</td>
                     </tr>
                      <tr>
                         <td>Half-marathon</td>
-                      <td>{{ results.half }}</td>
+                      <td>{% if  results.half != '' %}{{ results.half }}{% else %}No data{% endif %}</td>
                     </tr>
                  <tr>
                         <td>10km</td>
-                      <td>{{ results.10k }}</td>
+                      <td>{% if  results.10k != '' %}{{ results.10k }}{% else %}No data{% endif %}</td>
                     </tr>
                  <tr>
                         <td>5km</td>
-                      <td>{{ results.5k }}</td>
+                      <td>{% if  results.5k != '' %}{{ results.5k }}{% else %}No data{% endif %}</td>
                     </tr>
                  <tr>
                         <td>3km</td>
-                      <td>{{ results.3k }}</td>
+                      <td>{% if  results.3k != '' %}{{ results.3k }}{% else %}No data{% endif %}</td>
                     </tr>
                 </tbody>
                 </table>
