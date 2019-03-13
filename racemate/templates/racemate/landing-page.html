@@ -6,7 +6,8 @@
             <div class="card-header">
                             <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
                 <p class="fa-1x" >VDOT (efficiency) = {{user.efficiency}}</p>
-                <p class="fa-1x" >days from your last training</p>
+                <p class="fa-1x" >Number of days from your last training: {{ days }}</p>
+                    <a href="{% url 'addtraining' %}"><button name = 'training' type="submit">Add a trening</button></a>
             </div>
             <!--Username: {{user.username}} <br>-->
 
@@ -37,7 +38,7 @@
             <div class="card-body">Your trenings:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <a href="{% url 'addtraining' %}"><button name = 'training' type="submit">Add a trening</button></a>
+
                   <thead>
                     <tr>
 

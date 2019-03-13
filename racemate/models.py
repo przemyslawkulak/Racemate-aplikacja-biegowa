@@ -13,13 +13,13 @@ TRAINING_TYPE = (
 
 # Create your models here.
 class MyUser(AbstractUser):
-    r3 = models.IntegerField(null=True)
-    r5 = models.IntegerField(null=True)
-    r10 = models.IntegerField(null=True)
-    r15 = models.IntegerField(null=True)
-    r21 = models.IntegerField(null=True)
-    r42 = models.IntegerField(null=True)
-    efficiency = models.IntegerField(null=True)
+    r3 = models.IntegerField(null=True, default=0)
+    r5 = models.IntegerField(null=True, default=0)
+    r10 = models.IntegerField(null=True, default=0)
+    r15 = models.IntegerField(null=True, default=0)
+    r21 = models.IntegerField(null=True, default=0)
+    r42 = models.IntegerField(null=True, default=0)
+    efficiency = models.IntegerField(null=True, default=30)
 
     def __str__(self):
         return f' {self.username}'

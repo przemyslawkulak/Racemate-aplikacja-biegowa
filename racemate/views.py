@@ -125,10 +125,14 @@ class LandingView(LoginRequiredMixin, View):
 
         # showing groups where user is an admin
         groups = RunningGroup.objects.filter(admins=request.user.id)
-
-        return render(request, "racemate/landing-page.html", {"training": a, "msg": m, "groups": groups, 'results': results})
-
-
+        if training:
+            last_training_day = training[0]['date'].date()
+            now = datetime.date.today()
+            days = (now-last_training_day).days
+        else:
+            days = 'no data'
+        return render(request, "racemate/landing-page.html",
+                      {"training": a, "msg": m, "groups": groups, 'results': results, 'days': days})
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):
