@@ -73,6 +73,14 @@ class RegisterView(View):
                                                efficiency=30,
                                                password=password,
                                                )
+                    content = f'New user: "{username}" with email: {email}'
+                    send_mail(
+                        'New User',
+                        content,
+                        'racemate.app@gmail.com',
+                        ['przemyslaw.kulak86@gmail.com'],
+                        fail_silently=False,
+                    )
                     return redirect('login')
             text = 'The password and confirmation password do not match'
             return render(request, 'racemate/register.html', {"text": text})
