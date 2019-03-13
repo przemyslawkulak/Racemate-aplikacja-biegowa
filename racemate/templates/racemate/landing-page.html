@@ -1,6 +1,6 @@
 {% extends "racemate/index.html" %}
 {% block content %}
-<div class="cards mb-3">
+<div class="cards col-6">
 
 
             <div class="card-header">
@@ -91,5 +91,42 @@
 </div>
 
 </div>
+
+    <div class="cards col-6">
+    <div class="card-body col-6">{{ user.username }} personal records
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Distance</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr>
+                        <td>Marathon</td>
+                      <td>{{ results.marathon }}</td>
+                    </tr>
+                     <tr>
+                        <td>Half-marathon</td>
+                      <td>{{ results.half }}</td>
+                    </tr>
+                 <tr>
+                        <td>10km</td>
+                      <td>{{ results.10k }}</td>
+                    </tr>
+                 <tr>
+                        <td>5km</td>
+                      <td>{{ results.5k }}</td>
+                    </tr>
+                 <tr>
+                        <td>3km</td>
+                      <td>{{ results.3k }}</td>
+                    </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+    </div>
 
 {% endblock content %}

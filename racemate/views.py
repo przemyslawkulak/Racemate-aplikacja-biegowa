@@ -114,8 +114,40 @@ class LandingView(LoginRequiredMixin, View):
                 {"subject": i.subject, 'content': i.content,
                  'to': i.to, 'user': request.user,
                  'sender': i.sender, "id": i.id})
+        print(request.user.r42)
+        results = adding_result(request.user)
+
         groups = RunningGroup.objects.filter(admins=request.user.id)
-        return render(request, "racemate/landing-page.html", {"training": a, "msg": m, "groups": groups})
+        return render(request, "racemate/landing-page.html", {"training": a, "msg": m, "groups": groups, 'results': results})
+
+def generate_records(total_time):
+    hours = total_time // 3600
+    minutes = (total_time - hours * 3600) // 60
+    seconds = total_time - hours * 3600 - minutes * 60
+    if hours > 0:
+        hours = str(hours) + "h "
+    else:
+        hours = ''
+    if minutes > 0:
+        minutes = str(minutes) + "min "
+    else:
+        minutes = ''
+    if seconds > 0:
+        seconds = str(seconds) + "sec "
+    else:
+        seconds = ''
+
+    return hours + minutes + seconds
+
+def adding_result(user):
+    results = {}
+    results['marathon'] = generate_records(user.r42)
+    print(user.r42)
+    results['half'] = generate_records(user.r21)
+    results['10k'] = generate_records(user.r10)
+    results['5k'] = generate_records(user.r5)
+    results['3k'] = generate_records(user.r3)
+    return results
 
 
 class LandingGeneratorView(LoginRequiredMixin, View):
