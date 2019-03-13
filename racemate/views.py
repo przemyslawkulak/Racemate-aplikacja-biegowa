@@ -104,7 +104,7 @@ def customhandler500(request):
 class LandingView(LoginRequiredMixin, View):
     def get(self, request):
 
-        # showing all trainings
+        # showing all trainings with pagination
         training = []
         tra = PastTraining.objects.filter(user=request.user.id).order_by("-date")
         for i in tra:
@@ -129,16 +129,18 @@ class LandingView(LoginRequiredMixin, View):
 
         # showing personal records
         results = adding_result(request.user)
-        print(results['half'])
 
         # showing groups where user is an admin
         groups = RunningGroup.objects.filter(admins=request.user.id)
+
+        # showing date from last training
         if training:
             last_training_day = training[0]['date'].date()
             now = datetime.date.today()
             days = (now-last_training_day).days
         else:
             days = 'no data'
+
         return render(request, "racemate/landing-page.html",
                       {"training": a, "msg": m, "groups": groups, 'results': results, 'days': days})
 
