@@ -49,8 +49,7 @@ def checktable(time, check):  # sprawdzenie VDOT w tabeli
 
 def generateVDOT(tr):  # ustalenie który dystans sprawdzać
     if tr.distance_total < 3000:
-        print('nie mierzone')
-        return f'VDOT generujemy od dystansu 3 km'
+        return f'VDOT is generated from distance 3 km'
 
 
     elif tr.distance_total >= 3000 and tr.distance_total < 5000:
@@ -84,3 +83,117 @@ def generateVDOT(tr):  # ustalenie który dystans sprawdzać
         time = int(42195 / (speed / 3.6))
 
         return checktable(time, 5)
+
+
+def check_best_time(tr):
+    if not tr.user.r3:
+        tr.user.r3 = 0
+    if not tr.user.r5:
+        tr.user.r5 = 0
+    if not tr.user.r10:
+        tr.user.r10 = 0
+    if not tr.user.r21:
+        tr.user.r21 = 0
+    if not tr.user.r42:
+        tr.user.r42 = 0
+
+    if tr.distance_total < 3000:
+        return None, 'too short run'
+
+    elif tr.distance_total == 3000:
+        time = tr.time_total
+        if tr.user.r3 > 0:
+            if time < tr.user.r3:
+                return time, 'r3'
+            else:
+                return None, 'r3'
+        return time, 'r3'
+
+
+    elif tr.distance_total > 3000 and tr.distance_total < 5000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(3000 / (speed / 3.6))
+        print(time)
+        if tr.user.r3 > 0:
+            if time < tr.user.r3:
+                return time, 'r3'
+            else:
+                return None, 'r3'
+        return time, 'r3'
+
+    elif tr.distance_total == 5000:
+        time = tr.time_total
+        if tr.user.r5 > 0:
+            if time < tr.user.r10:
+                return time, 'r5'
+            else:
+                return None, 'r5'
+        return time, 'r5'
+
+    elif tr.distance_total > 5000 and tr.distance_total < 10000:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(5000 / (speed / 3.6))
+        if tr.user.r5 > 0:
+            if time < tr.user.r10:
+                return time, 'r5'
+            else:
+                return None, 'r5'
+        return time, 'r5'
+
+    elif tr.distance_total == 10000:
+        time = tr.time_total
+        if tr.user.r10 > 0:
+            if time < tr.user.r10:
+                return time, 'r10'
+            else:
+                return None, 'r10'
+        return time, 'r10'
+
+    elif tr.distance_total > 10000 and tr.distance_total < 21097:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(10000 / (speed / 3.6))
+        if tr.user.r10 > 0:
+            if time < tr.user.r10:
+                return time, 'r10'
+            else:
+                return None, 'r10'
+        return time, 'r10'
+
+    elif tr.distance_total == 21097:
+        time = tr.time_total
+        if tr.user.r21 > 0:
+            if time < tr.user.r21:
+                return time, 'r21'
+            else:
+                return None, 'r21'
+        return time, 'r21'
+
+    elif tr.distance_total > 21097 and tr.distance_total < 42195:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(21097 / (speed / 3.6))
+        if tr.user.r21 > 0:
+            if time < tr.user.r21:
+                return time, 'r21'
+            else:
+                return None, 'r21'
+        return time, 'r21'
+
+    elif tr.distance_total == 42195:
+        time = tr.time_total
+        if tr.user.r42 > 0:
+            if time < tr.user.r42:
+                return time, 'r42'
+            else:
+                return None, 'r42'
+        return time, 'r42'
+
+    elif tr.distance_total > 42195:
+        speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
+        time = int(42195 / (speed / 3.6))
+        print(time)
+        if tr.user.r42 > 0:
+            if time < tr.user.r3:
+                return time, 'r42'
+            else:
+                return None, 'r42'
+        return time, 'r42'

@@ -13,7 +13,7 @@ from django.views.generic import DeleteView
 
 from racemate.forms import AddTreningForm
 from racemate.models import PastTraining, Training
-from racemate.table import generateVDOT, TABLES
+from racemate.table import generateVDOT, TABLES, check_best_time
 
 
 class AddTrainingView(LoginRequiredMixin, View):
@@ -29,18 +29,23 @@ class AddTrainingView(LoginRequiredMixin, View):
         time = request.POST.get('time')
         date = request.POST.get('date')
         time_total = int(hours) * 3600 + int(minutes) * 60 + int(seconds)
+
         if (name is not None and time_total != 0 and distance_total and
                 time and date and request.user is not None):
-
             distance_total = int(float(distance_total) * 1000)
-
             datetime = date + ' ' + time
-
             tr = PastTraining.objects.create(name=name,
                                              time_total=time_total,
                                              distance_total=distance_total,
                                              date=datetime,
                                              user=request.user)
+
+            # check if this training is personal best
+
+            if isinstance(check_best_time(tr)[0], int):
+                setattr(request.user, check_best_time(tr)[1], check_best_time(tr)[0])
+                request.user.save()
+
             if ('VDOT' in request.POST) and isinstance(generateVDOT(tr), int):
                 request.user.efficiency = generateVDOT(tr)
                 request.user.save()
