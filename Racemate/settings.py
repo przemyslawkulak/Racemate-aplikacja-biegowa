@@ -68,7 +68,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'racemate.cp.logged_user'
+                'racemate.cp.logged_user',
+                'racemate.cp.unread_messages',
+                'racemate.cp.join_to_group'
             ],
         },
     },

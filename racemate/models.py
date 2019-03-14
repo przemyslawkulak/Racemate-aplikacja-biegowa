@@ -83,3 +83,7 @@ class Message(models.Model):
     groupjoin = models.ForeignKey(RunningGroup, on_delete=models.CASCADE,  null=True, related_name="Join")
     togroup = models.ForeignKey(RunningGroup, on_delete=models.CASCADE, blank=True, null=True,
                                 related_name="Message", verbose_name="Wiadomość do grupy")
+    read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.subject} {self.content} {self.groupjoin}'

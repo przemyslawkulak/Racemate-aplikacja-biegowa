@@ -140,7 +140,6 @@ class LandingView(LoginRequiredMixin, View):
             days = (now-last_training_day).days
         else:
             days = 'no data'
-
         return render(request, "racemate/landing-page.html",
                       {"training": a, "msg": m, "groups": groups, 'results': results, 'days': days})
 
