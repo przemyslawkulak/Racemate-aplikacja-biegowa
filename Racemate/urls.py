@@ -18,7 +18,7 @@ from django.urls import path, re_path
 
 from calc.views import CalculatorView
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
-    AdminConfirmView, AdminView
+    AdminConfirmView, AdminView, ShowAdminView
 from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView
 from racemate.views import (LogoutView, LoginView, LandingView, LandingGeneratorView,
                             RegisterView, customhandler404, customhandler500, EditUserView, ContactView, AboutView)
@@ -50,6 +50,7 @@ urlpatterns = [
     re_path(r'joingroupconfirm/(?P<id>(\d)+)/$', JoinConfirmView.as_view(), name='join-group-confirm'),
     re_path(r'adminconfirm/(?P<id>(\d)+)/(?P<sender>(\d)+)$', AdminConfirmView.as_view(), name='adminconfirm'),
     re_path(r'adminview/(?P<id>(\d)+)$', AdminView.as_view(), name='adminview'),
+    path('showadmin/', ShowAdminView.as_view(), name='showadmin'),
 
     # messanger
     re_path(r'forum/(?P<id>(\d)+)/$', ForumView.as_view(), name='forum'),

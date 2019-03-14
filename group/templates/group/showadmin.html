@@ -1,0 +1,46 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="cards col-6">
+
+
+            <div class="card-header">
+                            <i class="fas fa-tachometer-alt"> </i><span  class="test fa-lg">  Hi {{ user.username }}</span>
+            </div>
+            <!--Username: {{user.username}} <br>-->
+
+    <div class="card-body">You are the admin of groups:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Name of the group</th>
+
+                      <th>Creation date</th>
+
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in groups %}
+                    <tr>
+
+                        <td><a href='{% url "adminview" id=i.id %}'>{{i.name}}</a></td>
+                      <td>{{i.date}}</td>
+
+
+                        <td></td>
+
+
+                        {% empty %}
+                        <p>You are admin of any group. <a href='{% url "create-group" %}'>Do you want to create group?</a></p>
+
+                    {% endfor%}
+                    </tr>
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}

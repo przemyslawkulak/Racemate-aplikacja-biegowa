@@ -32,6 +32,7 @@ class ShowGroupsView(LoginRequiredMixin, View):
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         return render(request, 'group/showgroups.html', {"groups": groups})
 
+
 class JoinGroupView(LoginRequiredMixin, View):
     def get(self, request):
         groups = []
@@ -117,9 +118,6 @@ class CreateGroupView(LoginRequiredMixin, View):
         return redirect('show-groups')
 
 
-
-
-
 class AdminView(LoginRequiredMixin, View):
     def get(self, request, id):
         g = RunningGroup.objects.get(id=id)
@@ -132,3 +130,8 @@ class AdminView(LoginRequiredMixin, View):
         print(requested_users)
         print(id)
         return render(request, 'group/admingroup.html', {"requested_users": requested_users, "group_id": id})
+
+class ShowAdminView(LoginRequiredMixin, View):
+    def get(self, request):
+        groups = RunningGroup.objects.filter(admins=request.user.id)
+        return render(request, 'group/showadmin.html', {'groups':groups})
