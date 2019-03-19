@@ -38,6 +38,9 @@ class JoinGroupView(LoginRequiredMixin, View):
         groups = []
         admin = []
         group = RunningGroup.objects.all().exclude(members=request.user)
+        join = Message.objects.filter(sender=request.user).exclude(groupjoin=None)
+        group_join_id = {i.groupjoin.id for i in join}
+        print(group_join_id)
         for i in group:
             admins = MyUser.objects.filter(admins=i)
             for j in admins:
@@ -45,7 +48,7 @@ class JoinGroupView(LoginRequiredMixin, View):
 
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
-        return render(request, 'group/joingroup.html', {"groups": groups})
+        return render(request, 'group/joingroup.html', {"groups": groups, 'join': group_join_id})
 
 
 class JoinConfirmView(LoginRequiredMixin, View):
@@ -63,7 +66,6 @@ class JoinConfirmView(LoginRequiredMixin, View):
                     admins = MyUser.objects.filter(admins=i)
                     for j in admins:
                         admin = j.username
-
                     m = len(MyUser.objects.filter(members=i))
                     groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
                 text = f'You already request to {group.name}'
