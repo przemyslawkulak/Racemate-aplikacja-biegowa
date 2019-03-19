@@ -123,7 +123,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'racemate.MyUser'
 
 try:
-    from Racemate.local_settings import DATABASES
+    from Racemate.test import DATABASES
 except ModuleNotFoundError:
     print("Brak konfiguracji bazy danych w pliku local_settings.py!")
     print("Uzupełnij dane i spróbuj ponownie!")
