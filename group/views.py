@@ -127,11 +127,11 @@ class AdminView(LoginRequiredMixin, View):
             users = i.sender
             requested_users.append(
                 {"id": users.id, "username": users.username, "email": users.email, "last_login": users.last_login})
-        print(requested_users)
-        print(id)
         return render(request, 'group/admingroup.html', {"requested_users": requested_users, "group_id": id})
+
 
 class ShowAdminView(LoginRequiredMixin, View):
     def get(self, request):
+        join = Message.objects.filter(to=request.user).exclude(groupjoin=None)
         groups = RunningGroup.objects.filter(admins=request.user.id)
-        return render(request, 'group/showadmin.html', {'groups':groups})
+        return render(request, 'group/showadmin.html', {'groups': groups, 'join': join})

@@ -29,7 +29,9 @@
                       <td>{{i.date}}</td>
 
 
-                        <td></td>
+                        <td>{% for j in join %}
+                            {% if i.id == j.groupjoin.id %}<a href='{% url "adminview" id=i.id %}'>New user request</a>
+                            {% endif %}{% endfor %}</td>
 
 
                         {% empty %}
