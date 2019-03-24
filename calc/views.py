@@ -39,24 +39,30 @@ class CalculatorView(View):
 
 
 def generate_result(efficiency, distance):
-    total_time = TABLES[efficiency - 30][distance]
-    hours = total_time // 3600
-    minutes = (total_time - hours * 3600) // 60
-    seconds = total_time - hours * 3600 - minutes * 60
-    if hours > 0:
-        hours = str(hours) + "h "
-    else:
-        hours = ''
-    if minutes > 0:
-        minutes = str(minutes) + "min "
-    else:
-        minutes = ''
-    if seconds > 0:
-        seconds = str(seconds) + "sec "
-    else:
-        seconds = ''
+    if efficiency in range(30, 61) and isinstance(efficiency, int):
+        if distance in range(1, 6) and isinstance(distance, int):
+            total_time = TABLES[efficiency - 30][distance]
+            hours = total_time // 3600
+            minutes = (total_time - hours * 3600) // 60
+            seconds = total_time - hours * 3600 - minutes * 60
+            if hours > 0:
+                hours = str(hours) + "h "
+            else:
+                hours = ''
+            if minutes > 0:
+                minutes = str(minutes) + "min "
+            else:
+                minutes = ''
+            if seconds > 0:
+                seconds = str(seconds) + "sec "
+            else:
+                seconds = ''
 
-    return hours + minutes + seconds
+            return hours + minutes + seconds
+        else:
+            return "Incorrect distance"
+    else:
+        return "Incorrect efficiency"
 
 
 def adding_result(efficiency):

@@ -1,6 +1,6 @@
 # Create your tests here.
 import string
-from random import random, randint, choice
+from random import randint, choice
 from unittest import TestCase
 from django.test import Client
 
@@ -8,7 +8,7 @@ from racemate.forms import LoginForm
 from racemate.models import MyUser
 
 
-class User_Form_Test(TestCase):
+class UserFormTest(TestCase):
 
     # Valid Form Data
     def test_UserForm_valid(self):
