@@ -66,13 +66,16 @@ def generate_result(efficiency, distance):
 
 
 def adding_result(efficiency):
-    results = {}
-    results['marathon'] = generate_result(efficiency, 5)
-    results['half'] = generate_result(efficiency, 4)
-    results['10k'] = generate_result(efficiency, 3)
-    results['5k'] = generate_result(efficiency, 2)
-    results['3k'] = generate_result(efficiency, 1)
-    return results
+    if efficiency in range(30, 61) and isinstance(efficiency, int):
+        results = {}
+        results['marathon'] = generate_result(efficiency, 5)
+        results['half'] = generate_result(efficiency, 4)
+        results['10k'] = generate_result(efficiency, 3)
+        results['5k'] = generate_result(efficiency, 2)
+        results['3k'] = generate_result(efficiency, 1)
+        return results
+    else:
+        return 'Incorrect efficiency'
 
 
 def generate_tempo(efficiency, type):
