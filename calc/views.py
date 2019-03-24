@@ -87,12 +87,16 @@ def generate_tempo(efficiency, type):
     else:
         return 'Incorrect efficiency'
 
-def adding_tempos(efficiency):
-    tempo = {}
-    tempo['easy'] = generate_tempo(efficiency, 8)
-    tempo['marathon'] = generate_tempo(efficiency, 9)
-    tempo['threshold'] = generate_tempo(efficiency, 10)
-    tempo['interval'] = generate_tempo(efficiency, 11)
-    tempo['repetition'] = generate_tempo(efficiency, 12)
 
-    return tempo
+def adding_tempos(efficiency):
+    if efficiency in range(30, 61) and isinstance(efficiency, int):
+        tempo = {}
+        tempo['easy'] = generate_tempo(efficiency, 8)
+        tempo['marathon'] = generate_tempo(efficiency, 9)
+        tempo['threshold'] = generate_tempo(efficiency, 10)
+        tempo['interval'] = generate_tempo(efficiency, 11)
+        tempo['repetition'] = generate_tempo(efficiency, 12)
+
+        return tempo
+    else:
+        return 'Incorrect efficiency'

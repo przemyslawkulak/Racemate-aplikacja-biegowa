@@ -106,8 +106,8 @@ class AddingTemposTest(unittest.TestCase):
 
     def test_correct(self):
         self.assertEqual(adding_tempos(30),
-                         {'marathon': '4h 49min 17sec ', 'half': '2h 21min 4sec ', '10k': '1h 3min 46sec ',
-                          '5k': '30min 40sec ', '3k': '17min 56sec '})
+                         {'easy': '7.74km/h', 'interval': '10.14km/h', 'marathon': '8.51km/h',
+                          'repetition': '10.75km/h', 'threshold': '9.38km/h'})
 
     def test_incorrect(self):
         self.assertEqual(adding_tempos(61), 'Incorrect efficiency')
@@ -122,3 +122,7 @@ class AddingTemposTest(unittest.TestCase):
         self.assertEqual(adding_tempos(61.0), 'Incorrect efficiency')
         self.assertEqual(adding_tempos(29.0), 'Incorrect efficiency')
         self.assertEqual(adding_tempos(35.0), 'Incorrect efficiency')
+
+
+class GeneratorViewTest:
+    pass
