@@ -79,8 +79,13 @@ def adding_result(efficiency):
 
 
 def generate_tempo(efficiency, type):
-    return str(round(1 / TABLES[efficiency - 30][type] * 3600, 2)) + 'km/h'
-
+    if efficiency in range(30, 61) and isinstance(efficiency, int):
+        if type in range(8, 13) and isinstance(type, int):
+            return str(round(1 / TABLES[efficiency - 30][type] * 3600, 2)) + 'km/h'
+        else:
+            return 'Incorrect type'
+    else:
+        return 'Incorrect efficiency'
 
 def adding_tempos(efficiency):
     tempo = {}
