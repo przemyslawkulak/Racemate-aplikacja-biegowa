@@ -51,13 +51,11 @@ def generateVDOT(tr):  # ustalenie który dystans sprawdzać
     if tr.distance_total < 3000:
         return f'VDOT is generated from distance 3 km'
 
-
     elif tr.distance_total >= 3000 and tr.distance_total < 5000:
         speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
         time = int(3000 / (speed / 3.6))
 
         return checktable(time, 1)
-
 
     elif tr.distance_total >= 5000 and tr.distance_total < 10000:
         speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
@@ -70,7 +68,6 @@ def generateVDOT(tr):  # ustalenie który dystans sprawdzać
         time = int(10000 / (speed / 3.6))
 
         return checktable(time, 3)
-
 
     elif tr.distance_total >= 20000 and tr.distance_total < 40000:
         speed = round((float(tr.distance_total) / float(tr.time_total) * 3.6), 2)
@@ -217,6 +214,7 @@ def generate_records(total_time):
         seconds = ''
 
     return hours + minutes + seconds
+
 
 def adding_result(user):
     results = {}
