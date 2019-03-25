@@ -21,18 +21,32 @@ class CalculatorView(View):
         form_value["minutes"] = minutes
         form_value["seconds"] = seconds
         form_value["distance_total"] = distance_total
-        time_total = int(hours) * 3600 + int(minutes) * 60 + int(seconds)
-        if time_total != 0 and distance_total:
-            distance_total = int(float(distance_total) * 1000)
-            tr = PastTraining.objects.none()
-            tr.distance_total = distance_total
-            tr.time_total = time_total
-            if isinstance(generateVDOT(tr), int):
-                efficiency = generateVDOT(tr)
+        try:
+            hours = int(hours)
+            minutes = int(minutes)
+            seconds = int(seconds)
+            distance_total = int(distance_total)
+        except ValueError:
+            text = 'Insert all data to the form'
+            return render(request, 'calc/calc.html', {'text': text})
 
-            return render(request, 'calc/calc.html', {'efficiency': efficiency, 'form_value': form_value,
-                                                      'results': adding_result(efficiency),
-                                                      'tempos': adding_tempos(efficiency)})
+        if hours < 0 or minutes < 0 or seconds < 0 or distance_total < 0:
+            text = 'No data can be a negative number'
+            return render(request, 'calc/calc.html', {'text': text})
+
+        if hours != 0 and minutes != 0 and seconds != 0:
+            time_total = hours * 3600 + minutes * 60 + seconds
+            if time_total != 0 and distance_total:
+                distance_total = int(float(distance_total) * 1000)
+                tr = PastTraining.objects.none()
+                tr.distance_total = distance_total
+                tr.time_total = time_total
+                if isinstance(generateVDOT(tr), int):
+                    efficiency = generateVDOT(tr)
+
+                return render(request, 'calc/calc.html', {'efficiency': efficiency, 'form_value': form_value,
+                                                          'results': adding_result(efficiency),
+                                                          'tempos': adding_tempos(efficiency)})
 
         text = 'Insert all data to the form'
         return render(request, 'calc/calc.html', {'text': text})

@@ -2,6 +2,8 @@ import unittest
 
 # ./manage.py test calc
 # Create your tests here.
+from django.test import Client
+
 from calc.views import generate_result, adding_result, generate_tempo, adding_tempos
 
 
@@ -124,5 +126,63 @@ class AddingTemposTest(unittest.TestCase):
         self.assertEqual(adding_tempos(35.0), 'Incorrect efficiency')
 
 
-class GeneratorViewTest:
-    pass
+class GeneratorViewTest(unittest.TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.credentials = {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance': '13'}
+
+    def test_correct_get(self):
+        response = self.client.get('/calculator/')
+        self.assertEquals(response.status_code, 200)
+
+    def test_correct_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance': '13'})
+
+        self.assertEqual(response.context['efficiency'], 43)
+        self.assertEqual(response.context['form_value'],
+                         {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance_total': '13'})
+        self.assertEqual(response.context['results'],
+                         {'marathon': '3h 36min 28sec ', 'half': '1h 44min 20sec ', '10k': '47min 4sec ',
+                          '5k': '22min 41sec ', '3k': '13min 11sec '})
+        self.assertEqual(response.context['tempos'],
+                         {'easy': '10.11km/h', 'interval': '13.53km/h', 'marathon': '11.65km/h',
+                          'repetition': '14.69km/h', 'threshold': '12.46km/h'})
+
+    def test_negative_time_post(self):
+        response = self.client.post('/calculator/', {'hours': '-1', 'minutes': '1', 'seconds': '1', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'No data can be a negative number')
+
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '-1', 'seconds': '1', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'No data can be a negative number')
+
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '1', 'seconds': '-1', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'No data can be a negative number')
+
+    def test_negative_distance_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance': '-13'})
+        self.assertEqual(response.context['text'], 'No data can be a negative number')
+
+    def test_empty_distance_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance': ''})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
+
+    def test_distance_zero_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '0', 'seconds': '0', 'distance': '0'})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
+
+    def test_time_zero_post(self):
+        response = self.client.post('/calculator/', {'hours': '0', 'minutes': '0', 'seconds': '0', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
+
+    def test_empty_time_post(self):
+        response = self.client.post('/calculator/', {'hours': '', 'minutes': '', 'seconds': '', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
+
+    def test_str_time_post(self):
+        response = self.client.post('/calculator/', {'hours': 'a', 'minutes': '1', 'seconds': '1', 'distance': '13'})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
+
+    def test_str_distance_post(self):
+        response = self.client.post('/calculator/', {'hours': 'a', 'minutes': '1', 'seconds': '1', 'distance': 'a'})
+        self.assertEqual(response.context['text'], 'Insert all data to the form')
