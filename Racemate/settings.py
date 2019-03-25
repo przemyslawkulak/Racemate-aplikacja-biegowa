@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'training',
     'calc',
     'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 WSGI_APPLICATION = 'Racemate.wsgi.application'
 
@@ -132,14 +139,12 @@ except ModuleNotFoundError:
     print("Uzupełnij dane i spróbuj ponownie!")
     exit(0)
 
-
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'racemate.app@gmail.com'
 EMAIL_HOST_PASSWORD = TEST
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'default')
 EMAIL_PORT = 587
-
 
 if 'test' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}

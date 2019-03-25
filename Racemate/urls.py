@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
+from api.api import router
 from calc.views import CalculatorView
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
     AdminConfirmView, AdminView, ShowAdminView
@@ -70,5 +71,8 @@ urlpatterns = [
     re_path(r'^(?P<pk>\d+)/delete/$', PastTrainingDelete.as_view(), name='delete'),
 
     #calc
-    path('calculator/', CalculatorView.as_view(), name='calculator')
+    path('calculator/', CalculatorView.as_view(), name='calculator'),
+
+    #api
+    re_path(r'^api/v1/', include(router.urls)),
 ]
