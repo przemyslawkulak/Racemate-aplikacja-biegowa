@@ -130,7 +130,6 @@ class GeneratorViewTest(unittest.TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.credentials = {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance': '13'}
 
     def test_correct_get(self):
         response = self.client.get('/calculator/')
@@ -142,6 +141,45 @@ class GeneratorViewTest(unittest.TestCase):
         self.assertEqual(response.context['efficiency'], 43)
         self.assertEqual(response.context['form_value'],
                          {'hours': '1', 'minutes': '1', 'seconds': '1', 'distance_total': '13'})
+        self.assertEqual(response.context['results'],
+                         {'marathon': '3h 36min 28sec ', 'half': '1h 44min 20sec ', '10k': '47min 4sec ',
+                          '5k': '22min 41sec ', '3k': '13min 11sec '})
+        self.assertEqual(response.context['tempos'],
+                         {'easy': '10.11km/h', 'interval': '13.53km/h', 'marathon': '11.65km/h',
+                          'repetition': '14.69km/h', 'threshold': '12.46km/h'})
+
+    def test_correct_empty_hours_post(self):
+        response = self.client.post('/calculator/', {'hours': '0', 'minutes': '61', 'seconds': '1', 'distance': '13'})
+
+        self.assertEqual(response.context['efficiency'], 43)
+        self.assertEqual(response.context['form_value'],
+                         {'hours': '0', 'minutes': '61', 'seconds': '1', 'distance_total': '13'})
+        self.assertEqual(response.context['results'],
+                         {'marathon': '3h 36min 28sec ', 'half': '1h 44min 20sec ', '10k': '47min 4sec ',
+                          '5k': '22min 41sec ', '3k': '13min 11sec '})
+        self.assertEqual(response.context['tempos'],
+                         {'easy': '10.11km/h', 'interval': '13.53km/h', 'marathon': '11.65km/h',
+                          'repetition': '14.69km/h', 'threshold': '12.46km/h'})
+
+    def test_correct_empty_minutes_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '0', 'seconds': '61', 'distance': '13'})
+
+        self.assertEqual(response.context['efficiency'], 43)
+        self.assertEqual(response.context['form_value'],
+                         {'hours': '1', 'minutes': '0', 'seconds': '61', 'distance_total': '13'})
+        self.assertEqual(response.context['results'],
+                         {'marathon': '3h 36min 28sec ', 'half': '1h 44min 20sec ', '10k': '47min 4sec ',
+                          '5k': '22min 41sec ', '3k': '13min 11sec '})
+        self.assertEqual(response.context['tempos'],
+                         {'easy': '10.11km/h', 'interval': '13.53km/h', 'marathon': '11.65km/h',
+                          'repetition': '14.69km/h', 'threshold': '12.46km/h'})
+
+    def test_correct_empty_seconds_post(self):
+        response = self.client.post('/calculator/', {'hours': '1', 'minutes': '1', 'seconds': '0', 'distance': '13'})
+
+        self.assertEqual(response.context['efficiency'], 43)
+        self.assertEqual(response.context['form_value'],
+                         {'hours': '1', 'minutes': '1', 'seconds': '0', 'distance_total': '13'})
         self.assertEqual(response.context['results'],
                          {'marathon': '3h 36min 28sec ', 'half': '1h 44min 20sec ', '10k': '47min 4sec ',
                           '5k': '22min 41sec ', '3k': '13min 11sec '})

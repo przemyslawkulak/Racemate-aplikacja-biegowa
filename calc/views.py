@@ -21,11 +21,13 @@ class CalculatorView(View):
         form_value["minutes"] = minutes
         form_value["seconds"] = seconds
         form_value["distance_total"] = distance_total
+
         try:
             hours = int(hours)
             minutes = int(minutes)
             seconds = int(seconds)
             distance_total = int(distance_total)
+
         except ValueError:
             text = 'Insert all data to the form'
             return render(request, 'calc/calc.html', {'text': text})
@@ -34,7 +36,7 @@ class CalculatorView(View):
             text = 'No data can be a negative number'
             return render(request, 'calc/calc.html', {'text': text})
 
-        if hours != 0 and minutes != 0 and seconds != 0:
+        if hours != 0 or minutes != 0 or seconds != 0:
             time_total = hours * 3600 + minutes * 60 + seconds
             if time_total != 0 and distance_total:
                 distance_total = int(float(distance_total) * 1000)
