@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'messanger',
     'training',
     'calc',
+    'api',
 ]
 
 MIDDLEWARE = [
