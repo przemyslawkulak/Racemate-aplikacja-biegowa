@@ -75,4 +75,6 @@ urlpatterns = [
 
     #api
     re_path(r'^api/v1/', include(router.urls)),
+    path('rest-auth/', include('rest_auth.urls')),
+
 ]
