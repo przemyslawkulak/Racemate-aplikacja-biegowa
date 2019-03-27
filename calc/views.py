@@ -8,6 +8,10 @@ from racemate.table import generateVDOT, TABLES
 
 
 class CalculatorView(View):
+    """
+    View for Running Calculator
+    """
+
     def get(self, request):
         return render(request, 'calc/calc.html')
 
@@ -55,6 +59,13 @@ class CalculatorView(View):
 
 
 def generate_result(efficiency, distance):
+    """
+    generating result for one of specific distance (3, 5, 10km, half-, marathon)
+    depending on level of runner's efficiency
+    :param efficiency: runner's efficiency for running time prediction
+    :param distance: index for calculated distance from racemate.table.TABLES
+    :return: string with prediction of time for one of specific distance (3, 5, 10km, half-, marathon)
+    """
     if efficiency in range(30, 61) and isinstance(efficiency, int):
         if distance in range(1, 6) and isinstance(distance, int):
             total_time = TABLES[efficiency - 30][distance]
@@ -82,6 +93,11 @@ def generate_result(efficiency, distance):
 
 
 def adding_result(efficiency):
+    """
+    generating result for all specific distance (3, 5, 10km, half-, marathon) depending on level of runner's efficiency
+    :param efficiency: runner's efficiency for running time prediction
+    :return: string with prediction of time for all of specific distance (3, 5, 10km, half-, marathon)
+    """
     if efficiency in range(30, 61) and isinstance(efficiency, int):
         results = {}
         results['marathon'] = generate_result(efficiency, 5)
@@ -95,6 +111,13 @@ def adding_result(efficiency):
 
 
 def generate_tempo(efficiency, type):
+    """
+    generating tempo results for one of specific training type (easy, marathon, threshold, interval, repetition)
+    depending on level of runner's efficiency
+    :param efficiency: runner's efficiency for training's tempos prediction
+    :param type:  index for calculated distance from racemate.table.TABLES
+    :return: string with prediction of tempos for one of specific training type (easy, marathon, threshold, interval, repetition)
+    """
     if efficiency in range(30, 61) and isinstance(efficiency, int):
         if type in range(8, 13) and isinstance(type, int):
             return str(round(1 / TABLES[efficiency - 30][type] * 3600, 2)) + 'km/h'
@@ -105,6 +128,12 @@ def generate_tempo(efficiency, type):
 
 
 def adding_tempos(efficiency):
+    """
+    generating tempo results for all of specific training type (easy, marathon, threshold, interval, repetition)
+    depending on level of runner's efficiency
+    :param efficiency: runner's efficiency for training's tempos prediction
+    :return: string with prediction of tempos for all of specific training type (easy, marathon, threshold, interval, repetition)
+    """
     if efficiency in range(30, 61) and isinstance(efficiency, int):
         tempo = {}
         tempo['easy'] = generate_tempo(efficiency, 8)

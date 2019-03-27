@@ -13,9 +13,7 @@ class MyUserViewSet(mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,
                     mixins.ListModelMixin,
                     GenericViewSet):
-    """
-    Serializer for MyUser Model
-    """
+    """Serializer for MyUser Model"""
     permission_classes = (IsAuthenticated,)
     queryset = MyUser.objects.all()
     serializer_class = MyUserSerializer
@@ -25,9 +23,7 @@ class RunningGroupViewSet(mixins.CreateModelMixin,
                           mixins.RetrieveModelMixin,
                           mixins.ListModelMixin,
                           GenericViewSet):
-    """
-    Serializer for RunningGroup Model
-    """
+    """Serializer for RunningGroup Model"""
     permission_classes = (IsAuthenticated,)
     queryset = RunningGroup.objects.all()
     serializer_class = RunningGroupSerializer
