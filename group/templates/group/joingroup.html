@@ -32,7 +32,7 @@
                         <td>{{i.members}}</td>
 
                         <td>
-                            {% if i.id in join %}You send a request
+                            {% if i.id in join %}You sent a request
                             {% else %}
                             <a href="{% url 'join-group-confirm' id=i.id %}">
                                 <button name = 'join' type="submit">Join</button></a></td>
