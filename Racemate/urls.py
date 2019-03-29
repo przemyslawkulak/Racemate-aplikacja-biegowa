@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 
-from api.api import router
+from api.views import MyUserViewSet, RunningGroupViewSet, PastTrainingViewSet
 from calc.views import CalculatorView
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
     AdminConfirmView, AdminView, ShowAdminView
@@ -25,6 +27,13 @@ from racemate.views import (LogoutView, LoginView, LandingView, LandingGenerator
                             RegisterView, customhandler404, customhandler500, EditUserView, ContactView, AboutView)
 from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView, TreningPlan18weeksView, \
     LoadTreningView, PlanChoiceView, DeleteTrainingView, PastTrainingDelete
+
+router = routers.DefaultRouter()
+
+router.register(r'users', MyUserViewSet)
+router.register(r'groups', RunningGroupViewSet)
+router.register(r'pasttrainings', PastTrainingViewSet)
+
 
 handler404 = customhandler404
 handler500 = customhandler500
@@ -70,11 +79,16 @@ urlpatterns = [
     re_path(r'^deletetraining/(?P<id>(\d)+)/$', DeleteTrainingView.as_view(), name='deletetraining'),
     re_path(r'^(?P<pk>\d+)/delete/$', PastTrainingDelete.as_view(), name='delete'),
 
-    #calc
+    # calc
     path('calculator/', CalculatorView.as_view(), name='calculator'),
 
-    #api
+    # api
+
     re_path(r'^api/v1/', include(router.urls)),
-    path('rest-auth/', include('rest_auth.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path(r'pasttrainings/', PastTrainingList.as_view()),
+    # path(r'pasttrainings/<int:pk>/', PastTrainingDetail.as_view()),
+
 
 ]
+# urlpatterns = format_suffix_patterns(urlpatterns)

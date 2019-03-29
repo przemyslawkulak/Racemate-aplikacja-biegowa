@@ -32,7 +32,7 @@ class RunningGroup(models.Model):
     admins = models.ManyToManyField(MyUser, related_name='admins')
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.admins}'
 
 
 class TrainingElement(models.Model):
