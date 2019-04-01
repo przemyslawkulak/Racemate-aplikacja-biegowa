@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.schemas import get_schema_view
 
 from api.views import MyUserViewSet, RunningGroupViewSet, PastTrainingViewSet
 from calc.views import CalculatorView
@@ -34,6 +34,7 @@ router.register(r'users', MyUserViewSet)
 router.register(r'groups', RunningGroupViewSet)
 router.register(r'pasttrainings', PastTrainingViewSet)
 
+schema_view = get_schema_view(title='Pastebin API')
 
 handler404 = customhandler404
 handler500 = customhandler500
@@ -86,8 +87,8 @@ urlpatterns = [
 
     re_path(r'^api/v1/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # path(r'pasttrainings/', PastTrainingList.as_view()),
-    # path(r'pasttrainings/<int:pk>/', PastTrainingDetail.as_view()),
+    path('schema/', schema_view),
+
 
 
 ]
