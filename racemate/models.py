@@ -31,8 +31,12 @@ class RunningGroup(models.Model):
     members = models.ManyToManyField(MyUser, related_name='members')
     admins = models.ManyToManyField(MyUser, related_name='admins')
 
+    @property
+    def owner(self):
+        return self.admins.first()
+
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.owner}'
 
 
 class TrainingElement(models.Model):

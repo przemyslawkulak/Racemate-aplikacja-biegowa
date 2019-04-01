@@ -1,9 +1,7 @@
 from rest_framework import permissions
 
-from racemate.models import RunningGroup
 
-
-class IsAdminOrReadOnly(permissions.BasePermission):
+class IsOwnerOrReadOnly(permissions.BasePermission):
     """
     Custom permission to only allow admin of an object to edit it.
     """
@@ -11,8 +9,8 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
-
+        print(obj.owner, request.user)
         if request.method in permissions.SAFE_METHODS:
             return True
         # Write permissions are only allowed to the admin of the group.
-        return obj.admins == request.user.id
+        return obj.owner == request.user

@@ -4,7 +4,7 @@ from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import GenericViewSet
 
-from api.permissions import IsAdminOrReadOnly
+from api.permissions import IsOwnerOrReadOnly
 from api.serializers import MyUserSerializer, RunningGroupSerializer, PastTrainingSerializer
 from racemate.models import MyUser, RunningGroup, PastTraining
 
@@ -28,10 +28,10 @@ class RunningGroupViewSet(mixins.CreateModelMixin,
                           mixins.UpdateModelMixin,
                           GenericViewSet):
     """Serializer for RunningGroup Model"""
-    permission_classes = (IsAuthenticatedOrReadOnly, IsAdminOrReadOnly)
+
     queryset = RunningGroup.objects.all()
     serializer_class = RunningGroupSerializer
-
+    permission_classes = [IsOwnerOrReadOnly]
 
 
 class PastTrainingViewSet(mixins.CreateModelMixin,
