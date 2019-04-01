@@ -35,6 +35,8 @@ class PastTrainingSerializer(serializers.Serializer):
     distance_total = serializers.IntegerField()
     date = serializers.DateTimeField()
 
+    # user = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+
     def create(self, validated_data):
         """
         Create and return a new `PastTrening` instance, given the validated data.

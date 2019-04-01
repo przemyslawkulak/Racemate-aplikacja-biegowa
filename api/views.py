@@ -39,7 +39,7 @@ class PastTrainingViewSet(mixins.CreateModelMixin,
                           mixins.ListModelMixin,
                           GenericViewSet):
     """Serializer for PastTraining Model"""
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = PastTraining.objects.all()
     serializer_class = PastTrainingSerializer
 #

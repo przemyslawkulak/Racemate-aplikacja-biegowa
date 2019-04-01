@@ -72,6 +72,10 @@ class PastTraining(models.Model):
     date = models.DateTimeField()
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
+    @property
+    def owner(self):
+        return self.user
+
     def __str__(self):
         return f'{self.name} {self.time_total} {self.distance_total}'
 
