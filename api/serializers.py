@@ -4,7 +4,7 @@ from racemate.models import MyUser, RunningGroup, PastTraining
 
 
 class RunningGroupSerializer(serializers.HyperlinkedModelSerializer):
-    admins = serializers.PrimaryKeyRelatedField(many=True, allow_empty=False, read_only='True')
+    # admins = serializers.PrimaryKeyRelatedField(many=True, allow_empty=False, read_only='True')
 
     class Meta:
         model = RunningGroup
@@ -19,6 +19,11 @@ class MyUserSerializer(serializers.HyperlinkedModelSerializer):
         model = MyUser
         fields = ('url', 'id', 'username', 'running_groups')
 
+    def create(self, validated_data):
+        profile_data = validated_data.pop('running_groups')
+        user = RunningGroup.objects.create(**validated_data)
+        MyUser.objects.create(user=user, **profile_data)
+        return user
 
 class PastTrainingSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)

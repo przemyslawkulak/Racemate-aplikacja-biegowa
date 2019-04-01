@@ -33,6 +33,7 @@ class RunningGroupViewSet(mixins.CreateModelMixin,
     serializer_class = RunningGroupSerializer
 
 
+
 class PastTrainingViewSet(mixins.CreateModelMixin,
                           mixins.RetrieveModelMixin,
                           mixins.ListModelMixin,
