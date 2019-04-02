@@ -92,7 +92,7 @@ class TestMyUserViewSet(APITestCase):
 
 class RunningGroupViewSet(APITestCase):
     """
-    TestCase for MyUserViewSet
+    TestCase for RunningGroupViewSet
     """
 
     def setUp(self):
@@ -130,21 +130,27 @@ class RunningGroupViewSet(APITestCase):
         response = self.client.get(f"/api/v1/groups/{group_id}", follow=True)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create_user(self):
+    def test_create_group(self):
         """
         Test for POST - method allowed 201_CREATED
         """
         response = self.client.post("/api/v1/groups/", {'name': 'testgroup'})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_put_user(self):
+    def test_put_group(self):
         """
-        Test for Put - method allowed (not allowed when user is not logged)
+        Test for Put - method allowed (forbidden when user is not an admin)
         """
+
+        # unlogged user
+
         group_id = RunningGroup.objects.first().id
         response = self.client.put(f"/api/v1/groups/{group_id}/",
                                    {'name': 'testgroup1', 'members': [], 'admins': []})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # logged admin
+
         self.client.login(**self.credentials1)
         group_id = RunningGroup.objects.first().id
         response = self.client.put(f"/api/v1/groups/{group_id}/",
@@ -152,29 +158,67 @@ class RunningGroupViewSet(APITestCase):
                                    content_type='application/json', follow=True)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_patch_user(self):
+        # logged not an admin
+
+        self.client.login(**self.credentials2)
+        group_id = RunningGroup.objects.first().id
+        response = self.client.put(f"/api/v1/groups/{group_id}/",
+                                   {'name': 'testgroup1', 'members': [], 'admins': []},
+                                   content_type='application/json', follow=True)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_patch_group(self):
         """
-        Test for Patch - method allowed (forbidden when user is not logged)
+        Test for Patch - method allowed (forbidden when user is not an admin)
         """
+
+        # unlogged user
+
         group_id = RunningGroup.objects.first().id
         response = self.client.patch(f"/api/v1/groups/{group_id}/", {'name': 'testgroup1'},
                                      content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # logged admin
+
         self.client.login(**self.credentials1)
         group_id = RunningGroup.objects.first().id
         response = self.client.patch(f"/api/v1/groups/{group_id}/", {'name': 'testgroup1'},
                                      content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_delete_user(self):
-        """
-        Test for Delete - method allowed (forbidden when user is not logged)
-        """
-        group = RunningGroup.objects.first()
+        # logged not an admin
+
+        self.client.login(**self.credentials2)
         group_id = RunningGroup.objects.first().id
-        response = self.client.delete(f"/api/v1/groups/{group_id}/", group, content_type='application/json',
+        response = self.client.patch(f"/api/v1/groups/{group_id}/", {'name': 'testgroup1'},
+                                     content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_delete_group(self):
+        """
+        Test for Delete - method allowed (forbidden when user is not an admin)
+        """
+
+        # unlogged user
+
+        group_id = RunningGroup.objects.get(name='testgroup').id
+        response = self.client.delete(f"/api/v1/groups/{group_id}/", content_type='application/json',
                                       follow=True)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # logged admin
+
+        self.client.login(**self.credentials2)
+        response = self.client.delete(f"/api/v1/groups/{group_id}/", content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # logged not an admin
+
+        group_id = RunningGroup.objects.get(name='testgroup').id
         self.client.login(**self.credentials1)
         response = self.client.delete(f"/api/v1/groups/{group_id}/", content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def tearDown(self):
+        RunningGroup.objects.filter(name='testgroup').delete()
