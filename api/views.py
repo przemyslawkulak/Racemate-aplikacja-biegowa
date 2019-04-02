@@ -39,9 +39,17 @@ class PastTrainingViewSet(mixins.CreateModelMixin,
                           mixins.ListModelMixin,
                           GenericViewSet):
     """Serializer for PastTraining Model"""
-    permission_classes = [IsOwnerOrReadOnly]
     queryset = PastTraining.objects.all()
     serializer_class = PastTrainingSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases
+        for the currently authenticated user.
+        """
+        owner = self.request.user
+        return PastTraining.objects.filter(user=owner)
+
 #
 # class PastTrainingList(APIView):
 #     """

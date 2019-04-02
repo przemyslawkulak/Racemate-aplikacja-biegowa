@@ -4,7 +4,6 @@ from racemate.models import MyUser, RunningGroup, PastTraining
 
 
 class RunningGroupSerializer(serializers.HyperlinkedModelSerializer):
-    # admins = serializers.PrimaryKeyRelatedField(many=True, allow_empty=False, read_only='True')
     admins = serializers.StringRelatedField(many=True)
     members = serializers.StringRelatedField(many=True)
 
@@ -28,28 +27,37 @@ class MyUserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class PastTrainingSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(max_length=255)
-    time_total = serializers.IntegerField()
-    distance_total = serializers.IntegerField()
-    date = serializers.DateTimeField()
+class PastTrainingSerializer(serializers.HyperlinkedModelSerializer):
 
-    # user = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
 
-    def create(self, validated_data):
-        """
-        Create and return a new `PastTrening` instance, given the validated data.
-        """
-        return PastTraining.objects.create(**validated_data)
+    class Meta:
+        model = PastTraining
+        fields = ('url', 'id', 'name', 'time_total', 'distance_total', 'date', 'user')
 
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `PastTrening` instance, given the validated data.
-        """
-        instance.name = validated_data.get('name', instance.name)
-        instance.time_total = validated_data.get('time_total', instance.time_total)
-        instance.distance_total = validated_data.get('distance_total', instance.distance_total)
-        instance.date = validated_data.get('date', instance.date)
-        instance.save()
-        return instance
+
+
+
+    # id = serializers.IntegerField(read_only=True)
+    # name = serializers.CharField(max_length=255)
+    # time_total = serializers.IntegerField()
+    # distance_total = serializers.IntegerField()
+    # date = serializers.DateTimeField()
+    #
+    # # user = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+    #
+    # def create(self, validated_data):
+    #     """
+    #     Create and return a new `PastTrening` instance, given the validated data.
+    #     """
+    #     return PastTraining.objects.create(**validated_data)
+    #
+    # def update(self, instance, validated_data):
+    #     """
+    #     Update and return an existing `PastTrening` instance, given the validated data.
+    #     """
+    #     instance.name = validated_data.get('name', instance.name)
+    #     instance.time_total = validated_data.get('time_total', instance.time_total)
+    #     instance.distance_total = validated_data.get('distance_total', instance.distance_total)
+    #     instance.date = validated_data.get('date', instance.date)
+    #     instance.save()
+    #     return instance

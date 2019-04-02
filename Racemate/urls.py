@@ -30,9 +30,9 @@ from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView
 
 router = routers.DefaultRouter()
 
-router.register(r'users', MyUserViewSet, basename='users')
+router.register(r'users', MyUserViewSet)
 router.register(r'groups', RunningGroupViewSet)
-router.register(r'pasttrainings', PastTrainingViewSet, basename='pasttrainings')
+router.register(r'pasttrainings', PastTrainingViewSet)
 
 schema_view = get_schema_view(title='Pastebin API')
 
