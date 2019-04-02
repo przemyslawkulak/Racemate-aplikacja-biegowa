@@ -1,6 +1,7 @@
 # Create your views here.
 import django_filters
 from rest_framework import mixins
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 from api.permissions import IsOwnerOrReadOnly, IsOwner
 from api.serializers import MyUserSerializer, RunningGroupSerializer, PastTrainingSerializer
@@ -11,9 +12,9 @@ class MyUserViewSet(mixins.RetrieveModelMixin,
                     mixins.ListModelMixin,
                     GenericViewSet):
     """View for MyUser Model
-    - unlogged user readonly
+    - unlogged user can read only
     - user can modify/delete only himself"""
-    permission_classes = [IsOwnerOrReadOnly, ]
+    permission_classes = [IsAuthenticated, ]
     queryset = MyUser.objects.all()
     serializer_class = MyUserSerializer
 
@@ -28,7 +29,7 @@ class RunningGroupViewSet(mixins.CreateModelMixin,
                           mixins.UpdateModelMixin,
                           GenericViewSet):
     """View for RunningGroup Model
-    - unlogged user readonly
+    - unlogged user can read only
     - user can modify/delete only his/her groups"""
 
     queryset = RunningGroup.objects.all()
