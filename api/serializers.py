@@ -35,28 +35,3 @@ class PastTrainingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PastTraining
         fields = ('url', 'id', 'name', 'time_total_in_sec', 'time_total_in_hms', 'distance_total_in_m', 'date', 'user')
-
-    # id = serializers.IntegerField(read_only=True)
-    # name = serializers.CharField(max_length=255)
-    # time_total = serializers.IntegerField()
-    # distance_total = serializers.IntegerField()
-    # date = serializers.DateTimeField()
-    #
-    # # user = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
-    #
-    # def create(self, validated_data):
-    #     """
-    #     Create and return a new `PastTrening` instance, given the validated data.
-    #     """
-    #     return PastTraining.objects.create(**validated_data)
-    #
-    # def update(self, instance, validated_data):
-    #     """
-    #     Update and return an existing `PastTrening` instance, given the validated data.
-    #     """
-    #     instance.name = validated_data.get('name', instance.name)
-    #     instance.time_total = validated_data.get('time_total', instance.time_total)
-    #     instance.distance_total = validated_data.get('distance_total', instance.distance_total)
-    #     instance.date = validated_data.get('date', instance.date)
-    #     instance.save()
-    #     return instance

@@ -34,7 +34,7 @@ router.register(r'users', MyUserViewSet)
 router.register(r'groups', RunningGroupViewSet)
 router.register(r'pasttrainings', PastTrainingViewSet)
 
-schema_view = get_schema_view(title='Pastebin API')
+schema_view = get_schema_view(title='Racemate API')
 
 handler404 = customhandler404
 handler500 = customhandler500
