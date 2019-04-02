@@ -21,7 +21,6 @@ class MyUser(AbstractUser):
     r42 = models.IntegerField(null=True, default=0)
     efficiency = models.IntegerField(null=True, default=30)
 
-
     def __str__(self):
         return f' {self.username}'
 
