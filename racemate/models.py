@@ -76,6 +76,26 @@ class PastTraining(models.Model):
     def owner(self):
         return self.user
 
+    @property
+    def get_time_total_in_hms(self):
+        hours = self.time_total // 3600
+        minutes = (self.time_total - hours * 3600) // 60
+        seconds = self.time_total - hours * 3600 - minutes * 60
+        if hours > 0:
+            hours = str(hours) + "h "
+        else:
+            hours = ''
+        if minutes > 0:
+            minutes = str(minutes) + "min "
+        else:
+            minutes = ''
+        if seconds > 0:
+            seconds = str(seconds) + "sec "
+        else:
+            seconds = ''
+
+        return hours + minutes + seconds
+
     def __str__(self):
         return f'{self.name} {self.time_total} {self.distance_total}'
 
@@ -88,7 +108,7 @@ class Message(models.Model):
     sender = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True,
                                related_name="Nadawca", verbose_name="Nadawca")
     date_sent = models.DateTimeField(auto_now_add=True, null=True, verbose_name="Data wysłania")
-    groupjoin = models.ForeignKey(RunningGroup, on_delete=models.CASCADE,  null=True, related_name="Join")
+    groupjoin = models.ForeignKey(RunningGroup, on_delete=models.CASCADE, null=True, related_name="Join")
     togroup = models.ForeignKey(RunningGroup, on_delete=models.CASCADE, blank=True, null=True,
                                 related_name="Message", verbose_name="Wiadomość do grupy")
     read = models.BooleanField(default=False)

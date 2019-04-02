@@ -1,5 +1,5 @@
 # Create your views here.
-
+import django_filters
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import GenericViewSet
@@ -13,7 +13,7 @@ class MyUserViewSet(mixins.RetrieveModelMixin,
                     mixins.ListModelMixin,
                     GenericViewSet):
     """Serializer for MyUser Model"""
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = [IsOwnerOrReadOnly, ]
     queryset = MyUser.objects.all()
     serializer_class = MyUserSerializer
 
@@ -41,6 +41,7 @@ class PastTrainingViewSet(mixins.CreateModelMixin,
     """Serializer for PastTraining Model"""
     queryset = PastTraining.objects.all()
     serializer_class = PastTrainingSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
 
     def get_queryset(self):
         """

@@ -28,14 +28,13 @@ class MyUserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PastTrainingSerializer(serializers.HyperlinkedModelSerializer):
-
+    time_total_in_sec = serializers.IntegerField(source='time_total')
+    time_total_in_hms = serializers.ReadOnlyField(source='get_time_total_in_hms')
+    distance_total_in_m = serializers.IntegerField(source='distance_total')
 
     class Meta:
         model = PastTraining
-        fields = ('url', 'id', 'name', 'time_total', 'distance_total', 'date', 'user')
-
-
-
+        fields = ('url', 'id', 'name', 'time_total_in_sec', 'time_total_in_hms', 'distance_total_in_m', 'date', 'user')
 
     # id = serializers.IntegerField(read_only=True)
     # name = serializers.CharField(max_length=255)
