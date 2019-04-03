@@ -36,7 +36,6 @@ class ForumChoiceView(LoginRequiredMixin, View):
             admins = MyUser.objects.filter(admins=i)
             for j in admins:
                 admin = j.username
-
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         friends = []
@@ -45,7 +44,10 @@ class ForumChoiceView(LoginRequiredMixin, View):
             friend = i.members.all()
             for j in friend:
                 friends.append(j)
-        return render(request, 'messanger/forumchoice.html', {"groups": groups, 'friends': friends})
+        unread_msg = Message.objects.filter(read=False).filter(to=request.user)
+        print(unread_msg)
+        return render(request, 'messanger/forumchoice.html',
+                      {"groups": groups, 'friends': set(friends), 'unread_msg': unread_msg})
 
 
 class SendMessageView(LoginRequiredMixin, View):
@@ -104,7 +106,10 @@ class MessangerView(LoginRequiredMixin, View):
             friend = i.members.all()
             for j in friend:
                 friends.append(j)
-
+        for i in msg:
+            i.read = True
+            i.save()
+        print(msg)
         return render(request, 'messanger/messanger.html',
                       {"msg": msg, 'user': user, 'friends': set(friends), 'interlocutor': interlocutor})
 

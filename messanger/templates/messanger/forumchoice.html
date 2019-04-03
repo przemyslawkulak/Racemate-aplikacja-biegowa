@@ -46,7 +46,7 @@
 
 
 <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message</button></a>
-     <div class="card-body">Messages:
+     <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -60,7 +60,9 @@
                     <tr>
 
                         <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
-
+                        {% for j in unread_msg %}
+                        {% if j.sender.id == i.id %}<th>New message!</th>{% endif %}
+                        {% endfor %}
 
    </tr>  {% endif %}
                     {% empty %}

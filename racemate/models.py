@@ -114,4 +114,4 @@ class Message(models.Model):
     read = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.subject} {self.content} {self.groupjoin}'
+        return f'{self.subject} {self.content} {self.groupjoin} {self.read}'
