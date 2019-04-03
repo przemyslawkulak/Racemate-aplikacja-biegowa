@@ -22,7 +22,8 @@ from api.views import MyUserViewSet, RunningGroupViewSet, PastTrainingViewSet
 from calc.views import CalculatorView
 from group.views import RunningGroupView, MemberView, CreateGroupView, ShowGroupsView, JoinGroupView, JoinConfirmView, \
     AdminConfirmView, AdminView, ShowAdminView
-from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView
+from messanger.views import ForumView, ForumChoiceView, SendMessageView, SendMessageGroupView, MessangerView, \
+    MessangerAllView
 from racemate.views import (LogoutView, LoginView, LandingView, LandingGeneratorView,
                             RegisterView, customhandler404, customhandler500, EditUserView, ContactView, AboutView)
 from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView, TreningPlan18weeksView, \
@@ -69,6 +70,7 @@ urlpatterns = [
     path('send_message/', SendMessageView.as_view(), name='sendmessage'),
     path('send_message_group', SendMessageGroupView.as_view(), name='sendmessagegroup'),
     re_path(r'^messanger/(?P<id>(\d)+)/$', MessangerView.as_view(), name='messanger'),
+    path('messangerall/', MessangerAllView.as_view(), name='messanger_all'),
 
     # training
     path('add_training/', AddTrainingView.as_view(), name='addtraining'),

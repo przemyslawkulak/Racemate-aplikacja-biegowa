@@ -67,12 +67,13 @@
                   </thead>
                 <tbody>
                     {% for i in friends %}
+                    {% if i.id != request.user.id %}
                     <tr>
 
-                        <td>{{i.username}}</td>
+                        <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
 
 
-   </tr>
+   </tr>  {% endif %}
                     {% empty %}
                     <p>No friends</p>
                     {% endfor %}

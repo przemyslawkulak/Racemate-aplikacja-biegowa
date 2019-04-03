@@ -30,9 +30,6 @@ class ForumChoiceView(LoginRequiredMixin, View):
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         return render(request, 'messanger/forumchoice.html', {"groups": groups})
-    # def get(self, request):
-    #     group = RunningGroup.objects.all().filter(members=request.user)
-    #     return render(request, 'racemate/forumchoice.html', {'group': group})
 
 
 class SendMessageView(LoginRequiredMixin, View):
@@ -77,10 +74,28 @@ class MessangerView(LoginRequiredMixin, View):
     def get(self, request, id):
         msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
-        msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
         group = RunningGroup.objects.get(id=11)
         user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
         msg = msg1 | msg2
         interlocutor = MyUser.objects.get(id=id)
+        friends = []
+        group = RunningGroup.objects.filter(members=request.user)
+        for i in group:
+            friend = i.members.all()
+            for j in friend:
+                friends.append(j)
 
-        return render(request, 'messanger/messanger.html', {"msg": msg, 'user': user, 'interlocutor': interlocutor})
+        return render(request, 'messanger/messanger.html',
+                      {"msg": msg, 'user': user, 'friends': set(friends), 'interlocutor': interlocutor})
+
+
+class MessangerAllView(LoginRequiredMixin, View):
+    def get(self, request):
+        friends = []
+        groups = RunningGroup.objects.filter(members=request.user)
+        for i in groups:
+            friend = i.members.all()
+            for j in friend:
+                friends.append(j)
+
+        return render(request, 'messanger/messanger_all.html', {'friends': set(friends), 'groups':groups})
