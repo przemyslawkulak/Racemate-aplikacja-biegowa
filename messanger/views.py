@@ -29,7 +29,13 @@ class ForumChoiceView(LoginRequiredMixin, View):
 
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
-        return render(request, 'messanger/forumchoice.html', {"groups": groups})
+        friends = []
+        group = RunningGroup.objects.filter(members=request.user)
+        for i in group:
+            friend = i.members.all()
+            for j in friend:
+                friends.append(j)
+        return render(request, 'messanger/forumchoice.html', {"groups": groups, 'friends':friends})
 
 
 class SendMessageView(LoginRequiredMixin, View):
