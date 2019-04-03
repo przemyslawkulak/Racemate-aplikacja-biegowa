@@ -3,33 +3,26 @@
 <div class="cards mb-3 col-6">
 
             <div class="card-header">
-              <i class="fas fa-table"></i><span  class="test fa-lg"> Messanger with {{ interlocutor.username }}</span>
+              <i class="fas fa-table"></i><span  class="test fa-lg"> Messages with {{ interlocutor.username }}</span>
             </div>
 
     <a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to: {{interlocutor.username}}</button></a>
-     <div class="card-body">Last messages with {{interlocutor.username}}:
+     <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-
-                      <th>Date</th>
-                      <th>Sender</th>
-                        <th>To</th>
-                      <th>Content</th>
-
-
-
+                      <th>Sender : to</th>
+                        <th>Content</th>
+                        <th>Date</th>
                     </tr>
                   </thead>
                 <tbody>
                     {% for i in msg %}
                     <tr>
-
+                      <td>{{i.sender.username}} to {{i.to.username}}</td>
+                    <th>{{i.content}} </th>
                         <td>{{i.date_sent}}</td>
-                      <td>{{i.sender.username}}</td>
-                        <td>{{i.to.username}}</td>
-                      <td>{{i.content}} </td>
                         {% if i.groupjoin is not null %}
                         {% if i.to == request.user %}
                         <td><a href="{% url 'adminconfirm' id=i.groupjoin.id sender=i.sender.id %}">Join to group</a></td>

@@ -10,11 +10,21 @@ from racemate.models import RunningGroup, MyUser, Message
 
 class ForumView(LoginRequiredMixin, View):
     def get(self, request, id):
-        group = RunningGroup.objects.get(id=id)
-        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
-        print(user)
-        messages = Message.objects.filter(togroup=group).order_by('-date_sent')
-        return render(request, 'messanger/forum.html', {'messages': messages, 'group': group, "user": user})
+        group_forum = RunningGroup.objects.get(id=id)
+        user = MyUser.objects.filter(members=group_forum).exclude(id=request.user.id)
+        messages = Message.objects.filter(togroup=group_forum).order_by('-date_sent')
+        groups = []
+        admin = []
+        group = RunningGroup.objects.all().filter(members=request.user)
+        for i in group:
+            admins = MyUser.objects.filter(admins=i)
+            for j in admins:
+                admin = j.username
+
+            m = len(MyUser.objects.filter(members=i))
+            groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
+        return render(request, 'messanger/forum.html',
+                      {'messages': messages, 'group': group_forum, "user": user, 'groups': groups})
 
 
 class ForumChoiceView(LoginRequiredMixin, View):
@@ -35,13 +45,17 @@ class ForumChoiceView(LoginRequiredMixin, View):
             friend = i.members.all()
             for j in friend:
                 friends.append(j)
-        return render(request, 'messanger/forumchoice.html', {"groups": groups, 'friends':friends})
+        return render(request, 'messanger/forumchoice.html', {"groups": groups, 'friends': friends})
 
 
 class SendMessageView(LoginRequiredMixin, View):
     def get(self, request):
         form = SendMessageForm()
-        form.fields['to'].queryset = MyUser.objects.all().exclude(id=request.user.id)
+        friends = MyUser.objects.none()
+        group = RunningGroup.objects.filter(members=request.user)
+        for i in group:
+            friends = (friends | i.members.all())
+        form.fields['to'].queryset = friends.distinct('username').exclude(username=request.user.username)
         return render(request, 'racemate/form_html.html', {'form': form})
 
     def post(self, request):
@@ -104,4 +118,4 @@ class MessangerAllView(LoginRequiredMixin, View):
             for j in friend:
                 friends.append(j)
 
-        return render(request, 'messanger/messanger_all.html', {'friends': set(friends), 'groups':groups})
+        return render(request, 'messanger/messanger_all.html', {'friends': set(friends), 'groups': groups})

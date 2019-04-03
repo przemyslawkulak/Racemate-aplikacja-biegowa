@@ -36,7 +36,7 @@ class RunningGroup(models.Model):
         return self.admins.first()
 
     def __str__(self):
-        return f'{self.name} {self.owner}'
+        return f'{self.name}'
 
 
 class TrainingElement(models.Model):

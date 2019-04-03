@@ -5,6 +5,7 @@
             <div class="card-header">
               <i class="fas fa-comments"></i><span  class="test fa-lg"> List of your groups</span>
             </div>
+            <a href="{% url 'sendmessagegroup' %}"><button name = 'VDOT' type="submit">Send a message to group</button></a>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -40,12 +41,12 @@
      <div class="cards mb-3 col-3 col-xs-12" >
 
             <div class="card-header">
-              <i class="fas fa-table"></i><span  class="test fa-lg"> List of friends </span>
+              <i class="fas fa-comments"></i><span  class="test fa-lg"> List of friends </span>
             </div>
 
 
-<a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to: {{interlocutor.username}}</button></a>
-     <div class="card-body">Messages{{interlocutor.username}}:
+<a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message</button></a>
+     <div class="card-body">Messages:
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
