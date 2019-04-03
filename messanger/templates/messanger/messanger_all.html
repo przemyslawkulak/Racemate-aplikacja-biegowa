@@ -1,0 +1,85 @@
+{% extends "racemate/index.html" %}
+{% block content %}
+<div class="cards mb-3 col-6" >
+
+            <div class="card-header">
+              <i class="fas fa-table"></i><span  class="test fa-lg"> Messanger </span>
+            </div>
+
+
+<a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to: {{interlocutor.username}}</button></a>
+     <div class="card-body">Messages{{interlocutor.username}}:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Date</th>
+                      <th>Sender</th>
+                        <th>To</th>
+                      <th>Content</th>
+
+
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in msg %}
+                    <tr>
+
+                        <td>{{i.date_sent}}</td>
+                      <td>{{i.sender.username}}</td>
+                        <td>{{i.to.username}}</td>
+                      <td>{{i.content}} </td>
+                        {% if i.groupjoin is not null %}
+                        {% if i.to == request.user %}
+                        <td><a href="{% url 'adminconfirm' id=i.groupjoin.id sender=i.sender.id %}">Join to group</a></td>
+                        {% endif %}
+                        {% endif %}
+
+   </tr>
+                    {% empty %}
+                    <p>No messages</p>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+    <div class="cards mb-3 col-3" >
+
+            <div class="card-header">
+              <i class="fas fa-table"></i><span  class="test fa-lg"> List of friends </span>
+            </div>
+
+
+<a href="{% url 'sendmessage' %}"><button name = 'VDOT' type="submit">Send a message to: {{interlocutor.username}}</button></a>
+     <div class="card-body">Messages{{interlocutor.username}}:
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+
+                      <th>Name</th>
+                      <th>Friend</th>
+
+                    </tr>
+                  </thead>
+                <tbody>
+                    {% for i in friends %}
+                    <tr>
+
+                        <td>{{i.username}}</td>
+
+
+   </tr>
+                    {% empty %}
+                    <p>No friends</p>
+                    {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+</div>
+
+{% endblock content %}
