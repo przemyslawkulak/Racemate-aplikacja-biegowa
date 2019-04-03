@@ -45,7 +45,6 @@ class ForumChoiceView(LoginRequiredMixin, View):
             for j in friend:
                 friends.append(j)
         unread_msg = Message.objects.filter(read=False).filter(to=request.user)
-        print(unread_msg)
         return render(request, 'messanger/forumchoice.html',
                       {"groups": groups, 'friends': set(friends), 'unread_msg': unread_msg})
 
@@ -67,8 +66,8 @@ class SendMessageView(LoginRequiredMixin, View):
 
         sender = request.user
         if to:
-            Message.objects.create(subject=subject, content=content,
-                                   to=MyUser.objects.get(id=to), sender=sender)
+            msg = Message.objects.create(subject=subject, content=content,
+                                         to=MyUser.objects.get(id=to), sender=sender)
             return redirect('messanger', id=to)
 
         return redirect('landing-page')
@@ -106,10 +105,12 @@ class MessangerView(LoginRequiredMixin, View):
             friend = i.members.all()
             for j in friend:
                 friends.append(j)
-        for i in msg:
+
+        msg3 = Message.objects.filter(to=request.user)
+        for i in msg3:
             i.read = True
             i.save()
-        print(msg)
+
         return render(request, 'messanger/messanger.html',
                       {"msg": msg, 'user': user, 'friends': set(friends), 'interlocutor': interlocutor})
 
