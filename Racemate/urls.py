@@ -87,7 +87,7 @@ urlpatterns = [
 
     # api
 
-    re_path(r'^api/v1/', include(router.urls)),
+    re_path(r'^api/v1/', include(router.urls), name='API'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('schema/', schema_view),
 

@@ -214,6 +214,14 @@
         </li>
       {% endif %}
 
+      {% if auth %}
+      <li class="nav-item ">
+          <a class="nav-link " href="api/v1/">
+            <i class="fas fa-fw fa-database"></i>
+            <span>API</span></a>
+        </li>
+      {% endif %}
+
         <li class="nav-item">
                   {% if auth %}
           <a class="nav-link" href="{% url 'logout'%}">
