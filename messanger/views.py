@@ -66,7 +66,7 @@ class SendMessageView(LoginRequiredMixin, View):
 
         sender = request.user
         if to:
-            msg = Message.objects.create(subject=subject, content=content,
+            Message.objects.create(subject=subject, content=content,
                                          to=MyUser.objects.get(id=to), sender=sender)
             return redirect('messanger', id=to)
 
