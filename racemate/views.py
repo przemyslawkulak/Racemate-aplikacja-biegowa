@@ -158,7 +158,7 @@ class LandingGeneratorView(LoginRequiredMixin, View):
 class EditUserView(LoginRequiredMixin, UpdateView):
     model = MyUser
 
-    fields = ['username', 'first_name', 'last_name', 'email']
+    fields = ['username', 'first_name', 'last_name', 'email', 'image']
     template_name_suffix = '_update_form'
 
     def get_object(self):

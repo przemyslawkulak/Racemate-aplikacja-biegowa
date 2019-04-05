@@ -29,6 +29,9 @@ from racemate.views import (LogoutView, LoginView, LandingView, LandingGenerator
 from training.views import AddTrainingView, AddTreningView, TreningPlanWhiteView, TreningPlan18weeksView, \
     LoadTreningView, PlanChoiceView, DeleteTrainingView, PastTrainingDelete
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 router = routers.DefaultRouter()
 
 router.register(r'users', MyUserViewSet)
@@ -93,5 +96,5 @@ urlpatterns = [
 
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns = format_suffix_patterns(urlpatterns)

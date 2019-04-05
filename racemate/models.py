@@ -20,6 +20,7 @@ class MyUser(AbstractUser):
     r21 = models.IntegerField(null=True, default=0)
     r42 = models.IntegerField(null=True, default=0)
     efficiency = models.IntegerField(null=True, default=30)
+    image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return f' {self.username}'
