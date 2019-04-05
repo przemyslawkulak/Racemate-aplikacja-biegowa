@@ -22,7 +22,7 @@
                     {% for i in messages%}
                     <tr>
                        <td><a href="{% url 'member' id=i.sender.id %}">{% if i.sender.image %}
-<img src="{{ i.sender.image.url }}" height="30" width="auto" class="rounded image img" alt="{{i.sender.username}}">{% else %}{{i.sender.username}}{% endif %}</a></td>
+<img src="{{ i.sender.image.url }}" height="30" width="auto" class="rounded img-profile" alt="{{i.sender.username}}">{% else %}{{i.sender.username}}{% endif %}</a></td>
                       <th>{{i.content}} </th>
                     <td>{{i.date_sent}}</td>
                     </tr>
