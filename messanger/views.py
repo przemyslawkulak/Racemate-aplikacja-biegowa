@@ -33,7 +33,7 @@ class ForumView(LoginRequiredMixin, View):
             m = len(MyUser.objects.filter(members=i))
             groups.append({"name": i.name, "admins": admin, "members": m, "date": i.date, "id": i.id})
         return render(request, 'messanger/forum.html',
-                      {'messages': messages, 'group': group_forum, "user": user, 'groups': groups})
+                      {'messages': messages, 'group': group_forum, "users": user, 'groups': groups})
 
 
 class ForumChoiceView(LoginRequiredMixin, View):
@@ -124,8 +124,6 @@ class MessangerView(LoginRequiredMixin, View):
     def get(self, request, id):
         msg1 = Message.objects.filter(to=id).filter(sender=request.user).order_by('-date_sent')
         msg2 = (Message.objects.filter(sender=id).filter(to=request.user).order_by('-date_sent'))
-        group = RunningGroup.objects.get(id=11)
-        user = MyUser.objects.filter(members=group).exclude(id=request.user.id)
         msg = msg1 | msg2
         interlocutor = MyUser.objects.get(id=id)
         friends = []
@@ -142,7 +140,7 @@ class MessangerView(LoginRequiredMixin, View):
             i.save()
 
         return render(request, 'messanger/messanger.html',
-                      {"msg": msg, 'user': user, 'friends': set(friends), 'interlocutor': interlocutor})
+                      {"msg": msg,  'friends': set(friends), 'interlocutor': interlocutor})
 
 
 class MessangerAllView(LoginRequiredMixin, View):

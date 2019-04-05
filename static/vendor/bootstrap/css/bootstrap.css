@@ -9026,3 +9026,9 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.img-profile {
+  object-fit: cover;
+  width:230px;
+  height:230px;
+}

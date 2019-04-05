@@ -60,6 +60,7 @@
                     <tr>
 
                         <td><a href = "{% url 'messanger' i.id%}">{{i.username}}</a></td>
+
                         {% for j in unread_msg %}
                         {% if j.sender.id == i.id %}<th>New message!</th>{% endif %}
                         {% endfor %}
