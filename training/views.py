@@ -17,6 +17,10 @@ from racemate.table import generateVDOT, TABLES, check_best_time
 
 
 class AddTrainingView(LoginRequiredMixin, View):
+    """
+    View with form to add training
+    POST  - create a new traning in DB and check if result is personal record (if does - save it in DB)
+    """
     def get(self, request):
         return render(request, 'training/add_training.html', )
 
@@ -55,6 +59,9 @@ class AddTrainingView(LoginRequiredMixin, View):
 
 
 class DeleteTrainingView(LoginRequiredMixin, View):
+    """
+    View with deleting training
+    """
     def get(self, request, id):
         PastTraining.objects.get(id=id).delete()
 
@@ -62,12 +69,18 @@ class DeleteTrainingView(LoginRequiredMixin, View):
 
 
 class PastTrainingDelete(LoginRequiredMixin, DeleteView):
+    """
+    View with deleting training
+    """
     model = PastTraining
-
     success_url = reverse_lazy('landing-page')
 
 
 class AddTreningView(LoginRequiredMixin, View):
+    """
+    View with adding plan training  - not working!!!
+    """
+
     def get(self, request):
         form = AddTreningForm
         return render(request, "racemate/form_html.html", {"form": form})
@@ -86,6 +99,13 @@ class AddTreningView(LoginRequiredMixin, View):
 
 
 def traningdata(efficiency, time, table):
+    """
+    function to taking data from TABLE and calculate total distance and speed depends on user efficiency
+    :param efficiency: user efficiency
+    :param time: time for specific distance from traning_plan DB
+    :param table:
+    :return: list with speed and distance on specific training
+    """
     result = []
     speed = 1 / TABLES[efficiency - 30][table] * 3600
     distance = time * speed / 60
@@ -95,6 +115,9 @@ def traningdata(efficiency, time, table):
 
 
 class TreningPlanWhiteView(LoginRequiredMixin, View):
+    """
+    View to showing Jack Daniel's White Plan
+    """
     def get(self, request):
         plan = []
         tr = Training.objects.filter(treningplan='white')
