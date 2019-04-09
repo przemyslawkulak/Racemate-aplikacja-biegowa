@@ -1,21 +1,21 @@
 # Racemate  
 
-##Technology Stack:
+## Technology Stack:
 
 Frontend: Bootstrap  
 Backend: Django, Python, Django Rest Framework  
 Database: PostgreSQL  
 
-##Functionality:  
+## Functionality:  
 
-###For anonymous user:  
+### For anonymous user:  
 Register - User enters his or her name, email, password and password confirmation  
 Login - Email and password  
 Running Calculator - calculate VDOT(runner's efficiency), training tempos and competition results  
 About  
 Contact  
 
-###Only for logged user:  
+### Only for logged user:  
 Main Page - Main Page is splited in two columns. Right shows user's VDOT(runner's efficiency) and last trainings. Left is for user's personal records and his groups.  
 Edit Profile - User can add some information about him or her, only username is required. User can't access the rest of the application without created profile.  
 Add trainig - Form for adding new past training, user can also automatically calculate VDOT from training's results  
