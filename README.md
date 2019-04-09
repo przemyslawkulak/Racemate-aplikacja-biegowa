@@ -1,4 +1,4 @@
-# Racemate  
+# Racemate - running app
 
 ## Technology Stack:
 
