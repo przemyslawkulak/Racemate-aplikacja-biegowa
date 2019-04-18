@@ -79,7 +79,7 @@ class RegisterView(View):
                         content,
                         'racemate.app@gmail.com',
                         ['przemyslaw.kulak86@gmail.com'],
-                        fail_silently=False,
+                        fail_silently=True,
                     )
                     return redirect('login')
             text = 'The password and confirmation password do not match'
@@ -185,7 +185,7 @@ class ContactView(View):
                 content,
                 'racemate.app@gmail.com',
                 ['przemyslaw.kulak86@gmail.com'],
-                fail_silently=False,
+                fail_silently=True,
             )
             return redirect('landing-page')  # Todo  sending without getting emailin form
         return redirect('landing-page')
